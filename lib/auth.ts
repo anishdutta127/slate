@@ -11,6 +11,13 @@ import * as schema from "@/db/schema";
 // the Firebase Phone Auth bridge as an additional plugin; dev-login stays
 // mounted on preview deploys only, gated by SLATE_ALLOW_DEV_LOGIN.
 
+// Resolve the active base URL. On Vercel preview deploys, VERCEL_URL is set
+// per deploy and unique to each push, so we use it. On localhost the env
+// var BETTER_AUTH_URL wins. trustedOrigins gets the Vercel preview pattern
+// so cookies/redirects accept the dynamic hostname.
+const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
+const baseURL = vercelUrl ?? env.BETTER_AUTH_URL;
+
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: "pg",
@@ -22,7 +29,13 @@ export const auth = betterAuth({
     },
   }),
   secret: env.BETTER_AUTH_SECRET,
-  baseURL: env.BETTER_AUTH_URL,
+  baseURL,
+  trustedOrigins: [
+    "http://localhost:3000",
+    "https://*.vercel.app",
+    env.BETTER_AUTH_URL,
+    ...(vercelUrl ? [vercelUrl] : []),
+  ],
   emailAndPassword: {
     // Disabled in Phase 1 — we don't ship password auth at all.
     enabled: false,
