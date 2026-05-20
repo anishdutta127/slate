@@ -128,7 +128,8 @@ Five screens, each is its own step. Each is optional after step 1.
 | Animation | Motion (framer-motion v12) | Cinematic curves |
 | Database | Postgres on Neon | Serverless, cheap, scales fine for our load |
 | ORM | Drizzle | Type-safe, migrations clean |
-| Auth | Better Auth + Firebase Phone Auth | Firebase delivers the OTP (free up to 10K/month, zero DLT paperwork). Better Auth handles sessions in our Neon DB. Google sign-in adds later. |
+| Auth (Phase 1, M0.5+) | Better Auth + dev-login | Phone number, no OTP, frictionless tester onboarding. Gated by `SLATE_ALLOW_DEV_LOGIN=1` on preview, dev only on localhost, never in prod. |
+| Auth (Phase 2, pre-launch) | Better Auth + Firebase Phone Auth | Firebase delivers the OTP (free up to 10K/month, zero DLT paperwork). Better Auth handles sessions in Neon. Google sign-in adds later. Dev login stays mounted on preview deploys for ongoing testing. |
 | File storage | Cloudflare R2 | S3-compatible, near-free at our scale |
 | Image opt | `next/image` + Sharp | Standard |
 | Video | YouTube / IG embeds first. Mux later if hosting our own | Free at launch |
@@ -224,13 +225,14 @@ GET  /club                          # The club page + applications
 GET  /[slug]                        # PUBLIC PROFILE â€” cinematic, server component, cached
 GET  /[slug]/c                      # CD view â€” tight scannable card, server component, cached
 
-GET  /login                         # Phone OTP
+GET  /login                         # Phase 1: dev-login (no OTP), gated by SLATE_ALLOW_DEV_LOGIN. Phase 2: Firebase Phone Auth UI.
 GET  /onboard                       # 5-step flow (sub-routes /onboard/1 ... /5)
 GET  /me                            # Dashboard (sends feed, profile editor)
 GET  /me/edit                       # Profile editor
 
 POST /api/auth/...                  # Better Auth (sessions, signout, user mgmt)
-POST /api/auth/firebase-callback    # Verify Firebase ID token, upsert user, mint Better Auth session
+POST /api/auth/sign-in-with-phone   # Phase 1 dev-login endpoint (custom plugin). Refuses unless SLATE_ALLOW_DEV_LOGIN=1.
+POST /api/auth/firebase-callback    # Phase 2: verify Firebase ID token, upsert user, mint Better Auth session
 POST /api/uploads                   # Presigned R2 URL
 POST /api/sends                     # Log a send, return ref id
 GET  /api/r/:ref                    # Redirect to /[slug]/c?ref=[ref] + log open
@@ -266,9 +268,10 @@ Local `pnpm dev` stays available for editor-loop tightness while implementing, b
 | Milestone | What ships | Done when |
 |---|---|---|
 | **M0 â€” Repo + design system** | Tailwind tokens, Fraunces + body font loaded, color vars, base layout, dark theme, grain overlay | Style guide page renders |
+| **M0.5 â€” Neon + Better Auth + dev login** | Neon provisioned (main + preview branches), Drizzle + Better Auth wired, `/login` (dev mode, no OTP) gated by `SLATE_ALLOW_DEV_LOGIN`, `/me` stub. Vercel preview deploys live. | Tester can sign in on the preview URL with a phone number and land on `/me` with a real Better Auth session |
 | **M1 â€” Ashish's page, hand-built** | `/ashish` as a static page (no DB). Full visual treatment, both render modes. | Page is shareable, OG image renders correctly on WhatsApp |
 | **M2 â€” Marketing landing + manifesto** | `/`, `/manifesto`, `/club`. The before/after section (messy WhatsApp vs Slate). | Lighthouse 95+ on mobile |
-| **M3 â€” Auth + onboarding** | Phone OTP, 5-step onboard, profile saved to DB. New users get a real `/[slug]`. | A new user can sign up and have a live profile in 15 min |
+| **M3 â€” Onboarding + (later) Firebase OTP** | 5-step onboard, full profile saved to DB. New users get a real `/[slug]`. Firebase Phone Auth wires in as Phase 2 of auth (replaces dev-login on prod; dev-login stays preview-only). Defer Firebase to right before public launch. | A new user can sign up and have a live profile in 15 min |
 | **M4 â€” The Send + tracking** | Dashboard, send flow, ref redirect, opens feed | Sending a profile produces a beautiful WhatsApp preview, opens are tracked |
 | **M5 â€” Club applications** | Form on `/club`, admin view to approve | First 20 club members onboarded manually |
 | **M6 â€” Launch day** | Aram Nagar Sunday event. Press kit. Founder-first profiles seeded. | We have a public moment |
@@ -300,3 +303,5 @@ Aim: M0â€“M2 in week 1. M3â€“M4 in week 2. M5â€“M6 in week 3.
 - **2026-05-20:** Name = Slate. Slug pattern = `slate.club/yourname`. Palette = charcoal / cream / gold. Display font = Fraunces. We do not build a casting-call aggregator. CD view is a query-param render of the same page, not a separate route. WhatsApp send is `wa.me` only (no Business API at launch). First featured profile = Ashish Rawat.
 - **2026-05-20 (reversal):** Reversed earlier CD-view-via-query-param decision. CD view is now `app/[slug]/c` â€” its own route, its own ISR cache, no searchParams branching. Reason: every real CD arrives via the `/api/r/[ref]` redirect anyway, which already does the routing â€” query param was unneeded coupling. Actor still shares `/[slug]`; the `/c` URL is internal-only (the redirect lands CDs there).
 - **2026-05-20:** Locked Firebase Phone Auth for OTP delivery (replaces MSG91). Better Auth still handles sessions and the user table in Neon. Reason: $0 at launch, zero DLT paperwork, saves 1â€“3 weeks of TRAI registration. ~80 lines of glue code in M3 to bridge Firebase ID token verification into Better Auth sessions. Migration cost if we ever regret: ~50 lines (users are keyed by phone, not Firebase UID).
+- **2026-05-20:** Auth implementation is two-phase. Phase 1 (M1â€“M5): `SLATE_ALLOW_DEV_LOGIN` flag, no OTP, frictionless tester onboarding. Phase 2 (pre-launch): Firebase Phone Auth wired as production OTP path, dev login stays available on preview only. Reason: testers don't need OTP friction during the build, and we want to validate the product before paying any complexity cost for auth.
+- **2026-05-20:** Provisioned Neon + Better Auth in M0.5 instead of M3. Reason: SQLite-in-repo doesn't survive Vercel's read-only serverless filesystem, and preview-deploy-first is now our verification workflow. Cost: +1 hour today. Saved: M3 rip-and-replace of any session-touching code written in M1â€“M2.
