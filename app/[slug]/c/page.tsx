@@ -74,7 +74,9 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
             <p className="font-mono text-sm leading-snug text-text-secondary">
               {t.languages.join(" · ")} · {t.accent} accent
             </p>
-            <p className="font-mono text-sm leading-snug text-text-secondary">{t.training}</p>
+            <p className="font-mono text-sm leading-snug text-text-secondary">
+              <span className="chip-text text-gold">EXP</span> {t.training}
+            </p>
           </div>
         </div>
       </section>
@@ -156,7 +158,7 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
       </section>
 
       {/* Quiet footer */}
-      <footer className="mt-10 flex flex-col items-center gap-3 border-t border-border-dark pt-6 text-center">
+      <footer className="mt-10 flex flex-col items-center gap-6 border-t border-border-dark pt-6 text-center">
         <Link
           href={`/${t.slug}`}
           className="text-sm text-gold underline-offset-4 hover:underline focus-visible:underline"

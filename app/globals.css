@@ -144,3 +144,65 @@ body {
   letter-spacing: 0.08em;
   font-weight: 500;
 }
+
+/* =============================================================================
+   Motion — cinematic-only utilities
+   ========================================================================== */
+
+/* Ken-burns: slow scale on the hero photo so it feels alive without parallaxing.
+   12s alternate so it never snaps back. Respects prefers-reduced-motion. */
+@keyframes slate-ken-burns {
+  0% {
+    transform: scale(1);
+  }
+  100% {
+    transform: scale(1.03);
+  }
+}
+.ken-burns {
+  animation: slate-ken-burns 12s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+/* Scroll cue line: draws downward, fades, pauses, repeats. */
+@keyframes slate-scroll-cue {
+  0%,
+  60%,
+  100% {
+    transform: scaleY(0);
+    transform-origin: top;
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  40% {
+    transform: scaleY(1);
+    transform-origin: top;
+    opacity: 1;
+  }
+  50% {
+    transform: scaleY(1);
+    transform-origin: bottom;
+    opacity: 0;
+  }
+}
+.scroll-cue::after {
+  content: "";
+  display: block;
+  width: 1px;
+  height: 36px;
+  background: var(--color-text-secondary);
+  margin: 0 auto;
+  animation: slate-scroll-cue 3.2s ease-in-out 1.4s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ken-burns {
+    animation: none;
+  }
+  .scroll-cue::after {
+    animation: none;
+    opacity: 0.4;
+  }
+}
