@@ -241,6 +241,12 @@ POST /api/club/apply                # Club application
 
 ---
 
+## Development workflow
+
+We deploy every PR to Vercel preview. `/qa` always targets the preview URL, never localhost, unless I explicitly say otherwise. This is faster, more accurate (real edge runtime, real CDN, real bundle), and stops generating local screenshots that clutter the repo.
+
+Local `pnpm dev` stays available for editor-loop tightness while implementing, but verification and bug-catching happen on preview deploys. Lighthouse runs against preview URLs only. Real-device testing (iPhone 12 mini, budget Android) also happens against preview, never against `localhost:3000` over a USB tether.
+
 ## Engineering principles for this repo
 
 1. **Server components by default.** Client only for interactive bits (camera, drag-drop, OTP, dashboard).
