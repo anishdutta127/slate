@@ -71,7 +71,7 @@ Variants (all use the same single woff2 file, axes set per element via CSS):
 
 **Numbers** for ages, heights, years — always in `--font-mono`. It's the one place we lean into the analog feel.
 
-**Devanagari accents** — Noto Serif Devanagari, custom-subset to only the glyphs we use (~10 KB woff2). Render via the `.devanagari` helper class, which sets the family, opacity 0.7, and font-size 0.85em relative to the parent. Always paired with English siblings, always smaller and quieter. Used in exactly four placements: hero wordmark (`Slate. · स्लेट`), about section header (`About · के बारे में`), contact section header (`Get in touch · संपर्क करें`), footer (`Made on Slate · स्लेट`). Never in CD view. To add a new Devanagari phrase, edit `PHRASES` in `scripts/subset-devanagari.ts` and re-run.
+**Devanagari accents** — Noto Serif Devanagari, custom-subset to only the glyphs we use (~10 KB woff2). Render via the `.devanagari` helper class, which sets the family, opacity 0.7, and font-size 0.85em relative to the parent. Always paired with English siblings, always smaller and quieter. Used in exactly these placements: cinematic hero wordmark (`Slate. · स्लेट`), cinematic about section header (`About · के बारे में`), cinematic contact section header (`Get in touch · संपर्क करें`), cinematic footer (`Made on Slate · स्लेट`), and one touch on the CD view footer (`Made on Slate · स्लेट`). The CD page is otherwise pure English — the accent is reserved for the closing wordmark only so it signals belonging without compromising the page's information density. To add a new Devanagari phrase, edit `PHRASES` in `scripts/subset-devanagari.ts` and re-run.
 
 ---
 

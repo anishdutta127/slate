@@ -39,6 +39,9 @@ export interface Talent {
   readonly slug: string; // url path under slate.club/
   readonly name: string;
   readonly city: string;
+  /** Two-second pitch shown on the CD view between name and stats.
+   *  One line that may wrap. Per-actor; not all profiles will set it. */
+  readonly tagline?: string;
   readonly plays: TalentPlays;
   readonly height: TalentHeight;
   readonly languages: readonly string[];

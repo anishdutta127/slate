@@ -8,6 +8,7 @@ export const ASHISH: Talent = {
   slug: "ashish",
   name: "Ashish Rawat",
   city: "Mumbai",
+  tagline: "A working ad-film actor. Honda. Cipla. Zepto.",
   plays: { min: 22, max: 28 },
   height: { cm: 173, display: "5'8\"" },
   languages: ["Hindi", "English"],

@@ -40,7 +40,8 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
   const t = getTalentBySlug(slug);
   if (!t) notFound();
 
-  const whatsappMessage = `Hi ${t.name.split(" ")[0]}, saw your Slate profile`;
+  const firstName = t.name.split(" ")[0]!;
+  const whatsappMessage = `Hi ${firstName}, saw your Slate profile`;
 
   return (
     <main className="mx-auto min-h-svh max-w-[680px] bg-slate-bg px-4 py-6 text-text-primary">
@@ -67,6 +68,9 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
             >
               {t.name}
             </h1>
+            {t.tagline ? (
+              <p className="text-sm leading-snug text-text-secondary">{t.tagline}</p>
+            ) : null}
             <p className="font-mono text-sm leading-snug text-text-secondary">
               Plays {t.plays.min}-{t.plays.max} · {t.height.display}
             </p>
@@ -81,22 +85,35 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
         </div>
       </section>
 
-      {/* Contact: tel: and wa.me are anchors, not buttons (semantic). The pill
-          styling matches the Button primitive exactly. */}
-      <div className="mt-4 flex flex-col gap-2" role="group" aria-label="Contact Ashish">
+      {/* Contact: tel: and wa.me are anchors, not buttons (semantic).
+          Two-line treatment — primary line uses the actor's first name to
+          bring warmth; secondary mono line gives the actionable detail. */}
+      <div
+        className="mt-4 flex flex-col gap-2"
+        role="group"
+        aria-label={`Contact ${t.name}`}
+      >
         <a
           href={getTelUrl(t.contact.phone)}
-          className="inline-flex h-11 w-full items-center justify-center rounded-full bg-slate-cream px-6 text-base font-medium text-text-on-light transition-colors hover:bg-slate-cream-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+          aria-label={`Call ${t.name} at ${displayPhone(t.contact.phone)}`}
+          className="flex w-full flex-col items-center justify-center rounded-2xl bg-slate-cream px-6 py-3 text-text-on-light transition-colors hover:bg-slate-cream-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
         >
-          Call {displayPhone(t.contact.phone)}
+          <span className="text-base font-medium">Call {firstName}</span>
+          <span className="font-mono text-xs text-text-on-light/70">
+            {displayPhone(t.contact.phone)}
+          </span>
         </a>
         <a
           href={getWhatsAppUrl(t.contact.phone, whatsappMessage)}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex h-11 w-full items-center justify-center rounded-full border border-border-dark px-6 text-base font-medium text-text-primary transition-colors hover:bg-slate-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+          aria-label={`Message ${t.name} on WhatsApp at ${displayPhone(t.contact.phone)}`}
+          className="flex w-full flex-col items-center justify-center rounded-2xl border border-border-dark px-6 py-3 text-text-primary transition-colors hover:bg-slate-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
         >
-          WhatsApp
+          <span className="text-base font-medium">Message {firstName}</span>
+          <span className="font-mono text-xs text-text-tertiary">
+            WhatsApp · {displayPhone(t.contact.phone)}
+          </span>
         </a>
       </div>
 
@@ -167,9 +184,11 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
         </Link>
         <Link
           href="/"
-          className="font-mono text-[11px] uppercase tracking-[0.15em] text-text-tertiary hover:text-text-secondary"
+          className="flex items-baseline gap-2 text-text-tertiary hover:text-text-secondary"
         >
-          Made on Slate
+          <span className="font-mono text-[11px] uppercase tracking-[0.15em]">Made on Slate</span>
+          <span className="font-mono text-[11px] text-text-tertiary">·</span>
+          <span className="devanagari">स्लेट</span>
         </Link>
       </footer>
     </main>
