@@ -16,6 +16,7 @@
 |---|---|---|
 | Plays | 22-28 | Screen age 25, derived range (screen age plus or minus 3) |
 | Height | 5 ft 8 in / 173cm | |
+| Hair color | Black | |
 | Languages | Hindi, English | |
 | Accent | North Indian | |
 | City | Mumbai | |
