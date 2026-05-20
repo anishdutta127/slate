@@ -55,10 +55,12 @@ What to avoid: gradients-on-white, purple/blue tech vibes, every-startup-Inter, 
 --font-mono:    'JetBrains Mono', ui-monospace, monospace;
 ```
 
-**Fraunces** must be loaded with these axes: `opsz` (optical size), `SOFT` (softness), `WONK` (a touch). Use the variable font. Variants:
-- Display L (actor names on profile hero): `Fraunces` 700 weight, opsz 144, SOFT 50, WONK 1. Size ~64–96px on desktop, 44px on mobile. Letter spacing -0.02em.
-- Display M (section headers, marketing H1): Fraunces 600, opsz 72. Size 40–56px.
-- Display S (card titles): Fraunces 600, opsz 36. Size 24–28px.
+**Fraunces** is loaded as a subset variable woff2: Latin only, weight axis 400–700, `opsz` axis live (used at three sizes), with `SOFT` and `WONK` pinned as CSS constants at `SOFT 50` and `WONK 1` via `font-variation-settings`. Total file weight ~50–65KB — this fits the CD view performance budget on India 3G/patchy 4G. Self-hosted from `public/fonts/`, loaded via `next/font/local` with `font-display: swap`.
+
+Variants (all use the same single woff2 file, axes set per element via CSS):
+- Display L (actor names on profile hero): `Fraunces` 700 weight, `opsz` 144, `SOFT` 50, `WONK` 1. Size ~64–96px on desktop, 44px on mobile. Letter spacing -0.02em.
+- Display M (section headers, marketing H1): Fraunces 600, `opsz` 72, same SOFT/WONK. Size 40–56px.
+- Display S (card titles): Fraunces 600, `opsz` 36, same SOFT/WONK. Size 24–28px.
 
 **Body** sizes:
 - Body L (intro paragraphs on marketing): 18–20px, line-height 1.55, weight 400
