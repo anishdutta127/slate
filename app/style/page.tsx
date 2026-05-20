@@ -1,19 +1,19 @@
 import { notFound } from "next/navigation";
 import { Wordmark } from "@/components/visual/Wordmark";
 import { Divider } from "@/components/visual/Divider";
+import { Section } from "@/components/visual/Section";
 import { Button } from "@/components/primitives/Button";
 import { Chip } from "@/components/primitives/Chip";
+import { env } from "@/lib/env";
 
 // Force per-request rendering so the env check runs at request time, not build
 // time. Without this, `next build` would prerender /style as a static 404 and
 // setting SLATE_ENABLE_STYLE_GUIDE on a preview deploy later would have no effect.
 export const dynamic = "force-dynamic";
 
-// Gated: hidden in production unless SLATE_ENABLE_STYLE_GUIDE=1.
-// Dev (localhost) always shows it; preview deploys can opt in by setting the env var.
 function isVisible() {
-  if (process.env.NODE_ENV !== "production") return true;
-  return process.env.SLATE_ENABLE_STYLE_GUIDE === "1";
+  if (env.NODE_ENV !== "production") return true;
+  return env.SLATE_ENABLE_STYLE_GUIDE === "1";
 }
 
 const SWATCHES = [
@@ -31,15 +31,15 @@ export default function StylePage() {
   if (!isVisible()) notFound();
 
   return (
-    <div className="min-h-svh">
-      {/* =============== Header =============== */}
-      <header className="border-b border-border-dark px-6 py-8 md:px-12">
+    <>
+      {/* =============== Header (dark) =============== */}
+      <Section tone="dark" as="header" className="border-b border-border-dark px-6 py-8 md:px-12">
         <Wordmark size="md" />
         <p className="chip-text mt-3 text-text-tertiary">Style guide · dev only</p>
-      </header>
+      </Section>
 
       {/* =============== Dark section =============== */}
-      <section className="bg-slate-bg px-6 py-16 md:px-12 md:py-24">
+      <Section tone="dark" className="px-6 py-16 md:px-12 md:py-24">
         <SectionHeader tone="cream">On dark</SectionHeader>
 
         <Block label="Typography">
@@ -109,10 +109,10 @@ export default function StylePage() {
             <Wordmark size="lg" />
           </div>
         </Block>
-      </section>
+      </Section>
 
       {/* =============== Cream section =============== */}
-      <section className="bg-slate-cream px-6 py-16 text-text-on-light md:px-12 md:py-24">
+      <Section tone="light" className="px-6 py-16 md:px-12 md:py-24">
         <SectionHeader tone="dark">On cream</SectionHeader>
 
         <Block label="Typography" tone="dark">
@@ -171,10 +171,10 @@ export default function StylePage() {
             <Wordmark size="lg" tone="dark" />
           </div>
         </Block>
-      </section>
+      </Section>
 
-      {/* =============== Color swatches =============== */}
-      <section className="bg-slate-bg px-6 py-16 md:px-12 md:py-24">
+      {/* =============== Color swatches (dark) =============== */}
+      <Section tone="dark" className="px-6 py-16 md:px-12 md:py-24">
         <SectionHeader tone="cream">Color tokens</SectionHeader>
         <div className="grid grid-cols-2 gap-4 md:grid-cols-4">
           {SWATCHES.map((s) => (
@@ -188,16 +188,20 @@ export default function StylePage() {
             </div>
           ))}
         </div>
-      </section>
+      </Section>
 
-      {/* =============== Footer =============== */}
-      <footer className="border-t border-border-dark bg-slate-bg px-6 py-12 md:px-12">
+      {/* =============== Footer (dark) =============== */}
+      <Section
+        tone="dark"
+        as="footer"
+        className="border-t border-border-dark px-6 py-12 md:px-12"
+      >
         <p className="body-s text-text-tertiary">
           DESIGN.md is the source of truth. If you see drift here, update DESIGN.md first, then{" "}
           <code className="font-mono">app/globals.css</code> to match.
         </p>
-      </footer>
-    </div>
+      </Section>
+    </>
   );
 }
 
@@ -209,11 +213,7 @@ function SectionHeader({
   tone?: "cream" | "dark";
 }) {
   const color = tone === "cream" ? "text-text-primary" : "text-text-on-light";
-  return (
-    <h2 className={`display-m mb-12 ${color}`}>
-      {children}
-    </h2>
-  );
+  return <h2 className={`display-m mb-12 ${color}`}>{children}</h2>;
 }
 
 function Block({

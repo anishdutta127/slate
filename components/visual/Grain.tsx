@@ -1,12 +1,25 @@
-// SVG fractal-noise overlay. Fixed full-viewport, pointer-events disabled,
-// mix-blend-mode: overlay so the texture only registers against dark sections.
-// DESIGN.md: ~2-3% opacity, "cinematic" — never visible enough to read as noise.
+import { useId } from "react";
 
-export function Grain() {
+interface GrainProps {
+  tone?: "dark" | "light";
+}
+
+// SVG fractal-noise overlay. Absolute-positioned within its parent (which must
+// be position: relative — <Section/> handles that). pointer-events disabled.
+// mix-blend-overlay registers as cinematic texture against dark backgrounds.
+// On light backgrounds we render nothing — DESIGN.md is explicit that grain is
+// dark-only.
+//
+// useId() gives each Grain instance a unique filter id, so multiple dark
+// Sections on the same page don't share a duplicate-id collision.
+export function Grain({ tone = "dark" }: GrainProps) {
+  const id = useId();
+  const filterId = `slate-grain-${id}`;
+  if (tone === "light") return null;
   return (
     <div
       aria-hidden="true"
-      className="pointer-events-none fixed inset-0 z-50 mix-blend-overlay"
+      className="pointer-events-none absolute inset-0 z-10 mix-blend-overlay"
       style={{ opacity: 0.025 }}
     >
       <svg
@@ -14,7 +27,7 @@ export function Grain() {
         className="h-full w-full"
         preserveAspectRatio="none"
       >
-        <filter id="slate-grain">
+        <filter id={filterId}>
           <feTurbulence
             type="fractalNoise"
             baseFrequency="0.9"
@@ -23,7 +36,7 @@ export function Grain() {
           />
           <feColorMatrix type="saturate" values="0" />
         </filter>
-        <rect width="100%" height="100%" filter="url(#slate-grain)" />
+        <rect width="100%" height="100%" filter={`url(#${filterId})`} />
       </svg>
     </div>
   );

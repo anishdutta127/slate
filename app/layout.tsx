@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { Grain } from "@/components/visual/Grain";
+import { env } from "@/lib/env";
 import "./globals.css";
 
 // Fraunces variable (Latin subset, opsz + wght axes — see public/fonts/README.md)
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   description:
     "Build a profile that looks like a film poster. Send it like a pro. Grow with others doing the same.",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL ?? "http://localhost:3000"),
+  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -46,10 +46,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
       lang="en"
       className={`${fraunces.variable} ${geist.variable} ${jetbrainsMono.variable}`}
     >
-      <body className="relative min-h-screen bg-slate-bg text-text-primary antialiased">
-        {children}
-        <Grain />
-      </body>
+      <body className="min-h-svh bg-slate-bg text-text-primary antialiased">{children}</body>
     </html>
   );
 }

@@ -1,14 +1,17 @@
 import { Wordmark } from "@/components/visual/Wordmark";
 import { Divider } from "@/components/visual/Divider";
+import { Section } from "@/components/visual/Section";
 
 export default function HomePage() {
   return (
-    <main className="relative flex min-h-svh flex-col items-center justify-center px-6 py-24 text-center">
+    <Section
+      tone="dark"
+      as="main"
+      className="flex min-h-svh flex-col items-center justify-center px-6 py-24 text-center"
+    >
       <Wordmark size="lg" />
 
-      <h1
-        className="display-l mt-12 max-w-[18ch] text-balance text-text-primary"
-      >
+      <h1 className="display-l mt-12 max-w-[18ch] text-balance text-text-primary">
         The actors&apos; club of Mumbai.
       </h1>
 
@@ -22,6 +25,6 @@ export default function HomePage() {
       <p className="chip-text mt-8 text-text-tertiary">
         Coming soon — the manifesto, the club, the first profiles.
       </p>
-    </main>
+    </Section>
   );
 }

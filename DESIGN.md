@@ -121,11 +121,13 @@ Film grain is the secret weapon.
 
 ```tsx
 // components/visual/Grain.tsx
-// SVG fractal noise, ~2.5% opacity, fixed position, pointer-events:none
-// Only render on dark sections, not on cream
+// SVG fractal noise, ~2.5% opacity, absolute-positioned within its parent
+// Section, pointer-events:none. Renders only when tone="dark"; returns null
+// for tone="light". Never mount Grain directly in a page — let <Section/>
+// own the bg + grain pairing.
 ```
 
-Reference implementation: a tiny SVG `<filter><feTurbulence baseFrequency="0.9" numOctaves="2"/></filter>` rendered as a fixed full-viewport overlay. Cheaper than a PNG and crisp on retina. Use `mix-blend-mode: overlay` on dark sections.
+Reference implementation: a tiny SVG `<filter><feTurbulence baseFrequency="0.9" numOctaves="2"/></filter>` rendered as an absolute-positioned overlay inside a `<Section tone="dark">` (which is `position: relative`). Cheaper than a PNG and crisp on retina. `mix-blend-mode: overlay` registers the texture against the dark bg without ever bleeding into adjacent cream sections.
 
 **Vignette:** the hero photo on profiles has a subtle vignette via a `radial-gradient` overlay, edges darkened by ~20%. This is what gives the cinematic feel.
 
@@ -136,11 +138,12 @@ Reference implementation: a tiny SVG `<filter><feTurbulence baseFrequency="0.9" 
 We keep this list deliberately small. Every component must serve a real need on the locked V1 surface. No empty Storybook entries.
 
 ### Atoms
+- `<Section tone="dark|light"/>` — structural primitive every page composes from. Owns background color, text color, and grain texture as a single dial. Pages never set bg or grain directly; they wrap content in `<Section>` and let the tone decide. `tone="dark"` gives charcoal bg + cream text + grain overlay. `tone="light"` gives cream bg + near-black text + no grain. This is what prevents grain from ever leaking onto a cream surface.
 - `<Wordmark/>` — the Slate logotype. Fraunces, with a small gold dot.
-- `<Button/>` — three variants: `primary` (cream on dark), `ghost` (border-only), `link` (text with gold underline on hover)
-- `<Chip/>` — for stats and skills. Mono font, uppercase, hairline border.
+- `<Button/>` — three variants: `primary` (cream on dark), `ghost` (border-only), `link` (text with gold underline on hover). `tone="cream"` for use on dark sections, `tone="dark"` for use on light sections.
+- `<Chip/>` — for stats and skills. Mono font, uppercase, hairline border. Accepts the same `tone` prop.
 - `<Divider/>` — a hairline gold gradient that fades to transparent at edges. The signature detail.
-- `<Grain/>` — the texture overlay.
+- `<Grain/>` — the texture overlay. Used by `<Section/>` internally; pages should not mount Grain directly. Accepts `tone="dark|light"` — renders the SVG fractal noise only when `tone="dark"`, returns null when `tone="light"`.
 
 ### Profile-specific
 - `<ProfileHero/>` — hero photo + name + tagline + stats chips. The page anchor.
