@@ -17,7 +17,7 @@ What to avoid: gradients-on-white, purple/blue tech vibes, every-startup-Inter, 
 ```css
 /* base */
 --slate-bg:        #0E0E0C;   /* deep charcoal, not pure black */
---slate-surface:   #16161300; /* nothing fancy on dark — depth via shadow + grain */
+--slate-surface:   #161613;   /* subtle lift above bg, for cards and panels on dark sections */
 --slate-cream:     #F5EFE3;   /* warm ivory — text on dark, bg on light sections */
 --slate-cream-2:   #ECE3D0;   /* muted variant for surfaces in light sections */
 
