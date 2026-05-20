@@ -2,7 +2,7 @@ import { betterAuth } from "better-auth";
 import { drizzleAdapter } from "better-auth/adapters/drizzle";
 import { nextCookies } from "better-auth/next-js";
 import { db } from "@/lib/db";
-import { env } from "@/lib/env";
+import { env, getBaseUrl } from "@/lib/env";
 import { devLoginPlugin } from "@/lib/dev-login-plugin";
 import * as schema from "@/db/schema";
 
@@ -11,12 +11,10 @@ import * as schema from "@/db/schema";
 // the Firebase Phone Auth bridge as an additional plugin; dev-login stays
 // mounted on preview deploys only, gated by SLATE_ALLOW_DEV_LOGIN.
 
-// Resolve the active base URL. On Vercel preview deploys, VERCEL_URL is set
-// per deploy and unique to each push, so we use it. On localhost the env
-// var BETTER_AUTH_URL wins. trustedOrigins gets the Vercel preview pattern
-// so cookies/redirects accept the dynamic hostname.
-const vercelUrl = process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : null;
-const baseURL = vercelUrl ?? env.BETTER_AUTH_URL;
+// Base URL cascade lives in getBaseUrl(): explicit BETTER_AUTH_URL > Vercel
+// deploy URL > localhost. trustedOrigins covers the dynamic preview pattern
+// plus the resolved current URL so cookies/redirects work across deploys.
+const baseURL = getBaseUrl();
 
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
@@ -33,8 +31,7 @@ export const auth = betterAuth({
   trustedOrigins: [
     "http://localhost:3000",
     "https://*.vercel.app",
-    env.BETTER_AUTH_URL,
-    ...(vercelUrl ? [vercelUrl] : []),
+    baseURL,
   ],
   emailAndPassword: {
     // Disabled in Phase 1 — we don't ship password auth at all.

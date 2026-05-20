@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import localFont from "next/font/local";
-import { env } from "@/lib/env";
+import { getBaseUrl } from "@/lib/env";
 import "./globals.css";
 
 // Fraunces variable (Latin subset, opsz + wght axes — see public/fonts/README.md)
@@ -37,7 +37,7 @@ export const metadata: Metadata = {
   },
   description:
     "Build a profile that looks like a film poster. Send it like a pro. Grow with others doing the same.",
-  metadataBase: new URL(env.NEXT_PUBLIC_APP_URL),
+  metadataBase: new URL(getBaseUrl()),
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
