@@ -36,7 +36,7 @@ pnpm db:seed                      # seeds Ashish Rawat's profile so /ashish work
 pnpm dev                          # localhost:3000
 ```
 
-Then open `localhost:3000/ashish` to see the reference profile, and `localhost:3000/ashish?cd=1` to see the CD render.
+Then open `localhost:3000/ashish` to see the reference profile, and `localhost:3000/ashish/c` to see the CD render.
 
 ## Tech
 

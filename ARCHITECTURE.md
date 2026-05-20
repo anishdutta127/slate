@@ -38,7 +38,7 @@ slate/
 ├── next.config.ts
 ├── tailwind.config.ts
 ├── drizzle.config.ts
-├── middleware.ts                   # only for CD-view referrer detection
+├── middleware.ts                   # reserved; no CD-view referrer detection needed (route handles it)
 │
 ├── app/
 │   ├── layout.tsx                  # root layout: fonts, grain overlay, theme
@@ -60,9 +60,11 @@ slate/
 │   │   └── send/page.tsx           # the WhatsApp send flow
 │   │
 │   ├── [slug]/
-│   │   ├── page.tsx                # PUBLIC PROFILE (server component)
+│   │   ├── page.tsx                # PUBLIC PROFILE — cinematic (server component)
 │   │   ├── opengraph-image.tsx     # PER-PROFILE OG (edge)
-│   │   └── not-found.tsx
+│   │   ├── not-found.tsx
+│   │   └── c/
+│   │       └── page.tsx            # CD VIEW — tight scannable card (server component, reached via /api/r/[ref])
 │   │
 │   └── api/
 │       ├── auth/[...all]/route.ts  # Better Auth handler
@@ -186,11 +188,11 @@ This is the one we ship publicly first. No DB. Just file-based.
 
 1. Optimise Ashish's 4 photos → WebP and AVIF, multiple sizes, store in `/public/talent/ashish/`. Recommended hero crop on `02-headshot-blazer.jpeg`.
 2. Build all profile components against a hardcoded data object `/lib/talent/ashish.ts` that matches the future DB schema. This is our seed and our type test.
-3. Build `app/[slug]/page.tsx` to first route only when `slug === 'ashish'`, using the hardcoded data
+3. Build `app/[slug]/page.tsx` (cinematic) to first route only when `slug === 'ashish'`, using the hardcoded data
 4. Build `<ProfileHero/>`, `<ProfileStatsCard/>`, `<ShowreelEmbed/>`, `<CreditsGrid/>`, `<PhotosGallery/>`, `<ContactCard/>`
-5. Implement the `?cd=1` branch via `<ProfileCdHeader/>` rendered conditionally
+5. Build `app/[slug]/c/page.tsx` (CD view) as its own server component, using `<ProfileCdHeader/>` + shared `<ProfileStatsCard/>` + `<ShowreelEmbed/>`. No client JS required.
 6. Build `app/[slug]/opengraph-image.tsx` for Ashish with `next/og`. Test by pasting `https://slate.club/ashish` into a real WhatsApp chat.
-7. **Done when:** `/ashish` looks beautiful on iPhone 12 mini AND `/ashish?cd=1` shows name/age/height/contact/reel above the fold AND the WhatsApp preview card unfurls with his hero photo and stats
+7. **Done when:** `/ashish` looks beautiful on iPhone 12 mini AND `/ashish/c` shows name/age/height/contact/reel above the fold AND the WhatsApp preview card unfurls with his hero photo and stats
 
 ### M2 — Marketing landing (target: day 5–6)
 
@@ -215,7 +217,7 @@ This is the one we ship publicly first. No DB. Just file-based.
 
 1. `<SendCard/>` form + the 4 message templates from `lib/send-templates.ts`
 2. `POST /api/sends` — log the send, return short ref id
-3. `GET /api/r/[ref]` — log the open server-side, redirect to `/[slug]?cd=1&ref=[ref]`
+3. `GET /api/r/[ref]` — log the open server-side, redirect to `/[slug]/c?ref=[ref]`
 4. Optional client beacon on `[slug]` page for "watched reel seconds" — `navigator.sendBeacon` on play / pause / unload
 5. `<OpensFeed/>` on the dashboard
 6. **Done when:** an actor sends their profile to a number, the recipient opens it on WhatsApp, the actor sees the open in their dashboard within seconds
@@ -258,7 +260,7 @@ For the profile page specifically (M1), use:
 |---|---|---|---|---|
 | `/` marketing | < 1.8s | < 200ms | < 100KB | < 600KB |
 | `/[slug]` cinematic | < 2.0s | < 200ms | < 120KB | < 800KB (excl video) |
-| `/[slug]?cd=1` CD view | < 1.2s | < 100ms | < 60KB | < 400KB (excl video) |
+| `/[slug]/c` CD view | < 1.2s | < 100ms | < 60KB | < 400KB (excl video) |
 
 The CD view is the strictest because the CD's experience is the make-or-break.
 

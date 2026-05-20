@@ -69,15 +69,17 @@ Four pieces, nothing more.
 
 ### 1. The Profile Page (`slate.club/yourname`)
 
-Mobile-first. One design (no template picker in V1). Two render modes on the same URL:
+Mobile-first. One design (no template picker in V1). Two routes, two render modes:
 
-- **Cinematic view (default):** full-bleed hero photo, name in Fraunces display, one-line tagline, then vertical scroll: showreel â†’ headshots â†’ stats card â†’ training/credits â†’ contact CTA. Subtle motion. Dark mode default.
-- **CD view (scannable):** triggered by `?cd=1` query param (used in all our generated WhatsApp links) OR when referrer is `wa.me` / WhatsApp. Top of page collapses to a tight info card: photo (left), name + age + height + languages + city + contact (right), reel embedded directly below. No animation. A small "see full profile" link at the bottom switches to cinematic view. **This detail wins the product.**
+- **Cinematic view (default):** lives at `/[slug]`. Full-bleed hero photo, name in Fraunces display, one-line tagline, then vertical scroll: showreel â†’ headshots â†’ stats card â†’ training/credits â†’ contact CTA. Subtle motion. Dark mode default. This is the URL the actor shares casually (Instagram bio, business card).
+- **CD view (scannable):** lives at `/[slug]/c` â€” its own route, its own ISR cache, no query-param branching. Tight info card: photo (left), name + age + height + languages + city + contact (right), reel embedded directly below. No animation. A small "see full profile" link at the bottom links back to `/[slug]`. **This detail wins the product.**
+
+CDs reach `/[slug]/c` via the `/api/r/[ref]` redirect that fires from every WhatsApp send (the redirect logs the open server-side then 302s to `/[slug]/c?ref=<id>`). Actors never share the `/c` URL directly â€” they always share `/[slug]`.
 
 ### 2. The Send (WhatsApp distribution kit)
 
 From the actor's dashboard:
-- "Send Profile" button â†’ enter phone number â†’ pick from 4 message presets (Ad film fresher / OTT / Theatre / Custom) â†’ optionally add role / project name â†’ opens WhatsApp via `wa.me/<number>?text=<encoded>` with prefilled message + the link including `?cd=1&ref=<send_id>`.
+- "Send Profile" button â†’ enter phone number â†’ pick from 4 message presets (Ad film fresher / OTT / Theatre / Custom) â†’ optionally add role / project name â†’ opens WhatsApp via `wa.me/<number>?text=<encoded>` with prefilled message + a tracked redirect URL `slate.club/r/<send_id>` which 302s to `/[slug]/c?ref=<send_id>` and logs the open.
 - The link, when opened, unfurls into a rich preview on WhatsApp: actor photo, name, age range, height, "Mumbai-based actor". This is implemented via dynamic OG image generation (per profile) at `/api/og/<slug>`.
 - **Tracking:** every generated link has a `ref` id. We log open events server-side via a redirect or pixel. The actor sees, in their dashboard, a feed: "Opened by [masked number] Â· 2h ago Â· watched 18s of reel". One line per send. No funnels, no graphs.
 
@@ -220,8 +222,8 @@ club_applications
 GET  /                              # Marketing landing
 GET  /manifesto                     # The story / why Slate exists
 GET  /club                          # The club page + applications
-GET  /[slug]                        # PUBLIC PROFILE â€” server component, cached
-GET  /[slug]?cd=1                   # CD view (same component, different render branch)
+GET  /[slug]                        # PUBLIC PROFILE â€” cinematic, server component, cached
+GET  /[slug]/c                      # CD view â€” tight scannable card, server component, cached
 
 GET  /login                         # Phone OTP
 GET  /onboard                       # 5-step flow (sub-routes /onboard/1 ... /5)
@@ -231,7 +233,7 @@ GET  /me/edit                       # Profile editor
 POST /api/auth/...                  # Better Auth
 POST /api/uploads                   # Presigned R2 URL
 POST /api/sends                     # Log a send, return ref id
-GET  /api/r/:ref                    # Redirect to /[slug]?cd=1 + log open
+GET  /api/r/:ref                    # Redirect to /[slug]/c?ref=[ref] + log open
 GET  /api/og/:slug                  # Dynamic OG image (1200x630)
 GET  /api/og/:slug/cd               # Tight WhatsApp preview variant
 POST /api/club/apply                # Club application
@@ -288,3 +290,4 @@ Aim: M0â€“M2 in week 1. M3â€“M4 in week 2. M5â€“M6 in week 3.
 ## Decision log (every locked decision lives here)
 
 - **2026-05-20:** Name = Slate. Slug pattern = `slate.club/yourname`. Palette = charcoal / cream / gold. Display font = Fraunces. We do not build a casting-call aggregator. CD view is a query-param render of the same page, not a separate route. WhatsApp send is `wa.me` only (no Business API at launch). First featured profile = Ashish Rawat.
+- **2026-05-20 (reversal):** Reversed earlier CD-view-via-query-param decision. CD view is now `app/[slug]/c` â€” its own route, its own ISR cache, no searchParams branching. Reason: every real CD arrives via the `/api/r/[ref]` redirect anyway, which already does the routing â€” query param was unneeded coupling. Actor still shares `/[slug]`; the `/c` URL is internal-only (the redirect lands CDs there).

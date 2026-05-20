@@ -165,7 +165,7 @@ We keep this list deliberately small. Every component must serve a real need on 
 
 ## CD view — the non-negotiables
 
-When `?cd=1` is in the URL, the profile renders differently. This is the most important screen in the whole product:
+The CD view lives at its own route, `/[slug]/c`, reached via the `/api/r/[ref]` redirect from every WhatsApp send. It is a separate Server Component from the cinematic `/[slug]` page (no query-param branching, no shared layout fork). This is the most important screen in the whole product:
 
 1. Top of viewport on mobile (above the fold, no scroll required) shows:
    - Square or 4:5 photo, 40% of viewport width on the left
@@ -179,7 +179,7 @@ When `?cd=1` is in the URL, the profile renders differently. This is the most im
 2. Reel embedded immediately below, autoplay disabled, poster image visible (so even with no JS / slow network there's a clear video preview)
 3. Three to five additional photos in a horizontal swipeable strip
 4. Credits as text-only list (brand · medium · year)
-5. A small "See full profile" link in gold at the bottom — switches off `?cd=1` and rerenders cinematic view
+5. A small "See full profile" link in gold at the bottom — links to `/[slug]` (the cinematic view)
 
 **Performance budget for CD view:**
 - LCP under 1.2s on a throttled 3G connection
