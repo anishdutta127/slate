@@ -29,14 +29,30 @@ Every Claude Code session must read `CLAUDE.md` before doing anything.
 
 ```bash
 pnpm install
-cp .env.example .env.local        # fill in DATABASE_URL, R2, FIREBASE_*, BETTER_AUTH
-pnpm db:generate                  # drizzle migrations from schema
-pnpm db:migrate                   # apply to your local/dev DB
-pnpm db:seed                      # seeds Ashish Rawat's profile so /ashish works
+cp .env.example .env.local        # fill in env keys as milestones land
 pnpm dev                          # localhost:3000
 ```
 
-Then open `localhost:3000/ashish` to see the reference profile, and `localhost:3000/ashish/c` to see the CD render.
+From M3 onward, `pnpm dev` will also require `pnpm db:generate && pnpm db:migrate && pnpm db:seed` (Drizzle + Neon, seeds Ashish Rawat's profile so `/ashish` works). Those scripts ship in M3.
+
+## Local development
+
+Today (M0) ships:
+
+- `pnpm dev` — Next.js 15 + Turbopack on `localhost:3000`
+- `pnpm lint` — ESLint via `next lint`
+- `pnpm typecheck` — `tsc --noEmit`, strict mode
+- `pnpm format` — Prettier write
+- `pnpm build` — production build
+
+Routes that exist today:
+
+- `localhost:3000/` — placeholder landing (wordmark + tagline + coming-soon)
+- `localhost:3000/style` — every design atom on dark and cream backgrounds (Wordmark, Button, Chip, Divider, Grain, typography scale, color tokens)
+
+The `/style` route is gated. In dev (`NODE_ENV !== 'production'`) it always renders. In a production build it 404s unless the env var `SLATE_ENABLE_STYLE_GUIDE=1` is set — so you can opt it on for a Vercel preview deploy to share the design system snapshot, but it stays hidden in real prod.
+
+From M1: `localhost:3000/ashish` (cinematic profile) and `localhost:3000/ashish/c` (CD scan view).
 
 ## Tech
 

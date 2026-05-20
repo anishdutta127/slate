@@ -1,11 +1,13 @@
-﻿# deps
+# deps
 node_modules/
 .pnpm-store/
 
-# next
+# next + typescript build cache
 .next/
 out/
 build/
+next-env.d.ts.bak
+*.tsbuildinfo
 
 # env
 .env
@@ -22,9 +24,20 @@ build/
 .vscode/
 .idea/
 
+# claude code local state
+.claude/
+.claude/settings.local.json
+
+# windows shell misfire — `mkdir ~/path` creates a literal `~/` dir on cmd/powershell
+/~/
+
 # gstack local state
 .gstack/
 .gstack-worktrees/
 
 # don't commit raw uploads, only the optimized public ones
 /assets/uploads/
+
+# os junk inside public assets
+public/**/.DS_Store
+public/**/Thumbs.db

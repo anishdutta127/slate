@@ -1,0 +1,47 @@
+# Fonts — provenance and regeneration
+
+These three woff2 files are checked into the repo as pre-subset variable fonts. Total weight ~137 KB.
+
+Source: [Fontsource](https://fontsource.org/) (a community-maintained mirror of Google Fonts and other open-source font sources, served via jsDelivr).
+
+## Files
+
+| File | Source package | Axes | Latin subset | Size |
+|---|---|---|---|---|
+| `Fraunces-Variable.woff2` | `@fontsource-variable/fraunces@5.2.9` (`standard`) | `opsz`, `wght` | yes | ~65.7 KB |
+| `Geist-Variable.woff2` | `@fontsource-variable/geist@latest` | `wght` | yes | ~28.7 KB |
+| `JetBrainsMono-Variable.woff2` | `@fontsource-variable/jetbrains-mono@latest` | `wght` | yes | ~39.5 KB |
+
+## Why "standard" Fraunces, not "full"
+
+DESIGN.md specifies four axes for Fraunces (`opsz`, `wght`, `SOFT`, `WONK`). The full file with all four axes is ~118 KB, which breaks the M0 perf budget for the CD view (<400 KB total, fonts share that with the photo and HTML). The locked subset decision (commit `15d0acc`) pins `SOFT` and `WONK` as CSS constants instead of live axes, and keeps `opsz` and `wght` live. The `standard` Fontsource subset matches this exactly: ~65.7 KB with `opsz` + `wght`, no `SOFT`/`WONK` axes.
+
+The `font-variation-settings: 'SOFT' 50, 'WONK' 1` declarations in `app/globals.css` are present for documentation and forward-compatibility — they are no-ops against this font file because those axes are not present, but the moment we swap to the `full` cut (118 KB) or generate a custom subset that includes them, the declarations activate.
+
+## Regenerating
+
+To re-download the same files (e.g. after a Fontsource version bump), run from the repo root:
+
+```powershell
+# Windows / PowerShell
+$ProgressPreference = 'SilentlyContinue'
+$urls = @{
+  'Fraunces-Variable.woff2'      = 'https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.2.9/files/fraunces-latin-standard-normal.woff2'
+  'Geist-Variable.woff2'         = 'https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@latest/files/geist-latin-wght-normal.woff2'
+  'JetBrainsMono-Variable.woff2' = 'https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@latest/files/jetbrains-mono-latin-wght-normal.woff2'
+}
+foreach ($name in $urls.Keys) {
+  Invoke-WebRequest -Uri $urls[$name] -OutFile "public\fonts\$name" -UseBasicParsing
+}
+```
+
+```bash
+# macOS / Linux
+curl -sL "https://cdn.jsdelivr.net/npm/@fontsource-variable/fraunces@5.2.9/files/fraunces-latin-standard-normal.woff2" -o public/fonts/Fraunces-Variable.woff2
+curl -sL "https://cdn.jsdelivr.net/npm/@fontsource-variable/geist@latest/files/geist-latin-wght-normal.woff2" -o public/fonts/Geist-Variable.woff2
+curl -sL "https://cdn.jsdelivr.net/npm/@fontsource-variable/jetbrains-mono@latest/files/jetbrains-mono-latin-wght-normal.woff2" -o public/fonts/JetBrainsMono-Variable.woff2
+```
+
+## Tightening further (future)
+
+If we ever need to go below ~65 KB on Fraunces, the path is to fork the source font and run `pyftsubset` locally with `--layout-features='*'` and a curated unicode range (drop pcrtt, drop unused glyphs in the Latin subset like fractions and old-style numerals). That requires Python + fontTools and lives outside the build pipeline; check in the result the same way.

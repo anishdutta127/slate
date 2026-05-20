@@ -1,0 +1,134 @@
+@import "tailwindcss";
+
+/* =============================================================================
+   Slate — design tokens (DESIGN.md is the source of truth)
+   Tailwind v4 reads @theme tokens to generate utilities (bg-slate-bg,
+   text-slate-cream, etc.). CSS variables are emitted into :root automatically.
+   ========================================================================== */
+
+@theme {
+  /* ---- color: base ---- */
+  --color-slate-bg: #0e0e0c;
+  --color-slate-surface: #161613;
+  --color-slate-cream: #f5efe3;
+  --color-slate-cream-2: #ece3d0;
+
+  /* ---- color: text (use on dark backgrounds unless suffixed) ---- */
+  --color-text-primary: #f5efe3;
+  --color-text-secondary: #c8c2b5;
+  --color-text-tertiary: #8a857b;
+  --color-text-on-light: #1a1916;
+
+  /* ---- color: accent (use sparingly — never as CTA fill) ---- */
+  --color-gold: #c9a24b;
+  --color-gold-soft: #e8c97a;
+
+  /* ---- color: signal ---- */
+  --color-danger: #c84b3c;
+  --color-success: #6b8e5a;
+
+  /* ---- borders / dividers ---- */
+  --color-border-dark: rgba(245, 239, 227, 0.08);
+  --color-border-light: rgba(26, 25, 22, 0.08);
+
+  /* ---- shadow ---- */
+  --shadow-cinematic:
+    0 24px 64px -20px rgba(0, 0, 0, 0.6), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
+
+  /* ---- typography: families (wired to next/font/local CSS vars in layout.tsx) ---- */
+  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-body: var(--font-geist), system-ui, -apple-system, sans-serif;
+  --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+}
+
+/* =============================================================================
+   Base — applied globally
+   ========================================================================== */
+
+:root {
+  color-scheme: dark;
+}
+
+html {
+  background-color: var(--color-slate-bg);
+  color: var(--color-text-primary);
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: 16px;
+  line-height: 1.6;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+/* Selection in slate cream so it reads cinematic, not OS-default-blue */
+::selection {
+  background-color: var(--color-gold);
+  color: var(--color-text-on-light);
+}
+
+/* =============================================================================
+   Typography utilities — opt-in classes used by display elements.
+   Fraunces is the only font that uses font-variation-settings (opsz + pinned
+   SOFT/WONK — the latter are no-ops against the current 'standard' subset
+   but stay declared for forward-compat — see public/fonts/README.md).
+   ========================================================================== */
+
+.font-display {
+  font-family: var(--font-display);
+  font-feature-settings: "ss01", "ss02";
+}
+
+.display-l {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-size: clamp(2.75rem, 7vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+}
+
+.display-m {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(2.5rem, 5vw, 3.5rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  font-variation-settings: "opsz" 72, "SOFT" 50, "WONK" 1;
+}
+
+.display-s {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: clamp(1.5rem, 2.5vw, 1.75rem);
+  line-height: 1.1;
+  letter-spacing: -0.01em;
+  font-variation-settings: "opsz" 36, "SOFT" 50, "WONK" 1;
+}
+
+.body-l {
+  font-size: 1.125rem;
+  line-height: 1.55;
+}
+
+.body-m {
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.body-s {
+  font-size: 0.875rem;
+  line-height: 1.5;
+  font-weight: 500;
+}
+
+.chip-text {
+  font-family: var(--font-mono);
+  font-size: 0.8125rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  font-weight: 500;
+}
