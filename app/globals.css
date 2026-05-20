@@ -39,6 +39,18 @@
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
   --font-body: var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
+  /* Devanagari accent face — only used inside .devanagari spans, always with English siblings */
+  --font-devanagari: var(--font-noto-serif-devanagari), "Noto Serif Devanagari", "Mangal", serif;
+}
+
+/* Helper for the few Devanagari accents we render across the app.
+   Always renders smaller and more muted than its English sibling per DESIGN.md. */
+.devanagari {
+  font-family: var(--font-devanagari);
+  font-weight: 400;
+  font-feature-settings: "kern";
+  opacity: 0.7;
+  font-size: 0.85em;
 }
 
 /* =============================================================================
