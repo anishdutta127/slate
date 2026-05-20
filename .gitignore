@@ -41,3 +41,9 @@ next-env.d.ts.bak
 # os junk inside public assets
 public/**/.DS_Store
 public/**/Thumbs.db
+
+# screenshots and QA artifacts
+.gstack/
+.playwright-cache/
+test-results/
+playwright-report/
