@@ -1,0 +1,30 @@
+﻿# deps
+node_modules/
+.pnpm-store/
+
+# next
+.next/
+out/
+build/
+
+# env
+.env
+.env.local
+.env*.local
+
+# misc
+.DS_Store
+*.log
+.vercel
+.turbo
+
+# editor
+.vscode/
+.idea/
+
+# gstack local state
+.gstack/
+.gstack-worktrees/
+
+# don't commit raw uploads, only the optimized public ones
+/assets/uploads/
