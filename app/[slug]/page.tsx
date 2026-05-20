@@ -59,7 +59,9 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
 
   const honda = t.credits.find((c) => c.brand === "Honda")!;
   const otherCredits = t.credits.filter((c) => c.brand !== "Honda");
-  const whatsappMessage = `Hi ${t.name.split(" ")[0]}, saw your Slate profile`;
+  // Trailing space is intentional — leaves the cursor primed right after our
+  // line in WhatsApp's compose. Mirrors the CD view.
+  const whatsappMessage = `Hi ${t.name.split(" ")[0]}, saw your profile on Slate `;
 
   return (
     <>

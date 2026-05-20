@@ -41,10 +41,24 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
   if (!t) notFound();
 
   const firstName = t.name.split(" ")[0]!;
-  const whatsappMessage = `Hi ${firstName}, saw your Slate profile`;
+  // Trailing space is intentional: WhatsApp's prefilled message opens with the
+  // cursor right after our line, so the CD can keep typing without first
+  // tapping space themselves.
+  const whatsappMessage = `Hi ${firstName}, saw your profile on Slate `;
 
   return (
-    <main className="mx-auto min-h-svh max-w-[680px] bg-slate-bg px-4 py-6 text-text-primary">
+    <main className="relative mx-auto min-h-svh max-w-[680px] bg-slate-bg px-4 py-6 text-text-primary">
+      {/* Top-right escape hatch to the cinematic view. Some CDs want the full
+          version after the two-second scan; making them scroll to the bottom
+          link is a friction tax. Small, low-opacity, gold mono so it reads as
+          an affordance, not a button competing with the contact CTAs. */}
+      <Link
+        href={`/${t.slug}`}
+        className="absolute right-4 top-6 font-mono text-[11px] uppercase tracking-[0.15em] text-gold/60 underline-offset-4 transition-opacity hover:text-gold hover:underline focus-visible:text-gold focus-visible:underline focus-visible:outline-none"
+      >
+        ← Full profile
+      </Link>
+
       {/* Info card — must fit + 2 buttons in 375x812 viewport */}
       <section
         className="rounded-md border border-border-dark bg-slate-surface p-4"
