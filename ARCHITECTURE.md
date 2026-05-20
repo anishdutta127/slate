@@ -2,7 +2,7 @@
 
 ## High-level
 
-Single Next.js 15 App Router app. Server-rendered profiles. Edge OG images. Postgres + Drizzle. R2 for media. Phone OTP via MSG91. Vercel host.
+Single Next.js 15 App Router app. Server-rendered profiles. Edge OG images. Postgres + Drizzle. R2 for media. Phone OTP via Firebase Phone Auth, sessions via Better Auth in our own DB. Vercel host.
 
 ```
 ┌──────────────────────────────────────────────────────────┐
@@ -19,10 +19,10 @@ Single Next.js 15 App Router app. Server-rendered profiles. Edge OG images. Post
                │
    ┌───────────┼────────────┐
    │           │            │
-┌──┴────┐  ┌───┴───┐   ┌────┴────┐
-│ Neon  │  │  R2   │   │ MSG91   │
-│  PG   │  │ media │   │  OTP    │
-└───────┘  └───────┘   └─────────┘
+┌──┴────┐  ┌───┴───┐   ┌──────────┐
+│ Neon  │  │  R2   │   │ Firebase │
+│  PG   │  │ media │   │Phone Auth│
+└───────┘  └───────┘   └──────────┘
 ```
 
 ## File layout
@@ -115,7 +115,8 @@ slate/
 │   ├── auth.ts                     # Better Auth config
 │   ├── db.ts                       # drizzle client
 │   ├── r2.ts                       # presign + upload helpers
-│   ├── msg91.ts                    # OTP send + verify
+│   ├── firebase.ts                 # client-side Firebase init (browser SDK, used by OTP screen)
+│   ├── firebase-admin.ts           # server-side firebase-admin init + verifyIdToken helper
 │   ├── slugs.ts                    # reserved list + validators
 │   ├── og.ts                       # shared OG image helpers
 │   ├── embed.ts                    # detect YouTube/IG/FB/Drive and produce embed URL + thumbnail
@@ -160,9 +161,14 @@ R2_PUBLIC_URL=                  # e.g. https://media.slate.club
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=                # https://slate.club in prod, http://localhost:3000 dev
 
-MSG91_AUTH_KEY=
-MSG91_TEMPLATE_ID=              # OTP template id
-MSG91_SENDER_ID=SLATEX
+FIREBASE_PROJECT_ID=            # server-side (firebase-admin)
+FIREBASE_CLIENT_EMAIL=          # service account email
+FIREBASE_PRIVATE_KEY=           # service account private key, with \n escaped
+
+NEXT_PUBLIC_FIREBASE_API_KEY=
+NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
+NEXT_PUBLIC_FIREBASE_PROJECT_ID=
+NEXT_PUBLIC_FIREBASE_APP_ID=
 
 NEXT_PUBLIC_APP_URL=            # https://slate.club
 ```
@@ -204,7 +210,7 @@ This is the one we ship publicly first. No DB. Just file-based.
 ### M3 — Auth + onboarding (target: day 7–9)
 
 1. Drizzle schema, migrations, Neon connection
-2. Better Auth with MSG91 OTP provider (custom adapter — Better Auth supports phone via custom plugin)
+2. Firebase Phone Auth as the OTP delivery layer (client-side `signInWithPhoneNumber()` via Firebase Web SDK, headless except for invisible reCAPTCHA). Server endpoint `/api/auth/firebase-callback` verifies the Firebase ID token via `firebase-admin.auth().verifyIdToken()`, upserts the user in our Drizzle `users` table by `phone`, then mints a Better Auth session. Better Auth's phone plugin is bypassed; we use Better Auth's session/user primitives directly. ~80 lines of glue.
 3. The 5-step onboard flow as separate routes inside a shared layout with progress dots
 4. `<SlugPicker/>` with debounced availability check
 5. `<PhonePhotoPicker/>` with R2 presigned upload + Sharp resize on server

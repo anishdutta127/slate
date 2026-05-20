@@ -29,7 +29,7 @@ Every Claude Code session must read `CLAUDE.md` before doing anything.
 
 ```bash
 pnpm install
-cp .env.example .env.local        # fill in DATABASE_URL, R2, MSG91, BETTER_AUTH
+cp .env.example .env.local        # fill in DATABASE_URL, R2, FIREBASE_*, BETTER_AUTH
 pnpm db:generate                  # drizzle migrations from schema
 pnpm db:migrate                   # apply to your local/dev DB
 pnpm db:seed                      # seeds Ashish Rawat's profile so /ashish works
@@ -40,7 +40,7 @@ Then open `localhost:3000/ashish` to see the reference profile, and `localhost:3
 
 ## Tech
 
-Next.js 15 (App Router, Turbopack) · TypeScript · Tailwind v4 · shadcn/ui · Motion v12 · Drizzle ORM · Neon Postgres · Better Auth · Cloudflare R2 · MSG91 (OTP) · Vercel.
+Next.js 15 (App Router, Turbopack) · TypeScript · Tailwind v4 · shadcn/ui · Motion v12 · Drizzle ORM · Neon Postgres · Better Auth (sessions) + Firebase Phone Auth (OTP delivery) · Cloudflare R2 · Vercel.
 
 ## Status
 

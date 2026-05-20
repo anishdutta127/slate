@@ -128,14 +128,13 @@ Five screens, each is its own step. Each is optional after step 1.
 | Animation | Motion (framer-motion v12) | Cinematic curves |
 | Database | Postgres on Neon | Serverless, cheap, scales fine for our load |
 | ORM | Drizzle | Type-safe, migrations clean |
-| Auth | Better Auth | Phone OTP (Twilio Verify or MSG91 for India) + Google later |
+| Auth | Better Auth + Firebase Phone Auth | Firebase delivers the OTP (free up to 10K/month, zero DLT paperwork). Better Auth handles sessions in our Neon DB. Google sign-in adds later. |
 | File storage | Cloudflare R2 | S3-compatible, near-free at our scale |
 | Image opt | `next/image` + Sharp | Standard |
 | Video | YouTube / IG embeds first. Mux later if hosting our own | Free at launch |
 | Hosting | Vercel | Edge OG, ISR, free tier covers us for months |
 | Analytics | PostHog (self-host or cloud free tier) + Plausible for the marketing site | Privacy-first |
 | WhatsApp send | `https://wa.me/<number>?text=<encoded>` â€” client opens user's own WhatsApp. **No business API, no template approvals, no cost.** | Our user sends, not us. |
-| OTP / phone | MSG91 (India-first, cheap) | Twilio is overkill |
 
 > **Reference:** the open-source `wrk.so` portfolio platform (github.com/9d8dev/wrk) uses almost exactly this stack. Read their `app/`, `db/schema.ts`, and `lib/actions/` as a structural reference. **Do not vendor their code (AGPL).** Use their architecture as inspiration only.
 
@@ -230,7 +229,8 @@ GET  /onboard                       # 5-step flow (sub-routes /onboard/1 ... /5)
 GET  /me                            # Dashboard (sends feed, profile editor)
 GET  /me/edit                       # Profile editor
 
-POST /api/auth/...                  # Better Auth
+POST /api/auth/...                  # Better Auth (sessions, signout, user mgmt)
+POST /api/auth/firebase-callback    # Verify Firebase ID token, upsert user, mint Better Auth session
 POST /api/uploads                   # Presigned R2 URL
 POST /api/sends                     # Log a send, return ref id
 GET  /api/r/:ref                    # Redirect to /[slug]/c?ref=[ref] + log open
@@ -269,6 +269,8 @@ POST /api/club/apply                # Club application
 
 Aim: M0â€“M2 in week 1. M3â€“M4 in week 2. M5â€“M6 in week 3.
 
+**M3 fallback note:** the OTP screen ships with a "Trouble receiving OTP?" link that opens a pre-filled WhatsApp message to our support number. Firebase's invisible reCAPTCHA occasionally challenges users on budget Android â€” we want a graceful escape hatch before a CD-impressing actor signup is lost to a silent OTP failure.
+
 ---
 
 ## First profile to build: Ashish Rawat
@@ -291,3 +293,4 @@ Aim: M0â€“M2 in week 1. M3â€“M4 in week 2. M5â€“M6 in week 3.
 
 - **2026-05-20:** Name = Slate. Slug pattern = `slate.club/yourname`. Palette = charcoal / cream / gold. Display font = Fraunces. We do not build a casting-call aggregator. CD view is a query-param render of the same page, not a separate route. WhatsApp send is `wa.me` only (no Business API at launch). First featured profile = Ashish Rawat.
 - **2026-05-20 (reversal):** Reversed earlier CD-view-via-query-param decision. CD view is now `app/[slug]/c` â€” its own route, its own ISR cache, no searchParams branching. Reason: every real CD arrives via the `/api/r/[ref]` redirect anyway, which already does the routing â€” query param was unneeded coupling. Actor still shares `/[slug]`; the `/c` URL is internal-only (the redirect lands CDs there).
+- **2026-05-20:** Locked Firebase Phone Auth for OTP delivery (replaces MSG91). Better Auth still handles sessions and the user table in Neon. Reason: $0 at launch, zero DLT paperwork, saves 1â€“3 weeks of TRAI registration. ~80 lines of glue code in M3 to bridge Firebase ID token verification into Better Auth sessions. Migration cost if we ever regret: ~50 lines (users are keyed by phone, not Firebase UID).
