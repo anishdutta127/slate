@@ -48,13 +48,12 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
 
   return (
     <main className="relative mx-auto min-h-svh max-w-[680px] bg-slate-bg px-4 py-6 text-text-primary">
-      {/* Top-right escape hatch to the cinematic view. Some CDs want the full
-          version after the two-second scan; making them scroll to the bottom
-          link is a friction tax. Small, low-opacity, gold mono so it reads as
-          an affordance, not a button competing with the contact CTAs. */}
+      {/* Top-right escape hatch to the cinematic view. Per C2: gold underline
+          decoration is always visible (not hover-only), padding gives a real
+          touch target on mobile so CDs don't have to pixel-aim a thin link. */}
       <Link
         href={`/${t.slug}`}
-        className="absolute right-4 top-6 font-mono text-[11px] uppercase tracking-[0.15em] text-gold/60 underline-offset-4 transition-opacity hover:text-gold hover:underline focus-visible:text-gold focus-visible:underline focus-visible:outline-none"
+        className="absolute right-2 top-3 -m-1 inline-block rounded-md px-3 py-2 font-mono text-[11px] uppercase tracking-[0.15em] text-gold/80 underline decoration-gold/40 decoration-1 underline-offset-4 transition-colors hover:text-gold hover:decoration-gold focus-visible:text-gold focus-visible:decoration-gold focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
       >
         ← Full profile
       </Link>

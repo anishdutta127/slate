@@ -18,24 +18,24 @@ export const ASHISH: Talent = {
   bio: "Mumbai-based actor with six years on stage and screen. Faces you've seen in Honda, Cipla, Zepto, Nilkamal, and Smotect commercials. North Indian roots, comfortable in Hindi and English, open to OTT, theatre, and longer formats.",
 
   hero: {
-    slug: "02-headshot-blazer",
-    alt: "Ashish Rawat headshot in a warm brown blazer against a brown backdrop, eye contact, slight smile.",
-    width: 853,
-    height: 1067,
+    slug: "03-outdoor-denim",
+    alt: "Ashish Rawat outdoors in a denim jacket, mid-distance composition with depth in the background.",
+    width: 960,
+    height: 1280,
   },
 
   gallery: [
+    {
+      slug: "02-headshot-blazer",
+      alt: "Ashish Rawat headshot in a warm brown blazer against a brown backdrop, eye contact, slight smile.",
+      width: 853,
+      height: 1067,
+    },
     {
       slug: "01-fullbody-white-shirt",
       alt: "Ashish Rawat in a full-body shot, white shirt, neutral studio backdrop.",
       width: 1000,
       height: 1500,
-    },
-    {
-      slug: "03-outdoor-denim",
-      alt: "Ashish Rawat outdoors in a denim jacket, looser commercial energy.",
-      width: 960,
-      height: 1280,
     },
     {
       slug: "04-seated-mint-shirt",
