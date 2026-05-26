@@ -8,7 +8,7 @@ import { ClubApplyForm } from "./ClubApplyForm";
 export const metadata: Metadata = {
   title: "The club — Slate",
   description:
-    "The Slate club meets every Sunday in Aram Nagar, Mumbai. Free, vetted, small. Scene work and cold reads with working actors.",
+    "The Slate club helps fresher actors in Mumbai join a vetted WhatsApp community, practise weekly, and get a CD-ready profile made for free during the founding batch.",
 };
 
 // /club — application + meetup placeholders. Application form posts to
@@ -44,10 +44,14 @@ export default function ClubPage() {
                 Aram Nagar.
               </h1>
               <p className="mt-6 max-w-[40ch] text-base leading-relaxed text-text-secondary md:text-lg">
-                Free. Hosted by us. Scene work, cold reads, and a monthly Slate Night with a working actor or casting coordinator as guest.
+                Free for the founding batch. We help freshers find scene partners, enter useful
+                WhatsApp circles, avoid shady casting noise, and practise cold reads with people on
+                the same path.
               </p>
               <p className="mt-4 max-w-[40ch] text-sm leading-relaxed text-text-tertiary">
-                We cap the WhatsApp community at ~80 vetted members so it stays a room, not a Discord. Applications open. We read every one.
+                The joining prize is your CD-ready Slate profile, made with us for free for now. We
+                cap the WhatsApp community at ~80 vetted members so it stays a room, not a random
+                group.
               </p>
 
               <dl className="mt-10 grid grid-cols-2 gap-4 border-t border-border-dark pt-8">
@@ -61,11 +65,11 @@ export default function ClubPage() {
                 </div>
                 <div>
                   <dt className="chip-text text-gold">Cost</dt>
-                  <dd className="mt-2 text-text-primary">Free</dd>
+                  <dd className="mt-2 text-text-primary">Free founding batch</dd>
                 </div>
                 <div>
-                  <dt className="chip-text text-gold">Members</dt>
-                  <dd className="mt-2 text-text-primary">Vetted, ~80 cap</dd>
+                  <dt className="chip-text text-gold">Prize</dt>
+                  <dd className="mt-2 text-text-primary">Profile made with us</dd>
                 </div>
               </dl>
             </div>
@@ -77,7 +81,8 @@ export default function ClubPage() {
               >
                 <p className="chip-text text-gold">Apply to join</p>
                 <p className="mt-3 text-sm text-text-secondary">
-                  Five quick fields. We&apos;ll read it the same day.
+                  Five quick fields. Hinglish is fine. We&apos;ll read it like humans, not a form
+                  rejection.
                 </p>
                 <div className="mt-6">
                   <ClubApplyForm />
@@ -102,10 +107,12 @@ export default function ClubPage() {
               lineHeight: 1.05,
             }}
           >
-            Photos come after Sunday.
+            The first room is being built.
           </h2>
           <p className="mt-4 max-w-[40ch] text-text-secondary">
-            We&apos;ll replace these placeholders with real shots from the first meetup.
+            Until the first meetup photos come in, this is the promise: better practice, cleaner
+            profiles, safer casting information, and people who actually understand the fresher
+            grind.
           </p>
 
           <div className="mt-12 grid grid-cols-2 gap-4 md:grid-cols-3 md:gap-6">
@@ -114,8 +121,7 @@ export default function ClubPage() {
                 key={i}
                 className="relative aspect-[4/5] overflow-hidden rounded-sm"
                 style={{
-                  background:
-                    "linear-gradient(135deg, #161613 0%, #1a1916 50%, #0a0a09 100%)",
+                  background: "linear-gradient(135deg, #161613 0%, #1a1916 50%, #0a0a09 100%)",
                   boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.12)",
                 }}
               >
@@ -139,20 +145,23 @@ export default function ClubPage() {
         </div>
       </Section>
 
-      <Section
-        tone="dark"
-        as="footer"
-        className="border-t border-border-dark px-6 py-12 md:px-12"
-      >
+      <Section tone="dark" as="footer" className="border-t border-border-dark px-6 py-12 md:px-12">
         <div className="mx-auto flex max-w-[1120px] flex-col items-center gap-4 text-center md:flex-row md:justify-between md:text-left">
-          <Link href="/" className="flex items-baseline gap-2 text-text-tertiary hover:text-text-primary">
+          <Link
+            href="/"
+            className="flex items-baseline gap-2 text-text-tertiary hover:text-text-primary"
+          >
             <span className="font-mono text-xs uppercase tracking-[0.15em]">Made on Slate</span>
             <span className="font-mono text-xs">·</span>
             <span className="devanagari">स्लेट</span>
           </Link>
           <nav className="flex flex-wrap items-center gap-6 font-mono text-[11px] uppercase tracking-[0.15em]">
-            <Link href="/" className="text-text-secondary hover:text-text-primary">Home</Link>
-            <Link href="/manifesto" className="text-text-secondary hover:text-text-primary">Manifesto</Link>
+            <Link href="/" className="text-text-secondary hover:text-text-primary">
+              Home
+            </Link>
+            <Link href="/manifesto" className="text-text-secondary hover:text-text-primary">
+              Manifesto
+            </Link>
           </nav>
         </div>
       </Section>

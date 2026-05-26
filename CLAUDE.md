@@ -10,7 +10,7 @@
 
 **The product wedge is distribution, not discovery.** Talentrack and MCCC are casting marketplaces. We are not. We are the layer the actor controls: their presence, their pitch, their people.
 
-**Promise:** *"Look ready before the audition. Send one link. Grow with others doing the same."*
+**Promise:** _"Look ready before the audition. Send one link. Grow with others doing the same."_
 
 ---
 
@@ -79,6 +79,7 @@ CDs reach `/[slug]/c` via the `/api/r/[ref]` redirect that fires from every What
 ### 2. The Send (WhatsApp distribution kit)
 
 From the actor's dashboard:
+
 - "Send Profile" button â†’ enter phone number â†’ pick from 4 message presets (Ad film fresher / OTT / Theatre / Custom) â†’ optionally add role / project name â†’ opens WhatsApp via `wa.me/<number>?text=<encoded>` with prefilled message + a tracked redirect URL `slate.club/r/<send_id>` which 302s to `/[slug]/c?ref=<send_id>` and logs the open.
 - The link, when opened, unfurls into a rich preview on WhatsApp: actor photo, name, age range, height, "Mumbai-based actor". This is implemented via dynamic OG image generation (per profile) at `/api/og/<slug>`.
 - **Tracking:** every generated link has a `ref` id. We log open events server-side via a redirect or pixel. The actor sees, in their dashboard, a feed: "Opened by [masked number] Â· 2h ago Â· watched 18s of reel". One line per send. No funnels, no graphs.
@@ -86,6 +87,7 @@ From the actor's dashboard:
 ### 3. The Club (community)
 
 At launch this is intentionally low-tech. Inside the app:
+
 - A `/club` page on the marketing site: photos from last meetup, next meetup date, "Join the Club" form (name, Insta, photo, one line about why they're acting).
 - Manual vetting by us, acceptance via WhatsApp.
 - One vetted WhatsApp community (cap ~80 active members at launch).
@@ -120,22 +122,22 @@ Five screens, each is its own step. Each is optional after step 1.
 
 ## Tech stack (locked)
 
-| Layer | Choice | Reason |
-|---|---|---|
-| Framework | Next.js 15 (App Router) + Turbopack | Server components, OG image gen, fast |
-| Language | TypeScript | Strict mode on |
-| UI | Tailwind CSS v4 + shadcn/ui | Standard, fast, hackable |
-| Animation | Motion (framer-motion v12) | Cinematic curves |
-| Database | Postgres on Neon | Serverless, cheap, scales fine for our load |
-| ORM | Drizzle | Type-safe, migrations clean |
-| Auth (Phase 1, M0.5+) | Better Auth + dev-login | Phone number, no OTP, frictionless tester onboarding. Gated by `SLATE_ALLOW_DEV_LOGIN=1` on preview, dev only on localhost, never in prod. |
-| Auth (Phase 2, pre-launch) | Better Auth + Firebase Phone Auth | Firebase delivers the OTP (free up to 10K/month, zero DLT paperwork). Better Auth handles sessions in Neon. Google sign-in adds later. Dev login stays mounted on preview deploys for ongoing testing. |
-| File storage | Cloudflare R2 | S3-compatible, near-free at our scale |
-| Image opt | `next/image` + Sharp | Standard |
-| Video | YouTube / IG embeds first. Mux later if hosting our own | Free at launch |
-| Hosting | Vercel | Edge OG, ISR, free tier covers us for months |
-| Analytics | PostHog (self-host or cloud free tier) + Plausible for the marketing site | Privacy-first |
-| WhatsApp send | `https://wa.me/<number>?text=<encoded>` â€” client opens user's own WhatsApp. **No business API, no template approvals, no cost.** | Our user sends, not us. |
+| Layer                      | Choice                                                                                                                             | Reason                                                                                                                                                                                                 |
+| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| Framework                  | Next.js 15 (App Router) + Turbopack                                                                                                | Server components, OG image gen, fast                                                                                                                                                                  |
+| Language                   | TypeScript                                                                                                                         | Strict mode on                                                                                                                                                                                         |
+| UI                         | Tailwind CSS v4 + shadcn/ui                                                                                                        | Standard, fast, hackable                                                                                                                                                                               |
+| Animation                  | Motion (framer-motion v12)                                                                                                         | Cinematic curves                                                                                                                                                                                       |
+| Database                   | Postgres on Neon                                                                                                                   | Serverless, cheap, scales fine for our load                                                                                                                                                            |
+| ORM                        | Drizzle                                                                                                                            | Type-safe, migrations clean                                                                                                                                                                            |
+| Auth (Phase 1, M0.5+)      | Better Auth + dev-login                                                                                                            | Phone number, no OTP, frictionless tester onboarding. Gated by `SLATE_ALLOW_DEV_LOGIN=1` on preview, dev only on localhost, never in prod.                                                             |
+| Auth (Phase 2, pre-launch) | Better Auth + Firebase Phone Auth                                                                                                  | Firebase delivers the OTP (free up to 10K/month, zero DLT paperwork). Better Auth handles sessions in Neon. Google sign-in adds later. Dev login stays mounted on preview deploys for ongoing testing. |
+| File storage               | Cloudflare R2                                                                                                                      | S3-compatible, near-free at our scale                                                                                                                                                                  |
+| Image opt                  | `next/image` + Sharp                                                                                                               | Standard                                                                                                                                                                                               |
+| Video                      | YouTube / IG embeds first. Mux later if hosting our own                                                                            | Free at launch                                                                                                                                                                                         |
+| Hosting                    | Vercel                                                                                                                             | Edge OG, ISR, free tier covers us for months                                                                                                                                                           |
+| Analytics                  | PostHog (self-host or cloud free tier) + Plausible for the marketing site                                                          | Privacy-first                                                                                                                                                                                          |
+| WhatsApp send              | `https://wa.me/<number>?text=<encoded>` â€” client opens user's own WhatsApp. **No business API, no template approvals, no cost.** | Our user sends, not us.                                                                                                                                                                                |
 
 > **Reference:** the open-source `wrk.so` portfolio platform (github.com/9d8dev/wrk) uses almost exactly this stack. Read their `app/`, `db/schema.ts`, and `lib/actions/` as a structural reference. **Do not vendor their code (AGPL).** Use their architecture as inspiration only.
 
@@ -265,16 +267,16 @@ Local `pnpm dev` stays available for editor-loop tightness while implementing, b
 
 ## The launch ladder
 
-| Milestone | What ships | Done when |
-|---|---|---|
-| **M0 â€” Repo + design system** | Tailwind tokens, Fraunces + body font loaded, color vars, base layout, dark theme, grain overlay | Style guide page renders |
-| **M0.5 â€” Neon + Better Auth + dev login** | Neon provisioned (main + preview branches), Drizzle + Better Auth wired, `/login` (dev mode, no OTP) gated by `SLATE_ALLOW_DEV_LOGIN`, `/me` stub. Vercel preview deploys live. | Tester can sign in on the preview URL with a phone number and land on `/me` with a real Better Auth session |
-| **M1 â€” Ashish's page, hand-built** | `/ashish` as a static page (no DB). Full visual treatment, both render modes. | Page is shareable, OG image renders correctly on WhatsApp |
-| **M2 â€” Marketing landing + manifesto** | `/`, `/manifesto`, `/club`. The before/after section (messy WhatsApp vs Slate). | Lighthouse 95+ on mobile |
-| **M3 â€” Onboarding + (later) Firebase OTP** | 5-step onboard, full profile saved to DB. New users get a real `/[slug]`. Firebase Phone Auth wires in as Phase 2 of auth (replaces dev-login on prod; dev-login stays preview-only). Defer Firebase to right before public launch. | A new user can sign up and have a live profile in 15 min |
-| **M4 â€” The Send + tracking** | Dashboard, send flow, ref redirect, opens feed | Sending a profile produces a beautiful WhatsApp preview, opens are tracked |
-| **M5 â€” Club applications** | Form on `/club`, admin view to approve | First 20 club members onboarded manually |
-| **M6 â€” Launch day** | Aram Nagar Sunday event. Press kit. Founder-first profiles seeded. | We have a public moment |
+| Milestone                                    | What ships                                                                                                                                                                                                                          | Done when                                                                                                   |
+| -------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------- |
+| **M0 â€” Repo + design system**              | Tailwind tokens, Fraunces + body font loaded, color vars, base layout, dark theme, grain overlay                                                                                                                                    | Style guide page renders                                                                                    |
+| **M0.5 â€” Neon + Better Auth + dev login**  | Neon provisioned (main + preview branches), Drizzle + Better Auth wired, `/login` (dev mode, no OTP) gated by `SLATE_ALLOW_DEV_LOGIN`, `/me` stub. Vercel preview deploys live.                                                     | Tester can sign in on the preview URL with a phone number and land on `/me` with a real Better Auth session |
+| **M1 â€” Ashish's page, hand-built**         | `/ashish` as a static page (no DB). Full visual treatment, both render modes.                                                                                                                                                       | Page is shareable, OG image renders correctly on WhatsApp                                                   |
+| **M2 â€” Marketing landing + manifesto**     | `/`, `/manifesto`, `/club`. The before/after section (messy WhatsApp vs Slate).                                                                                                                                                     | Lighthouse 95+ on mobile                                                                                    |
+| **M3 â€” Onboarding + (later) Firebase OTP** | 5-step onboard, full profile saved to DB. New users get a real `/[slug]`. Firebase Phone Auth wires in as Phase 2 of auth (replaces dev-login on prod; dev-login stays preview-only). Defer Firebase to right before public launch. | A new user can sign up and have a live profile in 15 min                                                    |
+| **M4 â€” The Send + tracking**               | Dashboard, send flow, ref redirect, opens feed                                                                                                                                                                                      | Sending a profile produces a beautiful WhatsApp preview, opens are tracked                                  |
+| **M5 â€” Club applications**                 | Form on `/club`, admin view to approve                                                                                                                                                                                              | First 20 club members onboarded manually                                                                    |
+| **M6 â€” Launch day**                        | Aram Nagar Sunday event. Press kit. Founder-first profiles seeded.                                                                                                                                                                  | We have a public moment                                                                                     |
 
 Aim: M0â€“M2 in week 1. M3â€“M4 in week 2. M5â€“M6 in week 3.
 

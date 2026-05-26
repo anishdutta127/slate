@@ -65,13 +65,7 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
       >
         <div className="flex gap-4">
           <div className="relative h-[200px] w-[160px] shrink-0 overflow-hidden rounded-sm bg-slate-bg">
-            <TalentImage
-              photo={t.hero}
-              talentSlug={t.slug}
-              fill
-              priority
-              sizes="160px"
-            />
+            <TalentImage photo={t.hero} talentSlug={t.slug} fill priority sizes="160px" />
           </div>
           <div className="flex min-w-0 flex-col gap-1.5">
             <h1
@@ -101,11 +95,7 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
       {/* Contact: tel: and wa.me are anchors, not buttons (semantic).
           Two-line treatment — primary line uses the actor's first name to
           bring warmth; secondary mono line gives the actionable detail. */}
-      <div
-        className="mt-4 flex flex-col gap-2"
-        role="group"
-        aria-label={`Contact ${t.name}`}
-      >
+      <div className="mt-4 flex flex-col gap-2" role="group" aria-label={`Contact ${t.name}`}>
         <a
           href={getTelUrl(t.contact.phone)}
           aria-label={`Call ${t.name} at ${displayPhone(t.contact.phone)}`}
@@ -176,12 +166,7 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
               key={photo.slug}
               className="relative h-[200px] w-[160px] shrink-0 snap-start overflow-hidden rounded-sm bg-slate-surface"
             >
-              <TalentImage
-                photo={photo}
-                talentSlug={t.slug}
-                fill
-                sizes="160px"
-              />
+              <TalentImage photo={photo} talentSlug={t.slug} fill sizes="160px" />
             </div>
           ))}
         </div>

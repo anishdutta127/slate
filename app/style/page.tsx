@@ -191,11 +191,7 @@ export default function StylePage() {
       </Section>
 
       {/* =============== Footer (dark) =============== */}
-      <Section
-        tone="dark"
-        as="footer"
-        className="border-t border-border-dark px-6 py-12 md:px-12"
-      >
+      <Section tone="dark" as="footer" className="border-t border-border-dark px-6 py-12 md:px-12">
         <p className="body-s text-text-tertiary">
           DESIGN.md is the source of truth. If you see drift here, update DESIGN.md first, then{" "}
           <code className="font-mono">app/globals.css</code> to match.

@@ -4,6 +4,10 @@ declare module "subset-font" {
   interface SubsetOptions {
     targetFormat: "woff" | "woff2" | "truetype" | "sfnt";
   }
-  function subsetFont(font: Buffer | Uint8Array, text: string, options: SubsetOptions): Promise<Buffer>;
+  function subsetFont(
+    font: Buffer | Uint8Array,
+    text: string,
+    options: SubsetOptions,
+  ): Promise<Buffer>;
   export default subsetFont;
 }

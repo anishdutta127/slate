@@ -13,10 +13,7 @@ interface StickyContactBarProps {
 // past the hero (sentinel leaves viewport from the top). Tap smooth-scrolls to
 // the contact section. Hidden on md+ (the contact section is always reachable
 // via normal scroll on desktop). prefers-reduced-motion: no slide, just appear.
-export function StickyContactBar({
-  sentinelId,
-  contactSectionId,
-}: StickyContactBarProps) {
+export function StickyContactBar({ sentinelId, contactSectionId }: StickyContactBarProps) {
   const reduced = useReducedMotion();
   const [visible, setVisible] = useState(false);
 

@@ -25,10 +25,7 @@ interface CinematicHeroProps {
 
 const ease = [0.16, 1, 0.3, 1] as const;
 
-export function CinematicHero({
-  talent,
-  objectClass = "object-[center_25%]",
-}: CinematicHeroProps) {
+export function CinematicHero({ talent, objectClass = "object-[center_25%]" }: CinematicHeroProps) {
   const reduced = useReducedMotion();
   const reveal = (delayMs: number) => ({
     initial: reduced ? { opacity: 0 } : { opacity: 0, y: 16 },
@@ -74,8 +71,7 @@ export function CinematicHero({
         className="relative aspect-[3/4] w-full max-w-[320px] p-2 md:max-w-[380px]"
         style={{
           border: "1px solid rgba(201, 162, 75, 0.6)",
-          boxShadow:
-            "0 30px 80px -25px rgba(0,0,0,0.8), 0 0 0 1px rgba(201, 162, 75, 0.15)",
+          boxShadow: "0 30px 80px -25px rgba(0,0,0,0.8), 0 0 0 1px rgba(201, 162, 75, 0.15)",
         }}
       >
         <div className="relative h-full w-full overflow-hidden">

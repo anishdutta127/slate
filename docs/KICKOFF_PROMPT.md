@@ -11,7 +11,7 @@ We're using the gstack workflow. Today we're starting **M0 — Scaffold + design
 Before you write any code, please:
 
 1. Read `CLAUDE.md`, `DESIGN.md`, `ARCHITECTURE.md` end to end
-2. Run `/office-hours` on this prompt: *"M0 scaffold and design system for Slate. The deliverable is a Next.js 15 app with Tailwind v4 tokens matching DESIGN.md, fonts loaded, the base layout with the grain overlay, and a `/style` route showing every atom (Button, Chip, Divider, Wordmark) on both dark and cream backgrounds."*
+2. Run `/office-hours` on this prompt: _"M0 scaffold and design system for Slate. The deliverable is a Next.js 15 app with Tailwind v4 tokens matching DESIGN.md, fonts loaded, the base layout with the grain overlay, and a `/style` route showing every atom (Button, Chip, Divider, Wordmark) on both dark and cream backgrounds."_
 3. Push back on anything in my plan that you think is wrong. I want disagreement, not compliance. Specifically interrogate: (a) the choice of Better Auth + MSG91 for phone OTP (vs Clerk vs Supabase Auth), (b) Tailwind v4 vs v3 stability today, (c) whether the CD view should be a query param or a separate route, (d) whether Fraunces is the right display font given subset weight on India 3G.
 4. Once we've debated those, run `/autoplan` for the M0 milestone only. Save the plan, do NOT implement yet.
 5. Show me the plan and the diff preview.

@@ -28,11 +28,7 @@ export const auth = betterAuth({
   }),
   secret: env.BETTER_AUTH_SECRET,
   baseURL,
-  trustedOrigins: [
-    "http://localhost:3000",
-    "https://*.vercel.app",
-    baseURL,
-  ],
+  trustedOrigins: ["http://localhost:3000", "https://*.vercel.app", baseURL],
   emailAndPassword: {
     // Disabled in Phase 1 — we don't ship password auth at all.
     enabled: false,

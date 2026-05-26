@@ -2,6 +2,7 @@ import { cn } from "@/lib/cn";
 import type { TalentCredit } from "@/types/talent";
 import { getEmbedInfo, type EmbedKind } from "@/lib/embed";
 import { BrandedFallbackCard } from "./BrandedFallbackCard";
+import { LinkThumbnailCard } from "./LinkThumbnailCard";
 
 interface CreditCardProps {
   credit: TalentCredit;
@@ -18,20 +19,17 @@ const PLATFORM_NAME: Record<EmbedKind, string> = {
   unknown: "the original page",
 };
 
-// Per the A2 pick: every credit card in the grid uses the Cover Story
-// treatment from BrandedFallbackCard. We dropped the YouTube-thumbnail
-// branch on purpose — having one card be a real screenshot while the
-// others are designed broke cohesion. The thumbnail only matters at the
-// destination (when the user taps through), and the tap-target carries
-// the user there. The grid stays a clean magazine series.
-//
-// The "OPEN ↗" overlay on hover/focus still signals that the card is
-// clickable, mirroring the bottom-right arrow on the cards themselves.
+// Thumbnail logic:
+// 1. Use a manual credit.thumbnailUrl when provided. This is the correct MVP
+//    path for Instagram, Facebook, and Drive links.
+// 2. Use automatic YouTube thumbnails when the primary URL is YouTube.
+// 3. Fall back to the editorial Slate cover card so the grid never breaks.
 
 export function CreditCard({ credit, index, className }: CreditCardProps) {
   const primaryUrl = credit.urls[0]!;
   const info = getEmbedInfo(primaryUrl);
   const platform = PLATFORM_NAME[info.kind];
+  const thumbnailUrl = credit.thumbnailUrl ?? info.thumbnailUrl;
   const aria = `Open ${credit.brand} ${credit.medium} ${credit.year} on ${platform} (opens in new tab)`;
 
   return (
@@ -47,16 +45,23 @@ export function CreditCard({ credit, index, className }: CreditCardProps) {
         className,
       )}
     >
-      <BrandedFallbackCard
-        brand={credit.brand}
-        medium={credit.medium}
-        year={credit.year}
-        index={index}
-      />
+      {thumbnailUrl ? (
+        <LinkThumbnailCard
+          credit={credit}
+          index={index}
+          thumbnailUrl={thumbnailUrl}
+          platform={platform}
+          kind={info.kind}
+        />
+      ) : (
+        <BrandedFallbackCard
+          brand={credit.brand}
+          medium={credit.medium}
+          year={credit.year}
+          index={index}
+        />
+      )}
 
-      {/* Hover/focus indicator — small "OPEN ↗" pill top-right. Always present
-          in the DOM for keyboard users; only visible on hover/focus so the
-          card stays clean at rest. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute right-4 top-4 opacity-0 transition-opacity duration-200 group-hover:opacity-100 group-focus-visible:opacity-100"

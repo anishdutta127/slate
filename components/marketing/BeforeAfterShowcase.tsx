@@ -26,7 +26,9 @@ function WhatsAppChrome({ children }: { children: React.ReactNode }) {
           <span className="truncate text-[12px] font-semibold">Casting · Mira films</span>
           <span className="truncate text-[9px] text-[#8696a0]">online</span>
         </div>
-        <span aria-hidden="true" className="text-[#8696a0]">⋮</span>
+        <span aria-hidden="true" className="text-[#8696a0]">
+          ⋮
+        </span>
       </header>
 
       {/* Chat body */}
@@ -61,9 +63,7 @@ function MessageBubble({
       className={`mb-1.5 max-w-[85%] rounded-md px-2 py-1.5 text-[10px] leading-snug ${sideClass}`}
     >
       <div className="whitespace-pre-line break-words text-white/95">{children}</div>
-      {time ? (
-        <div className="mt-0.5 text-right text-[8px] text-white/50">{time} ✓✓</div>
-      ) : null}
+      {time ? <div className="mt-0.5 text-right text-[8px] text-white/50">{time} ✓✓</div> : null}
     </div>
   );
 }
@@ -137,9 +137,7 @@ Age 25 · 5'8" · Hindi English`}
                   Plays 22-28 · Hindi & English. Honda, Cipla, Zepto.
                 </div>
               </div>
-              <div className="px-2.5 py-1 text-[9px] text-white/80">
-                slate.club/ashish
-              </div>
+              <div className="px-2.5 py-1 text-[9px] text-white/80">slate.club/ashish</div>
               <div className="px-2.5 pb-1.5 text-right text-[8px] text-white/50">
                 {FAKE_TIME} ✓✓
               </div>

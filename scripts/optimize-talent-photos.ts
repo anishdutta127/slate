@@ -32,8 +32,14 @@ async function optimizeOne(input: string, outputDir: string) {
     if (width > meta.width) continue; // never upscale
     const target = sharp(input).rotate().resize({ width, withoutEnlargement: true });
     await Promise.all([
-      target.clone().avif({ quality: QUALITY_AVIF, effort: 4 }).toFile(join(outputDir, `${name}-${width}.avif`)),
-      target.clone().webp({ quality: QUALITY_WEBP, effort: 4 }).toFile(join(outputDir, `${name}-${width}.webp`)),
+      target
+        .clone()
+        .avif({ quality: QUALITY_AVIF, effort: 4 })
+        .toFile(join(outputDir, `${name}-${width}.avif`)),
+      target
+        .clone()
+        .webp({ quality: QUALITY_WEBP, effort: 4 })
+        .toFile(join(outputDir, `${name}-${width}.webp`)),
     ]);
   }
   return { name, sourceWidth: meta.width };

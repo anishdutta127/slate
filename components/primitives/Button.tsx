@@ -34,8 +34,7 @@ const variantsByTone = {
   },
   dark: {
     primary: "bg-slate-bg text-slate-cream hover:bg-slate-surface",
-    ghost:
-      "border border-border-light text-text-on-light hover:bg-slate-cream-2",
+    ghost: "border border-border-light text-text-on-light hover:bg-slate-cream-2",
     link:
       "h-auto px-0 rounded-none text-text-on-light underline-offset-4 hover:text-gold " +
       "decoration-gold decoration-1 underline",

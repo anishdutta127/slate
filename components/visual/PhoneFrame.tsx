@@ -24,12 +24,7 @@ export function PhoneFrame({
   className,
   aspect = "9/19.5",
 }: PhoneFrameProps) {
-  const tiltClass =
-    tilt === "left"
-      ? "rotate-[-3deg]"
-      : tilt === "right"
-        ? "rotate-[3deg]"
-        : "";
+  const tiltClass = tilt === "left" ? "rotate-[-3deg]" : tilt === "right" ? "rotate-[3deg]" : "";
   return (
     <div
       className={cn(
@@ -38,8 +33,7 @@ export function PhoneFrame({
         className,
       )}
       style={{
-        boxShadow:
-          "0 30px 80px -30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(201, 162, 75, 0.18)",
+        boxShadow: "0 30px 80px -30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(201, 162, 75, 0.18)",
       }}
     >
       {/* Speaker pill at top */}

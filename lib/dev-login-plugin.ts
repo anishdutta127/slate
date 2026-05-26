@@ -36,7 +36,10 @@ export const devLoginPlugin = () =>
         async (ctx) => {
           if (env.SLATE_ALLOW_DEV_LOGIN !== "1") {
             return ctx.json(
-              { error: "DEV_LOGIN_DISABLED", message: "Dev login is not enabled in this environment." },
+              {
+                error: "DEV_LOGIN_DISABLED",
+                message: "Dev login is not enabled in this environment.",
+              },
               { status: 403 },
             );
           }

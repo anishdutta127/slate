@@ -8,9 +8,21 @@ export const metadata = {
 
 const VARIANTS = [
   { slug: "v1", name: "Bold Wordmark", note: "Brand name dominates, gold radial gradient." },
-  { slug: "v2", name: "Film Strip", note: "35mm sprocket holes top + bottom. Material cinema reference." },
-  { slug: "v3", name: "Painterly", note: "Brushstroke noise + warm palette per card. Curated print series." },
-  { slug: "v4", name: "Cover Story", note: "Each card is a magazine cover. Mast head, headline, cover line." },
+  {
+    slug: "v2",
+    name: "Film Strip",
+    note: "35mm sprocket holes top + bottom. Material cinema reference.",
+  },
+  {
+    slug: "v3",
+    name: "Painterly",
+    note: "Brushstroke noise + warm palette per card. Curated print series.",
+  },
+  {
+    slug: "v4",
+    name: "Cover Story",
+    note: "Each card is a magazine cover. Mast head, headline, cover line.",
+  },
   { slug: "v5", name: "Restraint", note: "Pure black + one gold rule. Swiss/Helvetica poster." },
   { slug: "v6", name: "Seal", note: "Circular gold stamp + guilloche ring. Mark of authenticity." },
 ] as const;
@@ -29,10 +41,9 @@ export default function CardsBoard() {
           Six card directions.
         </h1>
         <p className="mt-3 max-w-[60ch] text-text-secondary">
-          Each iframe renders the same 6 brand credits (Honda, Cipla, Zepto,
-          Nilkamal, Smotect, Rings & I) in one card style. Cards in production
-          will be a 2-column desktop grid; here we show single-column at phone
-          width so the card design reads at its real size.
+          Each iframe renders the same 6 brand credits (Honda, Cipla, Zepto, Nilkamal, Smotect,
+          Rings & I) in one card style. Cards in production will be a 2-column desktop grid; here we
+          show single-column at phone width so the card design reads at its real size.
         </p>
       </header>
 

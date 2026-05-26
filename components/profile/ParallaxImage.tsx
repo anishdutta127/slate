@@ -29,10 +29,7 @@ export function ParallaxImage({ photo, talentSlug, sizes }: ParallaxImageProps) 
       ref={ref}
       className="relative aspect-[3/4] w-full overflow-hidden rounded-sm border border-gold/10 bg-slate-bg"
     >
-      <motion.div
-        style={reduced ? undefined : { y }}
-        className="absolute inset-0"
-      >
+      <motion.div style={reduced ? undefined : { y }} className="absolute inset-0">
         <TalentImage
           photo={photo}
           talentSlug={talentSlug}

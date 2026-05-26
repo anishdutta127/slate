@@ -75,9 +75,7 @@ export default function DesignV1() {
           </div>
 
           {/* Tagline footer */}
-          <p className="text-xs leading-relaxed text-text-tertiary">
-            {t.tagline}
-          </p>
+          <p className="text-xs leading-relaxed text-text-tertiary">{t.tagline}</p>
         </div>
       </div>
     </HeroExploration>

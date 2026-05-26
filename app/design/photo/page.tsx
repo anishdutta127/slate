@@ -7,9 +7,21 @@ export const metadata = {
 };
 
 const PHOTOS = [
-  { slug: "p1", name: "02 · Headshot Blazer (current)", note: "Brown blazer, brown backdrop. Tight face, lots of brown." },
-  { slug: "p2", name: "01 · Full-body White Shirt", note: "Wider shot, neutral studio bg. More environmental." },
-  { slug: "p3", name: "03 · Outdoor Denim", note: "Denim jacket outdoors. Younger commercial energy." },
+  {
+    slug: "p1",
+    name: "02 · Headshot Blazer (current)",
+    note: "Brown blazer, brown backdrop. Tight face, lots of brown.",
+  },
+  {
+    slug: "p2",
+    name: "01 · Full-body White Shirt",
+    note: "Wider shot, neutral studio bg. More environmental.",
+  },
+  {
+    slug: "p3",
+    name: "03 · Outdoor Denim",
+    note: "Denim jacket outdoors. Younger commercial energy.",
+  },
   { slug: "p4", name: "04 · Seated Mint Shirt", note: "Seated with chai, mint shirt. Range shot." },
 ] as const;
 
@@ -27,9 +39,8 @@ export default function PhotoBoard() {
           Which photo composes best in the frame?
         </h1>
         <p className="mt-3 max-w-[60ch] text-text-secondary">
-          Same V3 layout (chosen hero direction), four photos. Each iframe is
-          375 × 812 — phone width. The frame shape and matting are identical;
-          only the photo inside changes.
+          Same V3 layout (chosen hero direction), four photos. Each iframe is 375 × 812 — phone
+          width. The frame shape and matting are identical; only the photo inside changes.
         </p>
       </header>
 

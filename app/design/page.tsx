@@ -53,14 +53,19 @@ export default function DesignBoard() {
           Six directions.
         </h1>
         <p className="mt-3 max-w-[60ch] text-text-secondary">
-          Each iframe below is a complete hero treatment at iPhone 12 mini width
-          (375 × 812). Click any variant title to open it full-screen on its own
-          route. The user picks; the others get deleted.
+          Each iframe below is a complete hero treatment at iPhone 12 mini width (375 × 812). Click
+          any variant title to open it full-screen on its own route. The user picks; the others get
+          deleted.
         </p>
         <p className="mt-3 font-mono text-[11px] uppercase tracking-[0.15em] text-text-tertiary">
-          Live links: <Link href="/ashish" className="text-gold hover:underline">/ashish (current)</Link>
+          Live links:{" "}
+          <Link href="/ashish" className="text-gold hover:underline">
+            /ashish (current)
+          </Link>
           {" · "}
-          <Link href="/ashish/c" className="text-gold hover:underline">/ashish/c (CD)</Link>
+          <Link href="/ashish/c" className="text-gold hover:underline">
+            /ashish/c (CD)
+          </Link>
         </p>
       </header>
 
@@ -93,9 +98,8 @@ export default function DesignBoard() {
 
       <footer className="mx-auto mt-16 max-w-[1400px] border-t border-border-dark pt-6">
         <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-tertiary">
-          When you've picked, paste the variant letter (V1–V6) back to Claude.
-          A1 then runs /design-html to convert it into production code, and
-          /design/* routes get removed.
+          When you've picked, paste the variant letter (V1–V6) back to Claude. A1 then runs
+          /design-html to convert it into production code, and /design/* routes get removed.
         </p>
       </footer>
     </main>

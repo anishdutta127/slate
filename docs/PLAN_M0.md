@@ -43,6 +43,7 @@ pnpm add -D eslint eslint-config-next
 ```
 
 Explicit non-installs in M0 (defer to milestone shown):
+
 - `drizzle-orm`, `pg`, `@neondatabase/serverless` → M3
 - `better-auth`, `firebase`, `firebase-admin` → M3
 - `@aws-sdk/client-s3`, `@aws-sdk/s3-request-presigner` → M3
@@ -96,6 +97,7 @@ README.md         # add a "Local dev" run note for the /style route
 ```
 
 Out-of-band (do not commit, mention in handoff):
+
 - The stray `~/` directory in repo root (Windows tilde misfire) — user to delete manually.
 
 Estimated total new lines: ~600 (most of it is config + the /style page).
@@ -125,12 +127,14 @@ Estimated total new lines: ~600 (most of it is config + the /style page).
 ## Done-when (M0 acceptance criteria)
 
 From ARCHITECTURE.md M0:
+
 - [x] /style shows the full atom set on dark AND cream backgrounds
 - [x] Hot reload works
 - [x] No FOIT (font-display: swap, fonts preloaded)
 - [x] Lighthouse mobile Performance >= 95 on / (placeholder)
 
 Added:
+
 - [x] Lighthouse mobile Performance >= 95 on /style
 - [x] `pnpm typecheck` passes with strict mode on
 - [x] `pnpm lint` passes
@@ -178,13 +182,13 @@ Otherwise: pnpm scripts cover the four common verbs (dev, build, lint, typecheck
 
 ## Risk register
 
-| Risk | Likelihood | Mitigation |
-|---|---|---|
-| Tailwind v4 + Turbopack hot reload edge case on globals.css edits | Low | Use `@tailwindcss/postcss` plugin per official 2026 setup; document in CONTRIBUTING if encountered |
-| Fraunces subset file too large (>80KB) after subset | Low | Pre-measure with `wc -c`; tighten subset to remove pcrtt opsz extremes if needed |
-| `pnpm dlx create-next-app` refuses to scaffold into non-empty repo | Medium | Scaffold to tmp, selectively merge — don't overwrite CLAUDE/DESIGN/ARCHITECTURE/README/docs/assets |
-| Lighthouse Performance <95 on /style because grain SVG is expensive | Low | Grain is a single static SVG, fixed, no repaints; should be fine. If not, lower opacity / simplify feTurbulence |
-| User hates the placeholder `/` and wants to skip it | Low | Placeholder is genuinely minimal — wordmark + one line. M2 throws it away anyway. |
+| Risk                                                                | Likelihood | Mitigation                                                                                                      |
+| ------------------------------------------------------------------- | ---------- | --------------------------------------------------------------------------------------------------------------- |
+| Tailwind v4 + Turbopack hot reload edge case on globals.css edits   | Low        | Use `@tailwindcss/postcss` plugin per official 2026 setup; document in CONTRIBUTING if encountered              |
+| Fraunces subset file too large (>80KB) after subset                 | Low        | Pre-measure with `wc -c`; tighten subset to remove pcrtt opsz extremes if needed                                |
+| `pnpm dlx create-next-app` refuses to scaffold into non-empty repo  | Medium     | Scaffold to tmp, selectively merge — don't overwrite CLAUDE/DESIGN/ARCHITECTURE/README/docs/assets              |
+| Lighthouse Performance <95 on /style because grain SVG is expensive | Low        | Grain is a single static SVG, fixed, no repaints; should be fine. If not, lower opacity / simplify feTurbulence |
+| User hates the placeholder `/` and wants to skip it                 | Low        | Placeholder is genuinely minimal — wordmark + one line. M2 throws it away anyway.                               |
 
 ## Locked answers (resolved 2026-05-20)
 

@@ -22,11 +22,7 @@ export function Grain({ tone = "dark" }: GrainProps) {
       className="pointer-events-none absolute inset-0 z-10 mix-blend-overlay"
       style={{ opacity: 0.025 }}
     >
-      <svg
-        xmlns="http://www.w3.org/2000/svg"
-        className="h-full w-full"
-        preserveAspectRatio="none"
-      >
+      <svg xmlns="http://www.w3.org/2000/svg" className="h-full w-full" preserveAspectRatio="none">
         <filter id={filterId}>
           <feTurbulence
             type="fractalNoise"

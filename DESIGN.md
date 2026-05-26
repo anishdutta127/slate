@@ -4,7 +4,7 @@
 
 ## Aesthetic direction
 
-**Film festival programme meets actor's headshot card.** Cinematic, restrained, warm. Not techy. Not playful. Not corporate. Closer to A24 marketing or MUBI than to a SaaS landing page. The product should feel like *something an actor would be proud to print*.
+**Film festival programme meets actor's headshot card.** Cinematic, restrained, warm. Not techy. Not playful. Not corporate. Closer to A24 marketing or MUBI than to a SaaS landing page. The product should feel like _something an actor would be proud to print_.
 
 Inspirations to study, not imitate: A24 film microsites, MUBI Notebook, the title cards of late-2010s OTT Hindi shows (Mirzapur, Made in Heaven, Trial by Fire), classic Bollywood title typography.
 
@@ -16,31 +16,31 @@ What to avoid: gradients-on-white, purple/blue tech vibes, every-startup-Inter, 
 
 ```css
 /* base */
---slate-bg:        #0E0E0C;   /* deep charcoal, not pure black */
---slate-surface:   #161613;   /* subtle lift above bg, for cards and panels on dark sections */
---slate-cream:     #F5EFE3;   /* warm ivory — text on dark, bg on light sections */
---slate-cream-2:   #ECE3D0;   /* muted variant for surfaces in light sections */
+--slate-bg: #0e0e0c; /* deep charcoal, not pure black */
+--slate-surface: #161613; /* subtle lift above bg, for cards and panels on dark sections */
+--slate-cream: #f5efe3; /* warm ivory — text on dark, bg on light sections */
+--slate-cream-2: #ece3d0; /* muted variant for surfaces in light sections */
 
 /* text */
---text-primary:    #F5EFE3;   /* on dark */
---text-secondary:  #C8C2B5;   /* on dark, muted */
---text-tertiary:   #8A857B;   /* on dark, low-emphasis */
---text-on-light:   #1A1916;   /* near-black for cream sections */
+--text-primary: #f5efe3; /* on dark */
+--text-secondary: #c8c2b5; /* on dark, muted */
+--text-tertiary: #8a857b; /* on dark, low-emphasis */
+--text-on-light: #1a1916; /* near-black for cream sections */
 
 /* accent — used sparingly */
---gold:            #C9A24B;   /* muted brass, not flashy */
---gold-soft:       #E8C97A;   /* hover state, focus rings */
+--gold: #c9a24b; /* muted brass, not flashy */
+--gold-soft: #e8c97a; /* hover state, focus rings */
 
 /* signal */
---danger:          #C84B3C;   /* terracotta, not Bootstrap red */
---success:         #6B8E5A;   /* muted olive */
+--danger: #c84b3c; /* terracotta, not Bootstrap red */
+--success: #6b8e5a; /* muted olive */
 
 /* borders / dividers */
---border-dark:     rgba(245, 239, 227, 0.08);
---border-light:    rgba(26, 25, 22, 0.08);
+--border-dark: rgba(245, 239, 227, 0.08);
+--border-light: rgba(26, 25, 22, 0.08);
 
 /* shadow */
---shadow-cinematic: 0 24px 64px -20px rgba(0,0,0,0.6), 0 8px 24px -12px rgba(0,0,0,0.4);
+--shadow-cinematic: 0 24px 64px -20px rgba(0, 0, 0, 0.6), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
 ```
 
 **Usage rule:** gold is an accent, never a CTA fill colour. CTA fills are cream on dark, near-black on light. Gold is reserved for focus rings, underlines, the wordmark dot, and one or two intentional highlights per page.
@@ -50,20 +50,22 @@ What to avoid: gradients-on-white, purple/blue tech vibes, every-startup-Inter, 
 ## Typography
 
 ```css
---font-display:    'Fraunces', ui-serif, Georgia, serif;
---font-body:       'Geist', 'Inter Tight', system-ui, sans-serif;
---font-mono:       'JetBrains Mono', ui-monospace, monospace;
---font-devanagari: 'Noto Serif Devanagari', 'Mangal', serif;
+--font-display: "Fraunces", ui-serif, Georgia, serif;
+--font-body: "Geist", "Inter Tight", system-ui, sans-serif;
+--font-mono: "JetBrains Mono", ui-monospace, monospace;
+--font-devanagari: "Noto Serif Devanagari", "Mangal", serif;
 ```
 
 **Fraunces** is loaded as a subset variable woff2: Latin only, weight axis 400–700, `opsz` axis live (used at three sizes), with `SOFT` and `WONK` pinned as CSS constants at `SOFT 50` and `WONK 1` via `font-variation-settings`. Total file weight ~50–65KB — this fits the CD view performance budget on India 3G/patchy 4G. Self-hosted from `public/fonts/`, loaded via `next/font/local` with `font-display: swap`.
 
 Variants (all use the same single woff2 file, axes set per element via CSS):
+
 - Display L (actor names on profile hero): `Fraunces` 700 weight, `opsz` 144, `SOFT` 50, `WONK` 1. Size ~64–96px on desktop, 44px on mobile. Letter spacing -0.02em.
 - Display M (section headers, marketing H1): Fraunces 600, `opsz` 72, same SOFT/WONK. Size 40–56px.
 - Display S (card titles): Fraunces 600, `opsz` 36, same SOFT/WONK. Size 24–28px.
 
 **Body** sizes:
+
 - Body L (intro paragraphs on marketing): 18–20px, line-height 1.55, weight 400
 - Body M (everything else): 15–16px, line-height 1.6, weight 400
 - Body S (captions, metadata): 13–14px, line-height 1.5, weight 500
@@ -92,20 +94,23 @@ Tailwind defaults are fine, but commit to a few rhythms:
 Use Motion (formerly Framer Motion) v12.
 
 **Curves:**
+
 ```ts
 export const ease = {
-  cinematic: [0.16, 1, 0.3, 1],  // out-expo, smooth deceleration
-  enter:     [0.22, 1, 0.36, 1], // similar, slightly snappier
-  exit:      [0.7, 0, 0.84, 0],  // in-expo
+  cinematic: [0.16, 1, 0.3, 1], // out-expo, smooth deceleration
+  enter: [0.22, 1, 0.36, 1], // similar, slightly snappier
+  exit: [0.7, 0, 0.84, 0], // in-expo
 };
 ```
 
 **Durations:**
+
 - Micro (hover, focus): 200ms
 - Standard (card, modal): 400ms
 - Hero / page-load reveal: 800–1200ms with stagger
 
 **Page load on profile:**
+
 1. Hero photo fades up + scales from 1.02 → 1.0 (1000ms, cinematic ease)
 2. Name reveals (delay 200ms, 600ms duration, y from 24px)
 3. Tagline reveals (delay 400ms)
@@ -141,6 +146,7 @@ Reference implementation: a tiny SVG `<filter><feTurbulence baseFrequency="0.9" 
 We keep this list deliberately small. Every component must serve a real need on the locked V1 surface. No empty Storybook entries.
 
 ### Atoms
+
 - `<Section tone="dark|light"/>` — structural primitive every page composes from. Owns background color, text color, and grain texture as a single dial. Pages never set bg or grain directly; they wrap content in `<Section>` and let the tone decide. `tone="dark"` gives charcoal bg + cream text + grain overlay. `tone="light"` gives cream bg + near-black text + no grain. This is what prevents grain from ever leaking onto a cream surface.
 - `<Wordmark/>` — the Slate logotype. Fraunces, with a small gold dot.
 - `<Button/>` — three variants: `primary` (cream on dark), `ghost` (border-only), `link` (text with gold underline on hover). `tone="cream"` for use on dark sections, `tone="dark"` for use on light sections.
@@ -149,6 +155,7 @@ We keep this list deliberately small. Every component must serve a real need on 
 - `<Grain/>` — the texture overlay. Used by `<Section/>` internally; pages should not mount Grain directly. Accepts `tone="dark|light"` — renders the SVG fractal noise only when `tone="dark"`, returns null when `tone="light"`.
 
 ### Profile-specific
+
 - `<ProfileHero/>` — hero photo + name + tagline + stats chips. The page anchor.
 - `<ProfileStatsCard/>` — the tight, scannable card used both inline on profile and as the dominant element in CD view.
 - `<ShowreelEmbed/>` — handles YouTube, Instagram reels, Facebook video, Drive previews. Server-renders the right embed.
@@ -157,11 +164,13 @@ We keep this list deliberately small. Every component must serve a real need on 
 - `<ContactCard/>` — phone (tap-to-call), Instagram, "Send via WhatsApp" CTA (only if visitor matches certain criteria — for the actor's own profile this is irrelevant).
 
 ### Marketing-specific
+
 - `<BeforeAfter/>` — the showpiece. Left: a mock WhatsApp chat with messy Drive links and a paragraph. Right: the same actor's Slate link unfurling as a beautiful preview card. This sells the product in one glance.
 - `<ClubCalendar/>` — next Sunday meetup date, location, RSVP CTA
 - `<ManifestoBlock/>` — narrow column editorial component for the story
 
 ### Dashboard / app
+
 - `<OnboardStep/>` — wrapper with progress dots
 - `<SlugPicker/>` — live availability check with debounced API
 - `<PhonePhotoPicker/>` — drag-drop and choose-from-camera-roll, with crop
@@ -190,6 +199,7 @@ The CD view lives at its own route, `/[slug]/c`, reached via the `/api/r/[ref]` 
 5. A small "See full profile" link in gold at the bottom — links to `/[slug]` (the cinematic view)
 
 **Performance budget for CD view:**
+
 - LCP under 1.2s on a throttled 3G connection
 - Total page weight under 500KB before video embed
 - No JS required for the contact info or stats to be visible — server-rendered
@@ -210,6 +220,7 @@ Test every OG image with the actual WhatsApp preview before considering it done.
 ## What "done" looks like for a page
 
 Before any page ships:
+
 - [ ] Tested on iPhone 12 mini width (375px) — the actor's most common device
 - [ ] Tested on a budget Android (360px wide, slow 4G)
 - [ ] Tested with JavaScript disabled (CD view especially)

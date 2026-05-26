@@ -53,128 +53,125 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   const muted = "#5C564E";
 
   return new ImageResponse(
-    (
+    <div
+      style={{
+        width: "100%",
+        height: "100%",
+        display: "flex",
+        backgroundColor: cream,
+        color: dark,
+        fontFamily: "Fraunces",
+      }}
+    >
+      {/* Left half — hero */}
       <div
         style={{
-          width: "100%",
-          height: "100%",
+          width: 600,
+          height: 630,
           display: "flex",
-          backgroundColor: cream,
-          color: dark,
-          fontFamily: "Fraunces",
+          position: "relative",
         }}
       >
-        {/* Left half — hero */}
+        <img
+          src={heroDataUrl}
+          width={600}
+          height={630}
+          alt=""
+          style={{ width: 600, height: 630, objectFit: "cover" }}
+        />
+        {/* Right-edge fade into the cream so the boundary doesn't read as a hard split */}
         <div
           style={{
-            width: 600,
-            height: 630,
+            position: "absolute",
+            right: 0,
+            top: 0,
+            bottom: 0,
+            width: 80,
+            background: `linear-gradient(to right, transparent, ${cream})`,
+          }}
+        />
+      </div>
+
+      {/* Right half — type */}
+      <div
+        style={{
+          width: 600,
+          height: 630,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "space-between",
+          padding: "60px 60px 50px 30px",
+        }}
+      >
+        {/* Wordmark, top */}
+        <div
+          style={{
             display: "flex",
-            position: "relative",
+            alignItems: "center",
+            gap: 8,
+            fontSize: 18,
+            letterSpacing: 3,
+            textTransform: "uppercase",
+            color: gold,
           }}
         >
-          <img
-            src={heroDataUrl}
-            width={600}
-            height={630}
-            alt=""
-            style={{ width: 600, height: 630, objectFit: "cover" }}
-          />
-          {/* Right-edge fade into the cream so the boundary doesn't read as a hard split */}
-          <div
+          <span style={{ fontWeight: 600 }}>Slate</span>
+          <span
             style={{
-              position: "absolute",
-              right: 0,
-              top: 0,
-              bottom: 0,
-              width: 80,
-              background: `linear-gradient(to right, transparent, ${cream})`,
+              display: "inline-flex",
+              width: 6,
+              height: 6,
+              borderRadius: 999,
+              backgroundColor: gold,
             }}
           />
         </div>
 
-        {/* Right half — type */}
-        <div
-          style={{
-            width: 600,
-            height: 630,
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "space-between",
-            padding: "60px 60px 50px 30px",
-          }}
-        >
-          {/* Wordmark, top */}
+        {/* Name + stats, center */}
+        <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div
             style={{
-              display: "flex",
-              alignItems: "center",
-              gap: 8,
-              fontSize: 18,
-              letterSpacing: 3,
-              textTransform: "uppercase",
-              color: gold,
+              fontSize: 80,
+              fontWeight: 700,
+              lineHeight: 0.95,
+              letterSpacing: -1.5,
             }}
           >
-            <span style={{ fontWeight: 600 }}>Slate</span>
-            <span
-              style={{
-                display: "inline-flex",
-                width: 6,
-                height: 6,
-                borderRadius: 999,
-                backgroundColor: gold,
-              }}
-            />
+            {talent.name}
           </div>
-
-          {/* Name + stats, center */}
-          <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
-            <div
-              style={{
-                fontSize: 80,
-                fontWeight: 700,
-                lineHeight: 0.95,
-                letterSpacing: -1.5,
-              }}
-            >
-              {talent.name}
-            </div>
-            <div
-              style={{
-                fontSize: 22,
-                letterSpacing: 2,
-                textTransform: "uppercase",
-                color: muted,
-              }}
-            >
-              Plays {talent.plays.min}-{talent.plays.max} · {talent.city} ·{" "}
-              {talent.height.display}
-            </div>
-            <div
-              style={{
-                width: 160,
-                height: 2,
-                background: `linear-gradient(to right, ${gold}, transparent)`,
-                marginTop: 6,
-              }}
-            />
-          </div>
-
-          {/* URL, bottom */}
           <div
             style={{
-              fontSize: 18,
+              fontSize: 22,
               letterSpacing: 2,
               textTransform: "uppercase",
               color: muted,
             }}
           >
-            slate.club/{talent.slug}
+            Plays {talent.plays.min}-{talent.plays.max} · {talent.city} · {talent.height.display}
           </div>
+          <div
+            style={{
+              width: 160,
+              height: 2,
+              background: `linear-gradient(to right, ${gold}, transparent)`,
+              marginTop: 6,
+            }}
+          />
+        </div>
+
+        {/* URL, bottom */}
+        <div
+          style={{
+            fontSize: 18,
+            letterSpacing: 2,
+            textTransform: "uppercase",
+            color: muted,
+          }}
+        >
+          slate.club/{talent.slug}
         </div>
       </div>
-    ),
+    </div>,
     {
       ...size,
       fonts: [

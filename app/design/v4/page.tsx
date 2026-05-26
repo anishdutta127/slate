@@ -77,9 +77,7 @@ export default function DesignV4() {
 
       {/* Hero word bottom-left, single name dominant */}
       <div className="absolute inset-x-6 bottom-8 z-20 flex flex-col items-start">
-        <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">
-          Rawat
-        </span>
+        <span className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">Rawat</span>
         <h1
           className="-mt-1 font-display text-text-primary"
           style={{

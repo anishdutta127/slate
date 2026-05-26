@@ -78,7 +78,10 @@ export default function DesignV5() {
           <span className="font-display text-5xl leading-none text-gold/70" aria-hidden="true">
             "
           </span>
-          <p className="font-display italic text-text-secondary" style={{ fontSize: "1.05rem", lineHeight: 1.5 }}>
+          <p
+            className="font-display italic text-text-secondary"
+            style={{ fontSize: "1.05rem", lineHeight: 1.5 }}
+          >
             {t.tagline}
           </p>
         </div>

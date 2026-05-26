@@ -42,11 +42,7 @@ async function dohResolve(hostname: string): Promise<{ ip: string; family: 4 | 6
   return { ip: a.data, family: 4 };
 }
 
-type LookupCallback = (
-  err: NodeJS.ErrnoException | null,
-  address: string,
-  family: number,
-) => void;
+type LookupCallback = (err: NodeJS.ErrnoException | null, address: string, family: number) => void;
 
 let patched = false;
 
@@ -64,11 +60,7 @@ export function installDohLookup(): void {
 
   // Type intentionally loose; node's dns.lookup has overloaded signatures
   // and we just need to intercept the (host, opts, cb) and (host, cb) forms.
-  const dohLookup = function (
-    hostname: string,
-    optionsOrCb: unknown,
-    maybeCb?: unknown,
-  ): void {
+  const dohLookup = function (hostname: string, optionsOrCb: unknown, maybeCb?: unknown): void {
     const cb = (typeof optionsOrCb === "function" ? optionsOrCb : maybeCb) as LookupCallback;
 
     const cached = cache.get(hostname);

@@ -32,8 +32,7 @@
   --color-border-light: rgba(26, 25, 22, 0.08);
 
   /* ---- shadow ---- */
-  --shadow-cinematic:
-    0 24px 64px -20px rgba(0, 0, 0, 0.6), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
+  --shadow-cinematic: 0 24px 64px -20px rgba(0, 0, 0, 0.6), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
 
   /* ---- typography: families (wired to next/font/local CSS vars in layout.tsx) ---- */
   --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
@@ -100,7 +99,10 @@ body {
   font-size: clamp(2.75rem, 7vw, 6rem);
   line-height: 1;
   letter-spacing: -0.02em;
-  font-variation-settings: "opsz" 144, "SOFT" 50, "WONK" 1;
+  font-variation-settings:
+    "opsz" 144,
+    "SOFT" 50,
+    "WONK" 1;
 }
 
 .display-m {
@@ -109,7 +111,10 @@ body {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   line-height: 1.05;
   letter-spacing: -0.015em;
-  font-variation-settings: "opsz" 72, "SOFT" 50, "WONK" 1;
+  font-variation-settings:
+    "opsz" 72,
+    "SOFT" 50,
+    "WONK" 1;
 }
 
 .display-s {
@@ -118,7 +123,10 @@ body {
   font-size: clamp(1.5rem, 2.5vw, 1.75rem);
   line-height: 1.1;
   letter-spacing: -0.01em;
-  font-variation-settings: "opsz" 36, "SOFT" 50, "WONK" 1;
+  font-variation-settings:
+    "opsz" 36,
+    "SOFT" 50,
+    "WONK" 1;
 }
 
 .body-l {

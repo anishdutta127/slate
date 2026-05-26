@@ -1,12 +1,10 @@
-import { type ElementType, type ReactNode } from "react";
+import { type ComponentPropsWithoutRef, type ElementType } from "react";
 import { cn } from "@/lib/cn";
 import { Grain } from "@/components/visual/Grain";
 
-interface SectionProps {
+interface SectionProps extends ComponentPropsWithoutRef<"section"> {
   tone: "dark" | "light";
   as?: ElementType;
-  className?: string;
-  children: ReactNode;
 }
 
 // Section is the structural primitive every page composes from.
@@ -16,11 +14,11 @@ interface SectionProps {
 // grain (per DESIGN.md). Pages never set bg or grain directly; they wrap
 // content in Section and let the tone decide. This keeps the design system
 // consistent and prevents grain from ever bleeding onto a cream surface.
-export function Section({ tone, as: As = "section", className, children }: SectionProps) {
+export function Section({ tone, as: As = "section", className, children, ...props }: SectionProps) {
   const toneClasses =
     tone === "dark" ? "bg-slate-bg text-text-primary" : "bg-slate-cream text-text-on-light";
   return (
-    <As className={cn("relative", toneClasses, className)}>
+    <As {...props} className={cn("relative", toneClasses, className)}>
       <Grain tone={tone} />
       <div className="relative z-20">{children}</div>
     </As>

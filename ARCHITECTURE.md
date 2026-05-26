@@ -253,6 +253,7 @@ This is the one we ship publicly first. No DB. Just file-based.
 ### M6 — Launch (target: day 13–21)
 
 Not code. This is the human bit:
+
 1. Press kit (one-pager PDF, 5 still frames, the manifesto)
 2. Hand-build profiles for the first 10–15 members (we onboard them in person at the Sunday event)
 3. Aram Nagar Sunday session, scene work, photographed
@@ -272,17 +273,18 @@ Assume the developer has installed gstack (`~/.claude/skills/gstack`). The workf
 7. `/canary` — post-deploy monitoring
 
 For the profile page specifically (M1), use:
+
 - `/design-shotgun` → generates 4-6 variants of the cinematic hero, pick + iterate
 - `/design-html` → turns the approved mockup into shippable code that respects DESIGN.md tokens
 - `/plan-design-review` → before any profile PR is merged
 
 ## Performance budgets (enforced)
 
-| Page | LCP | TBT | JS shipped | Total weight |
-|---|---|---|---|---|
-| `/` marketing | < 1.8s | < 200ms | < 100KB | < 600KB |
-| `/[slug]` cinematic | < 2.0s | < 200ms | < 120KB | < 800KB (excl video) |
-| `/[slug]/c` CD view | < 1.2s | < 100ms | < 60KB | < 400KB (excl video) |
+| Page                | LCP    | TBT     | JS shipped | Total weight         |
+| ------------------- | ------ | ------- | ---------- | -------------------- |
+| `/` marketing       | < 1.8s | < 200ms | < 100KB    | < 600KB              |
+| `/[slug]` cinematic | < 2.0s | < 200ms | < 120KB    | < 800KB (excl video) |
+| `/[slug]/c` CD view | < 1.2s | < 100ms | < 60KB     | < 400KB (excl video) |
 
 The CD view is the strictest because the CD's experience is the make-or-break.
 

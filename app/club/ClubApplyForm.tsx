@@ -70,23 +70,61 @@ export function ClubApplyForm() {
     <form onSubmit={onSubmit} className="flex flex-col gap-4">
       <label className="flex flex-col gap-2">
         <span className="chip-text text-text-tertiary">Name</span>
-        <input name="name" required minLength={2} maxLength={80} disabled={isPending} className={fieldClass} placeholder="What casting calls you" />
+        <input
+          name="name"
+          required
+          minLength={2}
+          maxLength={80}
+          disabled={isPending}
+          className={fieldClass}
+          placeholder="What casting calls you"
+        />
       </label>
       <label className="flex flex-col gap-2">
         <span className="chip-text text-text-tertiary">Phone</span>
-        <input name="phone" required type="tel" inputMode="tel" autoComplete="tel" disabled={isPending} className={fieldClass} placeholder="98765 43210" />
+        <input
+          name="phone"
+          required
+          type="tel"
+          inputMode="tel"
+          autoComplete="tel"
+          disabled={isPending}
+          className={fieldClass}
+          placeholder="98765 43210"
+        />
       </label>
       <label className="flex flex-col gap-2">
         <span className="chip-text text-text-tertiary">Instagram (optional)</span>
-        <input name="instagram" maxLength={80} disabled={isPending} className={fieldClass} placeholder="@yourhandle" />
+        <input
+          name="instagram"
+          maxLength={80}
+          disabled={isPending}
+          className={fieldClass}
+          placeholder="@yourhandle"
+        />
       </label>
       <label className="flex flex-col gap-2">
         <span className="chip-text text-text-tertiary">City</span>
-        <input name="city" required defaultValue="Mumbai" disabled={isPending} className={fieldClass} />
+        <input
+          name="city"
+          required
+          defaultValue="Mumbai"
+          disabled={isPending}
+          className={fieldClass}
+        />
       </label>
       <label className="flex flex-col gap-2">
         <span className="chip-text text-text-tertiary">One line — why are you acting?</span>
-        <textarea name="why" required minLength={10} maxLength={500} rows={3} disabled={isPending} className={fieldClass} placeholder="No wrong answer. Be honest." />
+        <textarea
+          name="why"
+          required
+          minLength={10}
+          maxLength={500}
+          rows={3}
+          disabled={isPending}
+          className={fieldClass}
+          placeholder="No wrong answer. Be honest."
+        />
       </label>
 
       <button

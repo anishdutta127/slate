@@ -23,9 +23,7 @@ export default function SignupPage() {
     >
       <Wordmark size="md" />
 
-      <p className="chip-text mt-12 text-gold">
-        Sign-up · coming with M3
-      </p>
+      <p className="chip-text mt-12 text-gold">Sign-up · coming with M3</p>
       <h1
         className="mt-6 max-w-[20ch] font-display text-text-primary"
         style={{
@@ -39,7 +37,8 @@ export default function SignupPage() {
         Profile builder lands soon.
       </h1>
       <p className="mt-6 max-w-[36ch] text-balance text-base leading-relaxed text-text-secondary md:text-lg">
-        Phone OTP, photo upload, in-browser reel recording, the whole 15-minute flow. We&apos;re building it. You&apos;ll get a Slate of your own within weeks.
+        Phone OTP, photo upload, in-browser reel recording, the whole 15-minute flow. We&apos;re
+        building it. You&apos;ll get a Slate of your own within weeks.
       </p>
 
       <Divider className="my-10 max-w-[14rem]" />

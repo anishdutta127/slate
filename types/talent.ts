@@ -10,6 +10,8 @@ export interface TalentCredit {
   readonly medium: CreditMedium;
   readonly year: number;
   readonly urls: readonly string[]; // primary first; multiple allowed (e.g. Rings & I has two videos)
+  readonly thumbnailUrl?: string; // optional manual poster for non-YouTube work links
+  readonly thumbnailAlt?: string;
 }
 
 export interface TalentPhoto {

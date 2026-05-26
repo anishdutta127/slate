@@ -17,10 +17,7 @@ function Sprockets({ side }: { side: "top" | "bottom" }) {
       aria-hidden="true"
     >
       {Array.from({ length: 8 }).map((_, idx) => (
-        <span
-          key={idx}
-          className="block h-2 w-3 rounded-sm bg-slate-bg/90"
-        />
+        <span key={idx} className="block h-2 w-3 rounded-sm bg-slate-bg/90" />
       ))}
     </div>
   );

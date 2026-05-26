@@ -1,7 +1,8 @@
 import { z } from "zod";
 
-// Env schema. Validated once at boot — if anything required is missing or
-// malformed, the app fails loudly here instead of at random query time.
+// Env schema for values that are safe to read during static builds. Database
+// and auth secrets are optional here so website-only preview deploys can build
+// without provisioning M0.5 runtime services.
 
 const envSchema = z.object({
   // Runtime
@@ -12,16 +13,16 @@ const envSchema = z.object({
   SLATE_ENABLE_STYLE_GUIDE: z.enum(["1"]).optional(),
   SLATE_ALLOW_DEV_LOGIN: z.enum(["1"]).optional(),
 
-  // Database (M0.5 onward)
-  DATABASE_URL: z.string().url(),
-  DIRECT_DATABASE_URL: z.string().url(),
+  // Database (M0.5 onward). Optional for M3 website-only preview deploys.
+  DATABASE_URL: z.string().url().optional(),
+  DIRECT_DATABASE_URL: z.string().url().optional(),
 
   // Better Auth (M0.5 onward). SECRET is required everywhere. URL is optional
   // because on Vercel deploys VERCEL_URL is set per deploy (unique per preview),
   // and locally we default to http://localhost:3000. Set BETTER_AUTH_URL only
   // when you want to override (e.g. a stable production canonical URL like
   // https://slate.club).
-  BETTER_AUTH_SECRET: z.string().min(32),
+  BETTER_AUTH_SECRET: z.string().min(32).optional(),
   BETTER_AUTH_URL: z.string().url().optional(),
 
   // Vercel injects this automatically on every deploy. Not user-settable.

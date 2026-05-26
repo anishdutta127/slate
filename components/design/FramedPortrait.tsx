@@ -40,8 +40,7 @@ export function FramedPortrait({
           className="relative aspect-[3/4] w-full max-w-[280px] p-2"
           style={{
             border: "1px solid rgba(201, 162, 75, 0.6)",
-            boxShadow:
-              "0 30px 60px -25px rgba(0,0,0,0.7), 0 0 0 1px rgba(201, 162, 75, 0.15)",
+            boxShadow: "0 30px 60px -25px rgba(0,0,0,0.7), 0 0 0 1px rgba(201, 162, 75, 0.15)",
           }}
         >
           <div className="relative h-full w-full overflow-hidden">

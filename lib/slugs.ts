@@ -42,7 +42,11 @@ export async function generateSlugFromPhone(phone: string): Promise<string> {
   let n = 1;
   while (true) {
     if (isValidSlug(candidate)) {
-      const existing = await db.select({ id: user.id }).from(user).where(eq(user.slug, candidate)).limit(1);
+      const existing = await db
+        .select({ id: user.id })
+        .from(user)
+        .where(eq(user.slug, candidate))
+        .limit(1);
       if (existing.length === 0) return candidate;
     }
     n += 1;
@@ -51,7 +55,11 @@ export async function generateSlugFromPhone(phone: string): Promise<string> {
       // safety valve, exceedingly unlikely; fall back to random suffix
       const random = Math.random().toString(36).slice(2, 7);
       candidate = `${last4}-${random}`;
-      const exists = await db.select({ id: user.id }).from(user).where(eq(user.slug, candidate)).limit(1);
+      const exists = await db
+        .select({ id: user.id })
+        .from(user)
+        .where(eq(user.slug, candidate))
+        .limit(1);
       if (exists.length === 0) return candidate;
     }
   }

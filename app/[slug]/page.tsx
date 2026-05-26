@@ -10,12 +10,7 @@ import { CreditCard } from "@/components/profile/CreditCard";
 import { BrandedFallbackCard } from "@/components/profile/BrandedFallbackCard";
 import { SectionLabel } from "@/components/profile/SectionLabel";
 import { StickyContactBar } from "@/components/profile/StickyContactBar";
-import {
-  getAllTalentSlugs,
-  getTalentBySlug,
-  getTelUrl,
-  getWhatsAppUrl,
-} from "@/lib/talent";
+import { getAllTalentSlugs, getTalentBySlug, getTelUrl, getWhatsAppUrl } from "@/lib/talent";
 import { displayPhone } from "@/lib/phone";
 import { getBaseUrl } from "@/lib/env";
 
@@ -102,10 +97,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
             </div>
 
             {/* Centered play icon overlay */}
-            <span
-              aria-hidden="true"
-              className="absolute inset-0 flex items-center justify-center"
-            >
+            <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
               <span className="flex h-20 w-20 items-center justify-center rounded-full border border-gold/40 bg-slate-bg/60 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
                 <svg className="ml-1 h-8 w-8 fill-gold" viewBox="0 0 24 24" aria-hidden="true">
                   <path d="M8 5v14l11-7z" />
@@ -215,11 +207,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
       </Section>
 
       {/* ============ 05 · GET IN TOUCH ============ */}
-      <Section
-        tone="dark"
-        as="section"
-        className="px-6 py-24 md:px-12 md:py-32"
-      >
+      <Section tone="dark" as="section" className="px-6 py-24 md:px-12 md:py-32">
         <div id="contact" className="mx-auto max-w-[680px] text-center">
           <SectionLabel number="05" label="Get in touch" devanagari="संपर्क करें" />
           <h2
