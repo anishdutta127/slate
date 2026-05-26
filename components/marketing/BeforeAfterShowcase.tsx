@@ -2,28 +2,18 @@ import { PhoneFrame } from "@/components/visual/PhoneFrame";
 import { TalentImage } from "@/components/profile/TalentImage";
 import { ASHISH } from "@/lib/talent/ashish";
 
-// The showpiece on the landing. Two phone frames side-by-side:
-//   LEFT  — fake WhatsApp chat with a messy fresher pitch: paragraph of
-//           YouTube and Drive links, no preview, ugly walls of text.
-//   RIGHT — same WhatsApp chat with a Slate link unfurling as a clean
-//           preview card with Ashish's hero + name + stats.
-//
-// The contrast is the whole argument for Slate in one frame. Built to be
-// visually striking on its own without copy doing all the work.
-
 const FAKE_TIME = "2:47 PM";
 
 function WhatsAppChrome({ children }: { children: React.ReactNode }) {
   return (
     <div className="flex h-full flex-col bg-[#0d1418] text-white">
-      {/* WA-style header */}
       <header className="flex items-center gap-2 bg-[#1f2c33] px-3 py-2 text-xs">
         <span className="text-lg leading-none text-[#54656f]">‹</span>
         <div className="flex h-8 w-8 items-center justify-center rounded-full bg-[#6b7c85] text-[10px] font-semibold">
           CD
         </div>
         <div className="flex min-w-0 flex-1 flex-col">
-          <span className="truncate text-[12px] font-semibold">Casting · Mira films</span>
+          <span className="truncate text-[12px] font-semibold">CD / Casting Coordinator</span>
           <span className="truncate text-[9px] text-[#8696a0]">online</span>
         </div>
         <span aria-hidden="true" className="text-[#8696a0]">
@@ -31,12 +21,10 @@ function WhatsAppChrome({ children }: { children: React.ReactNode }) {
         </span>
       </header>
 
-      {/* Chat body */}
       <div className="flex-1 overflow-hidden bg-[#0a141a] bg-[radial-gradient(circle_at_50%_50%,rgba(255,255,255,0.02)_0%,transparent_70%)] px-2.5 py-3">
         {children}
       </div>
 
-      {/* Composer */}
       <div className="flex items-center gap-2 bg-[#1f2c33] px-2 py-1.5">
         <span className="text-[#8696a0]">😊</span>
         <div className="flex-1 rounded-full bg-[#2a3942] px-3 py-1 text-[10px] text-[#8696a0]">
@@ -48,7 +36,7 @@ function WhatsAppChrome({ children }: { children: React.ReactNode }) {
   );
 }
 
-function MessageBubble({
+function Bubble({
   side = "right",
   children,
   time,
@@ -68,52 +56,55 @@ function MessageBubble({
   );
 }
 
+function LinkBubble({ url }: { url: string }) {
+  return (
+    <div className="mr-auto mb-1 max-w-[85%] rounded-md bg-[#1f2c33] px-2 py-1.5">
+      <p className="break-all font-mono text-[9px] leading-snug text-[#53bdeb]">{url}</p>
+    </div>
+  );
+}
+
 export function BeforeAfterShowcase() {
   return (
     <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
-      {/* BEFORE */}
+      {/* BEFORE — the Drive dump */}
       <figure className="flex flex-col items-center gap-4">
-        <span className="chip-text text-text-tertiary">Before · this morning</span>
+        <span className="chip-text text-text-tertiary">Today — the Drive dump</span>
         <PhoneFrame tilt="left" className="opacity-95">
           <WhatsAppChrome>
-            <MessageBubble side="left" time={FAKE_TIME}>
-              Hi sir, sending my profile for the OTT role
-            </MessageBubble>
-            <MessageBubble side="left" time={FAKE_TIME}>
-              {`Showreel:
-https://drive.google.com/file/d/1xH9k2Lp/view?usp=sharing
-
-Reels:
-https://www.instagram.com/reel/Cabc123
-https://www.instagram.com/reel/Cdef456
-https://www.instagram.com/reel/Cghi789
-
-Photos:
-https://drive.google.com/drive/folders/1AbCdEfGh
-
-Age 25 · 5'8" · Hindi English`}
-            </MessageBubble>
+            <Bubble side="right" time={FAKE_TIME}>
+              Send your profile na
+            </Bubble>
+            <Bubble side="left">
+              Hello sir myself Ashish Rawat actor from mumbai age 25 height 5&apos;8 sharing my
+              photos and work below pls consider
+            </Bubble>
+            <LinkBubble url="drive.google.com/file/d/1xH9k2Lp/view?usp=sharing" />
+            <LinkBubble url="youtu.be/tnVDz4HvhbE" />
+            <LinkBubble url="instagram.com/reel/DXGdDOHjA6_/" />
+            <LinkBubble url="drive.google.com/drive/folders/1AbCdEfGh" />
             <div className="mt-2 text-center text-[9px] italic text-[#8696a0]">
-              No preview. Twelve links. Swiped past.
+              Looks the same as 200 other messages. Forgettable.
             </div>
           </WhatsAppChrome>
         </PhoneFrame>
         <figcaption className="max-w-[28ch] text-balance text-center text-xs text-text-tertiary">
-          The same actor, sending the same pitch.
+          Looks the same as 200 other messages. Forgettable.
         </figcaption>
       </figure>
 
-      {/* AFTER */}
+      {/* AFTER — one Slate link */}
       <figure className="flex flex-col items-center gap-4">
-        <span className="chip-text text-gold">After · on Slate</span>
+        <span className="chip-text text-gold">With Slate — one link</span>
         <PhoneFrame tilt="right">
           <WhatsAppChrome>
-            <MessageBubble side="left" time={FAKE_TIME}>
-              Hi sir, here&apos;s my profile —
-            </MessageBubble>
+            <Bubble side="right" time={FAKE_TIME}>
+              Send your profile na
+            </Bubble>
+            <Bubble side="left">Hi, here&apos;s my profile —</Bubble>
 
-            {/* The Slate unfurl card */}
-            <div className="ml-auto mb-1.5 max-w-[90%] overflow-hidden rounded-md bg-[#005c4b]">
+            {/* Slate unfurl card */}
+            <div className="mr-auto mb-1.5 max-w-[90%] overflow-hidden rounded-md bg-[#1f2c33]">
               <div className="relative aspect-[4/3] w-full overflow-hidden">
                 <TalentImage
                   photo={ASHISH.hero}
@@ -137,19 +128,21 @@ Age 25 · 5'8" · Hindi English`}
                   Plays 22-28 · Hindi & English. Honda, Cipla, Zepto.
                 </div>
               </div>
-              <div className="px-2.5 py-1 text-[9px] text-white/80">slate.club/ashish</div>
+              <div className="px-2.5 py-1 text-[9px] text-white/80">
+                <span className="text-[#C9A24B]">◆</span> slate.club/ashish
+              </div>
               <div className="px-2.5 pb-1.5 text-right text-[8px] text-white/50">
                 {FAKE_TIME} ✓✓
               </div>
             </div>
 
             <div className="mt-2 text-center text-[9px] italic text-gold/80">
-              One link. Tapped within seconds.
+              One tap. Looks like a working actor. Gets saved.
             </div>
           </WhatsAppChrome>
         </PhoneFrame>
         <figcaption className="max-w-[28ch] text-balance text-center text-xs text-text-secondary">
-          Same actor. Same audition. The link does the work now.
+          One tap. Looks like a working actor. Gets saved.
         </figcaption>
       </figure>
     </div>

@@ -1,386 +1,710 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
-import type { ReactNode } from "react";
 import { Section } from "@/components/visual/Section";
-import { Divider } from "@/components/visual/Divider";
 import { Wordmark } from "@/components/visual/Wordmark";
-import { PhoneFrame } from "@/components/visual/PhoneFrame";
-import { SectionLabel } from "@/components/profile/SectionLabel";
 import { BeforeAfterShowcase } from "@/components/marketing/BeforeAfterShowcase";
+import { StickyNav } from "@/components/marketing/StickyNav";
+import { FloatingCards } from "@/components/marketing/FloatingCards";
+import { TalentImage } from "@/components/profile/TalentImage";
 import { ASHISH } from "@/lib/talent/ashish";
-import { cn } from "@/lib/cn";
 
 export const metadata: Metadata = {
-  title: "Slate, the fresher actors' club of Mumbai",
+  title: "Slate, the actors' club of Mumbai",
   description:
     "Join the Mumbai actors' club, get your casting profile made, send a beautiful link on WhatsApp, and practise with other freshers every week.",
 };
 
-const actorWins = [
+/* ---------------------------------------------------------------------------
+ * Data
+ * --------------------------------------------------------------------------- */
+
+const howSteps = [
   {
-    eyebrow: "Free for founding members",
-    title: "Join the Mumbai actors' circle",
-    body: "Get into a vetted WhatsApp community for freshers, scene partners, practice prompts, safe casting alerts, and weekly rooms in Aram Nagar.",
-    devanagari: "अपना circle बनाओ",
+    num: "1",
+    title: "Join the club",
+    body: "Apply to the Mumbai actors' club. We welcome freshers. No CV, no fees, no gatekeeping.",
+    hindi: "क्लब से जुड़ो।",
   },
   {
-    eyebrow: "Your joining prize",
-    title: "We make your CD profile",
-    body: "Not a boring Drive folder. A clean casting view with photos, stats, reel links, and a cinematic page you can proudly send.",
-    devanagari: "profile ready",
+    num: "2",
+    title: "Get your profile",
+    body: "We build you a clean, casting-ready profile from your photos and work. Free for the founding batch.",
+    hindi: "प्रोफाइल बनवाओ।",
   },
   {
-    eyebrow: "Made for WhatsApp",
-    title: "Send one link, not six links",
-    body: "Your profile opens with a preview card, a short pitch, and your contact details. It looks professional even inside a messy chat.",
-    devanagari: "भेजो like a pro",
+    num: "3",
+    title: "Grow together",
+    body: "Practise every Sunday, ask seniors for contacts and advice, send your link like a pro.",
+    hindi: "साथ में बढ़ो।",
   },
 ];
 
-const offerCards = [
+const whatYouGet = [
   {
-    name: "Founder Club",
-    price: "Free",
-    note: "For the first Mumbai batch",
-    items: [
-      "WhatsApp community",
-      "Weekly practice circle",
-      "Casting safety notes",
-      "Free CD profile made with us",
-    ],
-    cta: "Apply to join",
-    href: "/club",
-    featured: true,
+    icon: "✦",
+    title: "A profile that opens doors",
+    body: "Photos, intro video, work links, and a clean casting view — all on one cinematic page that looks ready to forward.",
   },
   {
-    name: "Cinematic Page",
-    price: "₹99",
-    note: "Launch price after the first batch",
-    items: [
-      "Film-poster profile page",
-      "Link thumbnail cards",
-      "Share-ready WhatsApp preview",
-      "No messy Google Drive pitch",
-    ],
-    cta: "See sample",
-    href: `/${ASHISH.slug}`,
-    featured: false,
+    icon: "◎",
+    title: "A real community",
+    body: "A vetted WhatsApp circle of Mumbai actors. Ask for contacts, audition leads, honest advice. You're not alone in this city anymore.",
   },
   {
-    name: "Outreach Desk",
-    price: "Pilot",
-    note: "For Ashish and trusted working actors first",
-    items: [
-      "Shortlisted contacts only",
-      "Email plus WhatsApp workflow",
-      "Template review before sending",
-      "Reply tracking and follow-ups",
-    ],
-    cta: "Read the pilot plan",
-    href: "#outreach",
-    featured: false,
+    icon: "☀",
+    title: "Weekly practice",
+    body: "Slate Sundays in Aram Nagar. Scene work, cold reads, feedback from people who get it. Free, every week.",
   },
 ];
 
-const howItWorks = [
-  {
-    step: "I",
-    title: "Apply to the club",
-    body: "Name, phone, Instagram, city, and why you are acting. Hinglish is fine. English polish is not the test.",
-  },
-  {
-    step: "II",
-    title: "We help build your profile",
-    body: "We collect photos, intro video, reel links, language, height, age range, and training. Then we make it look casting-ready.",
-  },
-  {
-    step: "III",
-    title: "Send it and practise weekly",
-    body: "Use your link when you message casting teams. Come to the Sunday room to improve your intro, scenes, and confidence.",
-  },
+const freeFeatures = [
+  "Casting-ready profile page",
+  "Clean WhatsApp share with preview",
+  "The Mumbai actors' WhatsApp community",
+  "Weekly Slate Sunday practice",
+  "Ask seniors for contacts & advice",
 ];
+
+const proFeatures = [
+  "The full cinematic profile page",
+  "Custom link & no Slate watermark",
+  "See who opened your profile",
+];
+
+const proHighlight = "Managed outreach — verified casting contacts";
+
+const proExtras = [
+  "Personalised email + WhatsApp, reviewed by us",
+  "Reply tracking & follow-up help",
+];
+
+const clubBullets = [
+  "Weekly scene practice & cold reads",
+  "Vetted WhatsApp community",
+  "Monthly Slate Nights with working actors & CDs",
+  "No fees, no gatekeeping",
+];
+
+/* ---------------------------------------------------------------------------
+ * Page
+ * --------------------------------------------------------------------------- */
 
 export default function HomePage() {
+  // Non-null: these are static data entries we control (lib/talent/ashish.ts)
+  const blazerPhoto = ASHISH.gallery[0]!; // 02-headshot-blazer
+  const fullbodyPhoto = ASHISH.gallery[1]!; // 01-fullbody-white-shirt
+  const seatedPhoto = ASHISH.gallery[2]!; // 04-seated-mint-shirt
+
   return (
     <>
+      <StickyNav />
+
+      {/* ============================================================
+       * 1.2 — Hero
+       * ============================================================ */}
       <Section
         tone="dark"
         as="main"
-        className="relative flex min-h-svh flex-col items-center justify-center overflow-hidden px-6 py-16 md:flex-row md:items-center md:gap-16 md:px-12 md:py-24"
+        className="relative overflow-hidden pt-[120px] pb-16 lg:min-h-svh lg:pb-0"
       >
+        {/* Ambient glow */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 h-[38rem] opacity-70"
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[42rem] opacity-75"
           style={{
             background:
-              "radial-gradient(circle at 30% 10%, rgba(201,162,75,0.20), transparent 34%), radial-gradient(circle at 75% 25%, rgba(245,239,227,0.10), transparent 28%)",
+              "radial-gradient(circle at 18% 12%, rgba(201,162,75,0.24), transparent 32%), radial-gradient(circle at 82% 24%, rgba(245,239,227,0.12), transparent 30%)",
           }}
         />
 
-        <div className="relative z-10 flex max-w-[29rem] flex-col items-start text-left">
-          <Wordmark size="md" />
-          <p className="chip-text mt-8 text-gold">
-            Mumbai fresher actors&apos; club · <span className="devanagari">नया circle</span>
-          </p>
-          <h1
-            className="mt-4 font-display text-text-primary"
-            style={{
-              fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
-              fontWeight: 700,
-              fontSize: "clamp(2.75rem, 9vw, 4.65rem)",
-              letterSpacing: "-0.025em",
-              lineHeight: 0.95,
-            }}
-          >
-            Stop sending
-            <br />
-            ugly audition
-            <br />
-            links.
-          </h1>
-          <p className="mt-6 max-w-[36ch] text-balance text-base leading-relaxed text-text-secondary md:text-lg">
-            Join the Slate actors&apos; club in Mumbai. We help freshers get into the right rooms,
-            practise every week, and get a CD-ready profile made for free while the founding batch
-            is open.
-          </p>
-          <div className="mt-8 flex flex-wrap items-center gap-3">
-            <Link
-              href="/club"
-              className="inline-flex h-12 items-center justify-center rounded-full bg-slate-cream px-7 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+        <div className="mx-auto grid max-w-[1200px] items-center gap-12 px-6 md:px-12 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+          {/* Left column */}
+          <div className="flex max-w-[560px] flex-col items-start">
+            {/* Eyebrow */}
+            <p className="flex items-center gap-3 font-mono text-[11px] uppercase tracking-[0.2em] text-gold">
+              <span aria-hidden="true" className="inline-block h-px w-6 bg-gold" />
+              Mumbai · The actors&apos; club
+            </p>
+
+            {/* H1 */}
+            <h1
+              className="mt-5 font-display text-text-primary"
+              style={{
+                fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
+                fontWeight: 600,
+                fontSize: "clamp(40px, 7vw, 76px)",
+                lineHeight: 1.02,
+                letterSpacing: "-0.025em",
+              }}
             >
-              Join the club
-            </Link>
-            <Link
-              href={`/${ASHISH.slug}`}
-              className="text-sm text-gold underline-offset-4 hover:underline focus-visible:underline"
-            >
-              See profile sample →
-            </Link>
+              Your first profile should feel like your{" "}
+              <em className="text-gold-soft" style={{ fontStyle: "italic" }}>
+                first break.
+              </em>
+            </h1>
+
+            {/* Subhead */}
+            <p className="mt-6 max-w-[480px] text-lg leading-relaxed text-text-secondary">
+              Join the Slate actors&apos; club in Mumbai. Get a free, casting-ready profile,
+              practise every week with other actors, and find your way into the right rooms.
+            </p>
+
+            {/* Hinglish */}
+            <p className="mt-4 text-[15px] text-text-tertiary">
+              <span className="font-devanagari text-gold" style={{ fontStyle: "normal" }}>
+                सीन शुरू यहीं से।
+              </span>
+              {"  "}
+              <span className="italic">The scene starts here.</span>
+            </p>
+
+            {/* CTAs */}
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center">
+              <Link
+                href="/signup"
+                className="inline-flex h-12 items-center justify-center rounded-full bg-slate-cream px-7 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+              >
+                Join the club — it&apos;s free
+              </Link>
+              <a
+                href="#ashish"
+                className="inline-flex h-12 items-center justify-center rounded-full border border-gold/35 px-7 text-base font-medium text-text-primary transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-slate-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+              >
+                See a profile →
+              </a>
+            </div>
+
+            {/* Founding note */}
+            <p className="mt-5 font-mono text-[12px] tracking-[0.04em] text-text-tertiary">
+              <span className="font-semibold text-gold">Founding batch open.</span> First 100
+              members get their profile made for free.
+            </p>
           </div>
-          <p className="mt-5 max-w-[38ch] font-mono text-[11px] uppercase tracking-[0.12em] text-text-tertiary">
-            Free now for founding members. Cinematic page later starts at ₹99.
+
+          {/* Right column — phone mockup */}
+          <div className="relative mx-auto w-full max-w-[400px] lg:max-w-none">
+            <div className="relative mx-auto w-[260px] sm:w-[280px] lg:w-[300px]">
+              {/* Phone frame */}
+              <div
+                className="relative overflow-hidden rounded-[2.5rem] bg-slate-surface p-2.5"
+                style={{
+                  boxShadow:
+                    "0 30px 80px -30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(245,239,227,0.08)",
+                }}
+              >
+                {/* Speaker pill */}
+                <div
+                  aria-hidden="true"
+                  className="absolute left-1/2 top-2 z-10 h-1 w-12 -translate-x-1/2 rounded-full bg-[#1a1916]"
+                />
+                {/* Screen */}
+                <div
+                  className="relative overflow-hidden rounded-[2rem]"
+                  style={{ aspectRatio: "9/19.5" }}
+                >
+                  {/* Photo */}
+                  <TalentImage
+                    photo={blazerPhoto}
+                    talentSlug={ASHISH.slug}
+                    priority
+                    fill
+                    sizes="300px"
+                    className="object-cover object-[center_15%]"
+                  />
+                  {/* Gradient fade */}
+                  <div
+                    aria-hidden="true"
+                    className="absolute inset-0"
+                    style={{
+                      background:
+                        "linear-gradient(to bottom, transparent 45%, rgba(22,22,19,0.6) 65%, #161613 88%)",
+                    }}
+                  />
+                  {/* Text overlay */}
+                  <div className="absolute inset-x-0 bottom-0 px-5 pb-6">
+                    <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
+                      Mumbai · Actor
+                    </p>
+                    <p
+                      className="mt-1 font-display text-[26px] font-semibold leading-tight text-text-primary"
+                      style={{
+                        fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1',
+                      }}
+                    >
+                      Ashish Rawat
+                    </p>
+                    <p className="mt-1 font-mono text-[10px] tracking-wide text-text-secondary">
+                      Plays 22-28 · 5&apos;8&quot; · Hindi &amp; English
+                    </p>
+                  </div>
+                </div>
+              </div>
+
+              {/* Floating cards */}
+              <FloatingCards />
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ============================================================
+       * 1.3 — Before / After
+       * ============================================================ */}
+      <Section
+        tone="dark"
+        className="py-20 md:py-28"
+        style={{
+          background: "linear-gradient(180deg, #0e0e0c 0%, #0a0a08 100%)",
+        }}
+      >
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">The problem</p>
+          <h2 className="display-m mt-6 text-text-primary">
+            How you apply now.{" "}
+            <span className="font-devanagari text-[0.7em] text-gold" style={{ opacity: 0.8 }}>
+              और कैसे होना चाहिए।
+            </span>
+          </h2>
+          <p className="mt-5 max-w-[600px] text-text-secondary">
+            Right now your work lives in a messy WhatsApp message. Drive links, YouTube dumps, a
+            wall of text. Casting people scroll past it in two seconds. Slate fixes the thing they
+            actually see.
           </p>
-        </div>
 
-        <div className="relative z-10 mt-12 w-full max-w-[280px] md:mt-0 md:w-auto md:flex-shrink-0">
-          <div
-            className="absolute -inset-4 rounded-[2.5rem] bg-gold/10 blur-2xl"
-            aria-hidden="true"
-          />
-          <PhoneFrame tilt="right">
-            <iframe
-              src={`/${ASHISH.slug}/c`}
-              title={`${ASHISH.name} profile preview`}
-              className="block h-full w-full"
-              loading="lazy"
-            />
-          </PhoneFrame>
-          <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.15em] text-text-tertiary">
-            slate.club/{ASHISH.slug}
+          <div className="mt-14">
+            <BeforeAfterShowcase />
+          </div>
+        </div>
+      </Section>
+
+      {/* ============================================================
+       * 1.4 — How it works
+       * ============================================================ */}
+      <Section tone="dark" id="how" className="py-20 md:py-28">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+            How it works
           </p>
-        </div>
-      </Section>
+          <h2 className="display-m mt-6 text-text-primary">
+            Three steps.{" "}
+            <span className="font-devanagari text-[0.7em] text-gold" style={{ opacity: 0.8 }}>
+              बस तीन कदम।
+            </span>
+          </h2>
 
-      <Section tone="dark" className="border-t border-border-dark px-6 py-20 md:px-12 md:py-28">
-        <div className="mx-auto max-w-[1120px]">
-          <div className="mx-auto max-w-[680px] text-center">
-            <SectionLabel
-              number="01"
-              label="The wedge"
-              devanagari="असल problem"
-              className="justify-center text-center"
-            />
-            <h2 className="display-m mt-6 text-text-primary">
-              Casting is controlled. Your presentation does not have to be.
-            </h2>
-            <p className="mt-5 text-balance text-text-secondary">
-              We are not starting with another audition board. We are starting with what every actor
-              can use today, a beautiful profile, a clean WhatsApp pitch, and a real Mumbai circle.
-            </p>
-          </div>
-
-          <div className="mt-14 grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-            {actorWins.map((card, i) => (
-              <ShinyCard key={card.title} index={i}>
-                <p className="chip-text text-gold">{card.eyebrow}</p>
-                <h3 className="display-s mt-4 text-text-primary">{card.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{card.body}</p>
-                <p className="devanagari mt-6 text-sm text-gold/80">{card.devanagari}</p>
-              </ShinyCard>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section tone="dark" className="px-6 py-20 md:px-12 md:py-28">
-        <div className="mx-auto max-w-[1120px]">
-          <div className="mx-auto mb-14 max-w-[640px] text-center">
-            <SectionLabel
-              number="02"
-              label="Before / After"
-              className="justify-center text-center"
-            />
-            <h2 className="display-m mt-6 text-text-primary">
-              One link replaces the audition link dump.
-            </h2>
-            <p className="mt-4 text-text-secondary">
-              The same actor, the same work, but one version feels like a forward and one version
-              feels like a professional introduction.
-            </p>
-          </div>
-          <BeforeAfterShowcase />
-        </div>
-      </Section>
-
-      <Section tone="dark" className="px-6 py-20 md:px-12 md:py-28">
-        <div className="mx-auto max-w-[1120px]">
-          <div className="mb-14">
-            <SectionLabel number="03" label="Launch offer" devanagari="founding batch" />
-            <h2 className="display-m mt-6 max-w-[18ch] text-text-primary">
-              Community first. Profile as the prize.
-            </h2>
-            <p className="mt-4 max-w-[48ch] text-text-secondary">
-              The club stays free while we build trust. The paid product starts only when actors
-              already see the value of having a Slate link.
-            </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-4 md:grid-cols-3 md:gap-6">
-            {offerCards.map((card) => (
-              <PricingCard key={card.name} card={card} />
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section tone="dark" className="px-6 py-20 md:px-12 md:py-28">
-        <div className="mx-auto max-w-[1120px]">
-          <div className="mb-14 text-center">
-            <SectionLabel
-              number="04"
-              label="How it works"
-              devanagari="simple hai"
-              className="justify-center text-center"
-            />
-            <h2 className="display-m mt-6 text-text-primary">From newcomer to share-ready.</h2>
-          </div>
-
-          <ol className="mx-auto grid max-w-[920px] grid-cols-1 gap-10 md:grid-cols-3 md:gap-8">
-            {howItWorks.map((s) => (
-              <li key={s.step} className="flex flex-col items-center text-center">
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+            {howSteps.map((step) => (
+              <article
+                key={step.num}
+                className="group relative overflow-hidden rounded-sm bg-[#161613] p-6 transition-all duration-300 hover:-translate-y-1 md:p-8"
+                style={{
+                  boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.15)",
+                }}
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.35)",
+                  }}
+                />
                 <span
-                  className="font-display text-gold"
+                  className="font-display text-gold/20"
                   style={{
                     fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                     fontWeight: 700,
-                    fontSize: "3rem",
+                    fontSize: "4.5rem",
                     lineHeight: 1,
                   }}
                 >
-                  {s.step}
+                  {step.num}
                 </span>
-                <Divider className="my-5 max-w-[6rem]" />
-                <h3 className="display-s text-text-primary">{s.title}</h3>
-                <p className="mt-3 max-w-[29ch] text-sm leading-relaxed text-text-secondary">
-                  {s.body}
-                </p>
-              </li>
+                <h3 className="display-s mt-4 text-text-primary">{step.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{step.body}</p>
+                <p className="mt-5 font-devanagari text-sm text-gold/70">{step.hindi}</p>
+              </article>
             ))}
-          </ol>
+          </div>
         </div>
       </Section>
 
-      <Section tone="dark" className="px-6 py-20 md:px-12 md:py-28">
-        <div className="mx-auto max-w-[1120px]">
-          <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2 md:gap-16">
-            <div className="order-2 md:order-1">
-              <SectionLabel number="05" label="Sample profile" devanagari="casting view" />
-              <h2 className="display-m mt-6 text-text-primary">
-                Meet {ASHISH.name.split(" ")[0]}.
-              </h2>
-              <p className="mt-4 max-w-[42ch] text-text-secondary">
-                Six years on stage and screen. Honda, Cipla, Zepto, Nilkamal, Smotect, and Rings & I
-                in one page. This is the level we want freshers to aspire to, even if their first
-                version is simpler.
+      {/* ============================================================
+       * 1.5 — What you get
+       * ============================================================ */}
+      <Section tone="dark" className="py-20 md:py-28">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+            What you get
+          </p>
+          <h2 className="display-m mt-6 text-text-primary">More than a portfolio.</h2>
+
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
+            {whatYouGet.map((tile) => (
+              <article
+                key={tile.title}
+                className="group relative overflow-hidden rounded-sm bg-[#161613] p-6 transition-all duration-300 hover:-translate-y-1 md:p-8"
+                style={{
+                  boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.15)",
+                }}
+              >
+                <div
+                  aria-hidden="true"
+                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+                  style={{
+                    boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.35)",
+                  }}
+                />
+                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gold/10 text-lg text-gold">
+                  {tile.icon}
+                </span>
+                <h3 className="display-s mt-5 text-text-primary">{tile.title}</h3>
+                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{tile.body}</p>
+              </article>
+            ))}
+          </div>
+        </div>
+      </Section>
+
+      {/* ============================================================
+       * 1.6 — Ashish showcase
+       * ============================================================ */}
+      <Section
+        tone="dark"
+        id="ashish"
+        className="py-20 md:py-28"
+        style={{
+          background: "linear-gradient(180deg, #0a0a08 0%, #0e0e0c 100%)",
+        }}
+      >
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left — framed portrait */}
+            <div className="flex flex-col items-center">
+              <div
+                className="relative overflow-hidden rounded-sm bg-slate-surface p-3"
+                style={{
+                  boxShadow:
+                    "0 24px 64px -20px rgba(0,0,0,0.6), 0 8px 24px -12px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(201,162,75,0.25)",
+                  maxWidth: 380,
+                }}
+              >
+                <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2px]">
+                  <TalentImage
+                    photo={blazerPhoto}
+                    talentSlug={ASHISH.slug}
+                    fill
+                    sizes="(min-width: 1024px) 380px, 320px"
+                    className="object-cover object-[center_15%]"
+                  />
+                </div>
+              </div>
+              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-text-tertiary">
+                Ashish Rawat · slate.club/ashish
               </p>
-              <p className="mt-3 max-w-[42ch] text-sm italic leading-relaxed text-text-tertiary">
-                The CD view is scannable. The cinematic view is memorable. Both share the same data.
+            </div>
+
+            {/* Right — copy + credits */}
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+                One of the first
               </p>
+              <h2 className="display-m mt-6 text-text-primary">Meet Ashish.</h2>
+
+              {/* Pull-quote */}
+              <blockquote className="mt-6 border-l-2 border-gold/60 pl-5">
+                <p
+                  className="font-display italic text-text-primary"
+                  style={{
+                    fontSize: "clamp(1.1rem, 2.5vw, 1.4rem)",
+                    lineHeight: 1.45,
+                    fontWeight: 400,
+                  }}
+                >
+                  Six years on stage and screen. Built for ad films, ready for the long form.
+                </p>
+              </blockquote>
+
+              {/* Credit pills — linked */}
+              <div className="mt-8 flex flex-wrap gap-2">
+                {ASHISH.credits.map((credit) => (
+                  <a
+                    key={credit.id}
+                    href={credit.urls[0]}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="group/pill inline-flex items-center gap-1.5 rounded-full border border-gold/30 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.1em] text-text-primary transition-all duration-200 hover:border-gold/60 hover:bg-slate-surface"
+                  >
+                    {credit.brand}
+                    <svg
+                      className="h-3 w-3 text-text-tertiary opacity-0 transition-opacity group-hover/pill:opacity-100"
+                      fill="none"
+                      viewBox="0 0 24 24"
+                      stroke="currentColor"
+                      strokeWidth={2}
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        d="M7 17L17 7M17 7H7M17 7v10"
+                      />
+                    </svg>
+                  </a>
+                ))}
+              </div>
+
+              <p className="mt-6 max-w-[440px] text-sm leading-relaxed text-text-secondary">
+                This is what a Slate profile looks like. Yours will look just as good — whether you
+                have six credits or none yet.
+              </p>
+
               <Link
                 href={`/${ASHISH.slug}`}
                 className="mt-8 inline-flex h-12 items-center justify-center rounded-full border border-gold/40 px-6 text-base font-medium text-text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream hover:text-text-on-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
               >
-                See full profile →
+                See his full profile →
+              </Link>
+            </div>
+          </div>
+        </div>
+      </Section>
+
+      {/* ============================================================
+       * 1.7 — Pricing
+       * ============================================================ */}
+      <Section tone="dark" id="pricing" className="py-20 md:py-28">
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+            Free to join
+          </p>
+          <h2 className="display-m mt-6 text-text-primary">
+            Start free. Grow when you&apos;re ready.
+          </h2>
+          <p className="mt-5 max-w-[560px] text-text-secondary">
+            The club and your first profile are free for the founding batch. When you want more
+            reach, we have tools that do the work for you.
+          </p>
+
+          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-2">
+            {/* Free card */}
+            <article
+              className="flex flex-col rounded-sm bg-[#161613] p-6 md:p-8"
+              style={{ boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.15)" }}
+            >
+              <p className="chip-text text-gold">The Club</p>
+              <p
+                className="mt-4 font-display text-text-primary"
+                style={{
+                  fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
+                  fontWeight: 700,
+                  fontSize: "clamp(2rem, 6vw, 3rem)",
+                  lineHeight: 0.95,
+                }}
+              >
+                Free
+              </p>
+              <p className="mt-2 text-sm text-text-tertiary">Founding batch</p>
+              <p className="mt-4 text-sm text-text-secondary">
+                Everything you need to start showing up like a professional.
+              </p>
+
+              <ul className="mt-6 flex flex-1 flex-col gap-3">
+                {freeFeatures.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <span className="mt-0.5 text-gold">✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/signup"
+                className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-full bg-slate-cream text-base font-medium text-text-on-light transition-colors hover:bg-slate-cream-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+              >
+                Join the club
+              </Link>
+            </article>
+
+            {/* Pro card */}
+            <article
+              className="relative flex flex-col overflow-hidden rounded-sm p-6 md:p-8"
+              style={{
+                boxShadow: "inset 0 0 0 1px rgba(201,162,75,0.5)",
+                background: "linear-gradient(160deg, #161613 0%, rgba(201,162,75,0.06) 100%)",
+              }}
+            >
+              <div
+                aria-hidden="true"
+                className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent"
+              />
+              <div className="flex items-center gap-3">
+                <p className="chip-text text-gold">Slate Pro + Outreach</p>
+                <span className="rounded-full bg-gold/15 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-gold">
+                  For serious profiles
+                </span>
+              </div>
+              <p
+                className="mt-4 font-display text-text-primary"
+                style={{
+                  fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
+                  fontWeight: 700,
+                  fontSize: "clamp(2rem, 6vw, 3rem)",
+                  lineHeight: 0.95,
+                }}
+              >
+                ₹99{" "}
+                <span className="text-[0.4em] font-normal tracking-normal text-text-tertiary">
+                  /cinematic page
+                </span>
+              </p>
+              <p className="mt-4 text-sm text-text-secondary">
+                When you&apos;re ready to be seen by the right people, we help you reach them —
+                properly, never spam.
+              </p>
+
+              <ul className="mt-6 flex flex-1 flex-col gap-3">
+                {proFeatures.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <span className="mt-0.5 text-gold">✓</span>
+                    {f}
+                  </li>
+                ))}
+                <li className="flex items-start gap-2 text-sm font-medium text-gold">
+                  <span className="mt-0.5">✓</span>
+                  {proHighlight}
+                </li>
+                {proExtras.map((f) => (
+                  <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
+                    <span className="mt-0.5 text-gold">✓</span>
+                    {f}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/signup?intent=pro"
+                className="mt-8 inline-flex h-12 w-full items-center justify-center rounded-full bg-slate-cream text-base font-medium text-text-on-light transition-colors hover:bg-slate-cream-2 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+              >
+                Talk to us
+              </Link>
+            </article>
+          </div>
+
+          <p className="mt-8 text-center font-mono text-[11px] tracking-[0.06em] text-text-tertiary">
+            Outreach is{" "}
+            <span className="font-semibold text-text-secondary">managed and respectful</span>. We
+            never blast. We reach the right people, on your behalf, with messages worth reading.
+          </p>
+        </div>
+      </Section>
+
+      {/* ============================================================
+       * 1.8 — Club
+       * ============================================================ */}
+      <Section
+        tone="dark"
+        id="club"
+        className="py-20 md:py-28"
+        style={{
+          background: "linear-gradient(180deg, #0e0e0c 0%, #0a0a08 100%)",
+        }}
+      >
+        <div className="mx-auto max-w-[1200px] px-6 md:px-12">
+          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left */}
+            <div>
+              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+                Slate Sundays
+              </p>
+              <h2 className="display-m mt-6 text-text-primary">
+                The club meets every week.{" "}
+                <span className="font-devanagari text-[0.7em] text-gold" style={{ opacity: 0.8 }}>
+                  हर संडे।
+                </span>
+              </h2>
+              <p className="mt-5 max-w-[440px] text-text-secondary">
+                Every Sunday in Aram Nagar, freshers come together for scene work, cold reads, and
+                honest feedback. The WhatsApp community carries the energy through the week.
+              </p>
+
+              <ul className="mt-8 flex flex-col gap-3">
+                {clubBullets.map((b) => (
+                  <li key={b} className="flex items-start gap-3 text-text-secondary">
+                    <span className="font-devanagari text-gold" style={{ opacity: 0.8 }}>
+                      ॥
+                    </span>
+                    {b}
+                  </li>
+                ))}
+              </ul>
+
+              <Link
+                href="/club"
+                className="mt-10 inline-flex h-12 items-center justify-center rounded-full bg-slate-cream px-7 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
+              >
+                Apply to join
               </Link>
             </div>
 
-            <div className="order-1 flex justify-center md:order-2">
-              <PhoneFrame tilt="left">
-                <iframe
-                  src={`/${ASHISH.slug}/c`}
-                  title={`${ASHISH.name} CD view`}
-                  className="block h-full w-full"
-                  loading="lazy"
+            {/* Right — photo grid */}
+            <div className="grid grid-cols-2 gap-3">
+              {/* Tall photo */}
+              <div
+                className="relative row-span-2 overflow-hidden rounded-sm"
+                style={{
+                  boxShadow: "inset 0 0 0 1px rgba(245,239,227,0.08)",
+                }}
+              >
+                <Image
+                  src={`/talent/${ASHISH.slug}/${fullbodyPhoto.slug}-828.webp`}
+                  alt={fullbodyPhoto.alt}
+                  fill
+                  sizes="(min-width: 1024px) 280px, 180px"
+                  className="object-cover"
                 />
-              </PhoneFrame>
+              </div>
+              {/* Square photos */}
+              <div
+                className="relative aspect-square overflow-hidden rounded-sm"
+                style={{
+                  boxShadow: "inset 0 0 0 1px rgba(245,239,227,0.08)",
+                }}
+              >
+                <Image
+                  src={`/talent/${ASHISH.slug}/${ASHISH.hero.slug}-828.webp`}
+                  alt={ASHISH.hero.alt}
+                  fill
+                  sizes="(min-width: 1024px) 280px, 180px"
+                  className="object-cover"
+                />
+              </div>
+              <div
+                className="relative aspect-square overflow-hidden rounded-sm"
+                style={{
+                  boxShadow: "inset 0 0 0 1px rgba(245,239,227,0.08)",
+                }}
+              >
+                <Image
+                  src={`/talent/${ASHISH.slug}/${seatedPhoto.slug}-828.webp`}
+                  alt={seatedPhoto.alt}
+                  fill
+                  sizes="(min-width: 1024px) 280px, 180px"
+                  className="object-cover"
+                />
+              </div>
             </div>
           </div>
         </div>
       </Section>
 
-      <Section
-        id="outreach"
-        tone="dark"
-        className="border-y border-border-dark px-6 py-20 md:px-12 md:py-28"
-      >
-        <div className="mx-auto grid max-w-[1120px] grid-cols-1 gap-12 md:grid-cols-[0.9fr_1.1fr] md:gap-16">
-          <div>
-            <SectionLabel number="06" label="Bulk outreach" devanagari="careful mode" />
-            <h2 className="display-m mt-6 text-text-primary">
-              Ashish&apos;s request becomes a pilot, not a spam cannon.
-            </h2>
-            <p className="mt-5 max-w-[43ch] text-text-secondary">
-              Bulk WhatsApp is powerful but risky. We should first price it as a managed outreach
-              desk with opt-in or known contacts, approved templates, and manual review before any
-              message goes out.
-            </p>
-          </div>
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-            {[
-              [
-                "WhatsApp API",
-                "Use only for approved templates and consented contacts. Actor cold blasts should not be the default product.",
-              ],
-              [
-                "Email first",
-                "Cheaper, safer, and easier to test. Use polished profile links, subject lines, and follow-up tracking.",
-              ],
-              [
-                "Pilot price",
-                "₹2,999 setup plus message cost for the first 250 contacts. Manual quality check included.",
-              ],
-              [
-                "Scale price",
-                "₹7,999 to ₹14,999 per campaign once reply tracking, lists, and templates are working.",
-              ],
-            ].map(([title, body], i) => (
-              <ShinyCard key={title} index={i} compact>
-                <h3 className="display-s text-text-primary">{title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{body}</p>
-              </ShinyCard>
-            ))}
-          </div>
-        </div>
-      </Section>
-
-      <Section tone="dark" className="px-6 py-28 text-center md:px-12 md:py-36">
-        <div className="mx-auto max-w-[660px]">
-          <SectionLabel
-            number="07"
-            label="Start here"
-            devanagari="entry"
-            className="justify-center text-center"
-          />
+      {/* ============================================================
+       * 1.9 — Final CTA
+       * ============================================================ */}
+      <Section tone="dark" id="join" className="py-24 md:py-36">
+        <div className="mx-auto max-w-[660px] px-6 text-center md:px-12">
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+            Are you an actor?
+          </p>
           <h2
             className="mt-6 font-display text-text-primary"
             style={{
@@ -391,177 +715,70 @@ export default function HomePage() {
               lineHeight: 1,
             }}
           >
-            New to Mumbai?
+            Come find your room.
           </h2>
-          <p
-            className="mt-3 font-display italic text-text-secondary"
-            style={{ fontSize: "clamp(1.25rem, 3.5vw, 1.75rem)", lineHeight: 1.3 }}
+          <p className="mx-auto mt-6 max-w-[42ch] text-text-secondary">
+            Mumbai is hard alone. It&apos;s different with a club behind you. Join the founding
+            batch — your profile, your community, your first break.
+          </p>
+          <Link
+            href="/signup"
+            className="mt-10 inline-flex h-14 items-center justify-center rounded-full bg-slate-cream px-10 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
           >
-            Come as you are. Leave with a better first impression.
+            Join the Slate club — free →
+          </Link>
+          <p className="mt-6 font-devanagari text-[15px] text-gold" style={{ opacity: 0.8 }}>
+            मुंबई में नए हो? सही कमरे से शुरू करो।
           </p>
-          <p className="mx-auto mt-6 max-w-[42ch] text-text-tertiary">
-            Founding members get the club, the WhatsApp community, and a CD-ready profile made with
-            us for free.
-          </p>
-          <div className="mt-10 flex flex-wrap items-center justify-center gap-3">
-            <Link
-              href="/club"
-              className="inline-flex h-14 items-center justify-center rounded-full bg-slate-cream px-10 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
-            >
-              Apply to join
-            </Link>
-            <Link
-              href="/manifesto"
-              className="text-sm text-gold underline-offset-4 hover:underline focus-visible:underline"
-            >
-              Read the manifesto →
-            </Link>
-          </div>
         </div>
       </Section>
 
+      {/* ============================================================
+       * 1.10 — Footer
+       * ============================================================ */}
       <Section tone="dark" as="footer" className="border-t border-border-dark px-6 py-16 md:px-12">
-        <div className="mx-auto flex max-w-[1120px] flex-col items-center gap-8 text-center md:flex-row md:justify-between md:text-left">
+        <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 text-center md:flex-row md:justify-between md:text-left">
           <Link
             href="/"
-            className="flex items-baseline gap-2 text-text-primary opacity-80 transition-opacity hover:opacity-100"
+            className="flex items-baseline gap-2 opacity-80 transition-opacity hover:opacity-100"
           >
-            <span className="font-mono text-xs uppercase tracking-[0.15em] text-text-tertiary">
-              Made on Slate
+            <Wordmark size="sm" />
+            <span className="font-devanagari text-[13px] text-gold" style={{ opacity: 0.7 }}>
+              स्लेट
             </span>
-            <span className="font-mono text-xs text-text-tertiary">·</span>
-            <span className="devanagari text-text-tertiary">स्लेट</span>
           </Link>
 
           <nav className="flex flex-wrap items-center justify-center gap-6 font-mono text-[11px] uppercase tracking-[0.15em]">
+            <a href="#how" className="text-text-secondary hover:text-text-primary">
+              How it works
+            </a>
+            <Link href="/club" className="text-text-secondary hover:text-text-primary">
+              The Club
+            </Link>
+            <a href="#pricing" className="text-text-secondary hover:text-text-primary">
+              Pricing
+            </a>
             <Link href="/manifesto" className="text-text-secondary hover:text-text-primary">
               Manifesto
             </Link>
-            <Link href="/club" className="text-text-secondary hover:text-text-primary">
-              The club
-            </Link>
-            <Link href={`/${ASHISH.slug}`} className="text-text-secondary hover:text-text-primary">
-              Sample profile
-            </Link>
+            <a
+              href={ASHISH.contact.instagramUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-text-secondary hover:text-text-primary"
+            >
+              Instagram
+            </a>
           </nav>
 
           <p className="font-mono text-[10px] uppercase tracking-[0.15em] text-text-tertiary">
-            Mumbai · 2026
+            Made in Mumbai ·{" "}
+            <span className="font-devanagari text-gold" style={{ opacity: 0.7 }}>
+              स्लेट
+            </span>
           </p>
         </div>
       </Section>
     </>
-  );
-}
-
-function ShinyCard({
-  children,
-  index,
-  compact,
-}: {
-  children: ReactNode;
-  index: number;
-  compact?: boolean;
-}) {
-  const glow = index % 2 === 0 ? "rgba(201,162,75,0.16)" : "rgba(245,239,227,0.10)";
-
-  return (
-    <article
-      className={cn(
-        "group relative overflow-hidden rounded-sm bg-[#161613] transition-all duration-300 hover:-translate-y-1",
-        compact ? "p-5 md:p-6" : "p-6 md:p-8",
-      )}
-      style={{ boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.15)" }}
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute -right-16 -top-16 h-40 w-40 rounded-full opacity-0 blur-2xl transition-opacity duration-300 group-hover:opacity-100"
-        style={{ background: glow }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-        style={{
-          background:
-            "linear-gradient(115deg, transparent 0%, rgba(245,239,227,0.05) 38%, rgba(201,162,75,0.10) 46%, transparent 58%)",
-        }}
-      />
-      <div className="relative z-10">{children}</div>
-    </article>
-  );
-}
-
-function PricingCard({ card }: { card: (typeof offerCards)[number] }) {
-  return (
-    <article
-      className={cn(
-        "group relative flex min-h-[26rem] flex-col overflow-hidden rounded-sm p-6 transition-all duration-300 hover:-translate-y-1 md:p-8",
-        card.featured ? "bg-slate-cream text-text-on-light" : "bg-[#161613] text-text-primary",
-      )}
-      style={{
-        boxShadow: card.featured
-          ? "0 24px 72px -30px rgba(201,162,75,0.70)"
-          : "inset 0 0 0 1px rgba(201, 162, 75, 0.15)",
-      }}
-    >
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-x-0 top-0 h-px opacity-70"
-        style={{
-          background:
-            "linear-gradient(90deg, transparent, rgba(201,162,75,0.85), rgba(245,239,227,0.65), transparent)",
-        }}
-      />
-      <p className={cn("chip-text", card.featured ? "text-text-on-light/60" : "text-gold")}>
-        {card.name}
-      </p>
-      <p
-        className={cn(
-          "mt-5 font-display",
-          card.featured ? "text-text-on-light" : "text-text-primary",
-        )}
-        style={{
-          fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
-          fontWeight: 700,
-          fontSize: "clamp(2.5rem, 8vw, 4rem)",
-          letterSpacing: "-0.03em",
-          lineHeight: 0.95,
-        }}
-      >
-        {card.price}
-      </p>
-      <p
-        className={cn(
-          "mt-2 text-sm",
-          card.featured ? "text-text-on-light/70" : "text-text-tertiary",
-        )}
-      >
-        {card.note}
-      </p>
-      <ul className="mt-8 flex flex-1 flex-col gap-3">
-        {card.items.map((item) => (
-          <li
-            key={item}
-            className={cn(
-              "text-sm",
-              card.featured ? "text-text-on-light/78" : "text-text-secondary",
-            )}
-          >
-            <span className={card.featured ? "text-text-on-light" : "text-gold"}>•</span> {item}
-          </li>
-        ))}
-      </ul>
-      <Link
-        href={card.href}
-        className={cn(
-          "mt-8 inline-flex h-11 items-center justify-center rounded-full px-5 text-sm font-medium transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2",
-          card.featured
-            ? "bg-text-on-light text-slate-cream hover:bg-[#2a2925] focus-visible:ring-offset-slate-cream"
-            : "border border-gold/40 text-text-primary hover:bg-slate-cream hover:text-text-on-light focus-visible:ring-offset-slate-bg",
-        )}
-      >
-        {card.cta}
-      </Link>
-    </article>
   );
 }

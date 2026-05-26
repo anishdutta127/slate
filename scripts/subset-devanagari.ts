@@ -12,9 +12,20 @@ import subsetFont from "subset-font";
 // so we don't ship 124 KB through public/fonts.
 
 const PHRASES = [
-  "स्लेट", // "Slate" — wordmark, used in hero + footer
-  "के बारे में", // "About" — section header on cinematic profile
-  "संपर्क करें", // "Get in touch" — contact section header
+  "स्लेट", // wordmark (nav, footer, everywhere)
+  "के बारे में", // "About" — profile section header
+  "संपर्क करें", // "Get in touch" — profile contact section
+  "सीन शुरू यहीं से।", // hero hinglish
+  "और कैसे होना चाहिए।", // before/after H2
+  "बस तीन कदम।", // how it works H2
+  "क्लब से जुड़ो।", // step 1
+  "प्रोफाइल बनवाओ।", // step 2
+  "साथ में बढ़ो।", // step 3
+  "हर संडे।", // club section H2
+  "॥", // club bullet character
+  "मुंबई में नए हो? सही कमरे से शुरू करो।", // final CTA
+  "क्लब", // club page section label
+  "घोषणा", // manifesto page section label
 ];
 
 const SOURCE_URL =
