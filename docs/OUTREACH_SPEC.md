@@ -43,21 +43,23 @@ Managed outreach protects the ecosystem. Every message goes out reviewed, person
 
 ## Pilot pricing
 
-| Tier | Price | Scope | Notes |
-|------|-------|-------|-------|
-| **Pilot** | ₹2,999 setup + message costs | Up to 250 contacts | Manual quality check on every message. Email-first. WhatsApp only for known/consented contacts. Reply tracking included. |
-| **Scale (later)** | ₹7,999–₹14,999 per campaign | Larger lists, segmented by genre/role type | Email + WhatsApp workflow. Reporting dashboard. Follow-up automation with human review gate. |
+| Tier              | Price                        | Scope                                      | Notes                                                                                                                    |
+| ----------------- | ---------------------------- | ------------------------------------------ | ------------------------------------------------------------------------------------------------------------------------ |
+| **Pilot**         | ₹2,999 setup + message costs | Up to 250 contacts                         | Manual quality check on every message. Email-first. WhatsApp only for known/consented contacts. Reply tracking included. |
+| **Scale (later)** | ₹7,999–₹14,999 per campaign  | Larger lists, segmented by genre/role type | Email + WhatsApp workflow. Reporting dashboard. Follow-up automation with human review gate.                             |
 
 ---
 
 ## Channels
 
 ### Email (primary)
+
 - Cheaper, safer, and easier to test.
 - Use polished profile links, subject lines, and follow-up tracking.
 - Personalised — not a mail merge template. Each email references the actor's specific work and the CD's recent projects.
 
 ### WhatsApp (secondary, careful)
+
 - Use only for consented or previously-engaged contacts.
 - Messages go through the actor's own WhatsApp (via `wa.me` with prefilled text), not a Business API blast.
 - For scale: approved templates via WhatsApp Business API, with explicit opt-in and message caps per contact per month.
@@ -76,11 +78,13 @@ Managed outreach protects the ecosystem. Every message goes out reviewed, person
 ## Product surface
 
 The actor sees:
+
 - A "Talk to us" CTA on the pricing card.
 - After upgrade: a brief form in `/me` — target roles, genres, any specific CDs or production houses.
 - A feed in `/me` showing: "Email sent to [CD name] · [date]", "Opened", "Replied", "Follow-up sent".
 
 The actor never sees:
+
 - The full contact list.
 - Raw email addresses or phone numbers of CDs.
 - A "send to all" button.

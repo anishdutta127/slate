@@ -63,7 +63,7 @@ export function PhoneProductDemo({ talentSlug, photos, credits }: PhoneProductDe
                   fill
                   priority={current === 0}
                   sizes="320px"
-                  className="object-cover"
+                  className="object-contain"
                 />
               </motion.div>
             </AnimatePresence>

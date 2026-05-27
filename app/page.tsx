@@ -1,4 +1,5 @@
 import Link from "next/link";
+import Image from "next/image";
 import type { Metadata } from "next";
 import { Section } from "@/components/visual/Section";
 import { Wordmark } from "@/components/visual/Wordmark";
@@ -7,7 +8,6 @@ import { StickyNav } from "@/components/marketing/StickyNav";
 import { FloatingCards } from "@/components/marketing/FloatingCards";
 import { PhoneProductDemo } from "@/components/marketing/PhoneProductDemo";
 import { TalentImage } from "@/components/profile/TalentImage";
-import { MoodTile } from "@/components/visual/MoodTile";
 import { ASHISH } from "@/lib/talent/ashish";
 
 export const metadata: Metadata = {
@@ -41,21 +41,48 @@ const howSteps = [
   },
 ];
 
-const whatYouGet = [
+const clubHighlights = [
   {
     icon: "✦",
-    title: "A profile that opens doors",
-    body: "Photos, work links, casting view and cinematic view. One shareable link that looks professional.",
+    label: "Free",
+    title: "A professional profile",
+    body: "Casting view + cinematic view, one shareable link",
+  },
+  {
+    icon: "◆",
+    label: "Free",
+    title: "One link instead of many",
+    body: "No more Drive dumps. Everything in one clean page",
   },
   {
     icon: "◎",
-    title: "First access to working actors",
-    body: "A community where you can reach experienced actors, ask for contacts, and book practice slots.",
+    label: "Free",
+    title: "The Mumbai actors' community",
+    body: "Ask seniors for contacts, referrals, audition tips",
   },
   {
     icon: "☀",
-    title: "Your first introductions",
-    body: "We help you get seen by the right people, the right way. No cold-messaging, no spam.",
+    label: "Free",
+    title: "Your first practice session",
+    body: "With a working actor. Scene work, real feedback",
+  },
+  {
+    icon: "▲",
+    label: "Premium",
+    title: "More practice sessions",
+    body: "₹299-499 / 30 min with working actors",
+  },
+  {
+    icon: "◈",
+    label: "Premium",
+    title: "Cinematic Pro profile",
+    body: "Custom link, no watermark, see who viewed",
+  },
+  {
+    icon: "⬡",
+    label: "Premium",
+    title: "Reach recruiters directly",
+    body: "Personalised bulk WhatsApp + email to verified casting contacts",
   },
 ];
 
@@ -88,11 +115,11 @@ const paidFeatures = [
   },
 ];
 
-const clubBullets = [
-  "A vetted WhatsApp community of Mumbai actors",
-  "Book practice slots with working actors",
-  "First introductions to the right people",
-  "No fees, no gatekeeping",
+const communityUsps = [
+  { title: "Referrals from working actors", body: "The contacts that actually move careers" },
+  { title: "Practice with people who've done it", body: "Book a session, get real feedback" },
+  { title: "Group tips and audition leads", body: "A WhatsApp community that shares" },
+  { title: "You're not alone in this city", body: "Freshers and working actors, together" },
 ];
 
 /* ---------------------------------------------------------------------------
@@ -112,15 +139,15 @@ export default function HomePage() {
       <Section
         tone="dark"
         as="main"
-        className="relative overflow-hidden pt-[120px] pb-16 lg:min-h-svh lg:pb-0"
+        className="relative overflow-hidden pt-[100px] pb-16 lg:min-h-svh lg:pb-0"
       >
-        {/* Ambient glow */}
+        {/* Enhanced ambient glow */}
         <div
           aria-hidden="true"
-          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[42rem] opacity-75"
+          className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[50rem] opacity-80"
           style={{
             background:
-              "radial-gradient(circle at 18% 12%, rgba(201,162,75,0.24), transparent 32%), radial-gradient(circle at 82% 24%, rgba(245,239,227,0.12), transparent 30%)",
+              "radial-gradient(ellipse 70% 50% at 30% 8%, rgba(201,162,75,0.28), transparent 50%), radial-gradient(ellipse 60% 40% at 75% 20%, rgba(232,201,122,0.14), transparent 40%), radial-gradient(circle at 50% 0%, rgba(245,239,227,0.06), transparent 30%)",
           }}
         />
 
@@ -133,25 +160,23 @@ export default function HomePage() {
               Mumbai · The actors&apos; club
             </p>
 
-            {/* H1 */}
+            {/* H1 - outcome-driven, short */}
             <h1
               className="mt-5 font-display text-text-primary"
               style={{
                 fontWeight: 700,
-                fontSize: "clamp(40px, 7vw, 72px)",
-                lineHeight: 1.02,
-                letterSpacing: "-0.025em",
+                fontSize: "clamp(42px, 8vw, 76px)",
+                lineHeight: 1,
+                letterSpacing: "-0.03em",
               }}
             >
-              One link.
-              <br />
-              Everything a casting director needs.
+              Get seen by the right people.
             </h1>
 
             {/* Subhead */}
-            <p className="mt-6 max-w-[480px] text-lg leading-relaxed text-text-secondary">
-              Join the club and we build you a free profile that looks professional. Share one link
-              instead of a pile of Google Drive and YouTube links.
+            <p className="mt-6 max-w-[460px] text-lg leading-relaxed text-text-secondary">
+              Join the club and get a free professional profile. Share one link, not a pile of Drive
+              and YouTube links.
             </p>
 
             {/* Hinglish */}
@@ -179,14 +204,13 @@ export default function HomePage() {
               </a>
             </div>
 
-            {/* Founding note */}
-            <p className="mt-5 font-mono text-[12px] tracking-[0.04em] text-text-tertiary">
-              <span className="font-semibold text-gold">Founding batch open.</span> First 100
-              members get their profile made free.
+            {/* Micro-copy under CTA */}
+            <p className="mt-3 font-mono text-[11px] tracking-[0.04em] text-text-tertiary">
+              Free for the founding batch. No payment.
             </p>
           </div>
 
-          {/* Right column - phone as product demo */}
+          {/* Right column - phone + premium teaser */}
           <div className="relative mx-auto w-full max-w-[400px] lg:max-w-none">
             <PhoneProductDemo
               talentSlug={ASHISH.slug}
@@ -194,6 +218,29 @@ export default function HomePage() {
               credits={ASHISH.credits}
             />
             <FloatingCards />
+
+            {/* Premium teaser below phone */}
+            <div className="mx-auto mt-6 max-w-[320px]">
+              <a
+                href="#pricing"
+                className="group flex items-center gap-3 rounded-lg border border-gold/15 bg-slate-surface/50 px-4 py-3 backdrop-blur-sm transition-all duration-300 hover:border-gold/30"
+              >
+                <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-gold/10 text-sm text-gold">
+                  ⬡
+                </span>
+                <div className="min-w-0">
+                  <p className="text-[11px] font-medium text-text-primary">
+                    Reach 50 casting directors in one click
+                  </p>
+                  <p className="text-[9px] text-text-tertiary">
+                    Premium - personalised WhatsApp and email, sent for you
+                  </p>
+                </div>
+                <span className="shrink-0 text-[10px] text-gold opacity-0 transition-opacity group-hover:opacity-100">
+                  →
+                </span>
+              </a>
+            </div>
           </div>
         </div>
       </Section>
@@ -224,6 +271,22 @@ export default function HomePage() {
 
           <div className="mt-14">
             <BeforeAfterShowcase />
+          </div>
+
+          {/* Premium bulk-message one-liner */}
+          <div className="mt-12 flex items-center justify-center gap-2 rounded-sm border border-gold/15 bg-slate-surface/30 px-6 py-4 text-center">
+            <p className="text-sm text-text-secondary">
+              Sending to many people?{" "}
+              <span className="font-medium text-text-primary">
+                Slate Premium sends personalised messages to verified casting contacts, for you.
+              </span>
+            </p>
+            <a
+              href="#pricing"
+              className="shrink-0 text-sm font-medium text-gold underline-offset-4 hover:underline"
+            >
+              See how →
+            </a>
           </div>
         </div>
       </Section>
@@ -279,36 +342,54 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * WHAT YOU GET
+       * EVERYTHING IN THE CLUB
        * ============================================================ */}
-      <Section tone="dark" className="py-20 md:py-28">
+      <Section
+        tone="dark"
+        id="club"
+        className="relative py-20 md:py-28"
+        style={{
+          background: "linear-gradient(180deg, #0e0e0c 0%, #0a0a08 50%, #0e0e0c 100%)",
+        }}
+      >
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-            What you get
+            The full picture
           </p>
-          <h2 className="display-m mt-6 text-text-primary">More than a portfolio.</h2>
+          <h2 className="display-m mt-6 text-text-primary">
+            Everything in the club.{" "}
+            <span className="font-devanagari text-[0.7em] text-gold" style={{ opacity: 0.8 }}>
+              क्लब में सब कुछ।
+            </span>
+          </h2>
+          <p className="mt-5 max-w-[560px] text-text-secondary">
+            One membership. Profile, community, and access to people who can actually help. Free to
+            start, premium when you&apos;re ready.
+          </p>
 
-          <div className="mt-14 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {whatYouGet.map((tile) => (
+          <div className="mt-14 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+            {clubHighlights.map((item) => (
               <article
-                key={tile.title}
-                className="group relative overflow-hidden rounded-sm bg-[#161613] p-6 transition-all duration-300 hover:-translate-y-1 md:p-8"
+                key={item.title}
+                className="group relative overflow-hidden rounded-sm bg-[#161613] p-5 transition-all duration-300 hover:-translate-y-0.5"
                 style={{
-                  boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.15)",
+                  boxShadow: `inset 0 0 0 1px ${item.label === "Premium" ? "rgba(201, 162, 75, 0.3)" : "rgba(245, 239, 227, 0.06)"}`,
                 }}
               >
-                <div
-                  aria-hidden="true"
-                  className="pointer-events-none absolute inset-0 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
-                  style={{
-                    boxShadow: "inset 0 0 0 1px rgba(201, 162, 75, 0.35)",
-                  }}
-                />
-                <span className="inline-flex h-10 w-10 items-center justify-center rounded-full bg-gold/10 text-lg text-gold">
-                  {tile.icon}
-                </span>
-                <h3 className="display-s mt-5 text-text-primary">{tile.title}</h3>
-                <p className="mt-3 text-sm leading-relaxed text-text-secondary">{tile.body}</p>
+                <div className="flex items-center justify-between">
+                  <span className="text-lg text-gold">{item.icon}</span>
+                  <span
+                    className={`rounded-full px-2 py-0.5 font-mono text-[8px] uppercase tracking-[0.15em] ${
+                      item.label === "Premium"
+                        ? "bg-gold/15 text-gold"
+                        : "bg-white/5 text-text-tertiary"
+                    }`}
+                  >
+                    {item.label}
+                  </span>
+                </div>
+                <h3 className="mt-3 text-sm font-medium text-text-primary">{item.title}</h3>
+                <p className="mt-1 text-xs leading-relaxed text-text-tertiary">{item.body}</p>
               </article>
             ))}
           </div>
@@ -316,32 +397,25 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * MEET ASHISH - dual profile showcase
+       * MEET ASHISH
        * ============================================================ */}
-      <Section
-        tone="dark"
-        id="ashish"
-        className="py-20 md:py-28"
-        style={{
-          background: "linear-gradient(180deg, #0a0a08 0%, #0e0e0c 100%)",
-        }}
-      >
+      <Section tone="dark" id="ashish" className="py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
           <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
             One of the first
           </p>
-          <h2 className="display-m mt-6 text-text-primary">Meet Ashish. One of the first.</h2>
+          <h2 className="display-m mt-6 text-text-primary">Meet Ashish.</h2>
 
-          {/* Portrait + quote + credits */}
           <div className="mt-12 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left - framed portrait */}
-            <div className="flex flex-col items-center">
+            {/* Left - photo + community USPs */}
+            <div>
+              {/* Framed portrait - bigger, properly shown */}
               <div
-                className="relative overflow-hidden rounded-sm bg-slate-surface p-3"
+                className="relative mx-auto overflow-hidden rounded-sm bg-slate-surface p-3 lg:mx-0"
                 style={{
                   boxShadow:
                     "0 24px 64px -20px rgba(0,0,0,0.6), 0 8px 24px -12px rgba(0,0,0,0.4), inset 0 0 0 1px rgba(201,162,75,0.25)",
-                  maxWidth: 380,
+                  maxWidth: 420,
                 }}
               >
                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2px]">
@@ -349,17 +423,33 @@ export default function HomePage() {
                     photo={ASHISH.gallery[0]!}
                     talentSlug={ASHISH.slug}
                     fill
-                    sizes="(min-width: 1024px) 380px, 320px"
+                    sizes="(min-width: 1024px) 420px, 360px"
                     className="object-cover object-[center_15%]"
                   />
                 </div>
               </div>
-              <p className="mt-4 font-mono text-[10px] uppercase tracking-[0.15em] text-text-tertiary">
+              <p className="mt-4 text-center font-mono text-[10px] uppercase tracking-[0.15em] text-text-tertiary lg:text-left">
                 Ashish Rawat · slate.club/ashish
               </p>
+
+              {/* Community USPs */}
+              <div className="mt-8 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-1">
+                {communityUsps.map((usp) => (
+                  <div
+                    key={usp.title}
+                    className="flex gap-3 rounded-sm border border-border-dark bg-slate-surface/30 p-4"
+                  >
+                    <span className="mt-0.5 text-gold">॥</span>
+                    <div>
+                      <p className="text-sm font-medium text-text-primary">{usp.title}</p>
+                      <p className="mt-0.5 text-xs text-text-tertiary">{usp.body}</p>
+                    </div>
+                  </div>
+                ))}
+              </div>
             </div>
 
-            {/* Right - copy + credits */}
+            {/* Right - quote + credits + two profile views */}
             <div>
               <blockquote className="border-l-2 border-gold/60 pl-5">
                 <p
@@ -403,13 +493,12 @@ export default function HomePage() {
               </div>
 
               <p className="mt-6 max-w-[440px] text-sm leading-relaxed text-text-secondary">
-                This is what a Slate profile looks like. Every member gets two views: a fast casting
-                view for CDs, and a cinematic view for the full story.
+                Every member gets two views: a fast casting view for CDs, and a cinematic view for
+                the full story. Yours will look just as good.
               </p>
 
               {/* Two profile type preview cards */}
               <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {/* Casting view card */}
                 <Link
                   href={`/${ASHISH.slug}/c`}
                   className="group relative overflow-hidden rounded-sm border border-gold/20 bg-slate-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
@@ -423,23 +512,19 @@ export default function HomePage() {
                     </span>
                   </div>
                   <p className="text-sm font-medium text-text-primary">Fast, scannable.</p>
-                  <p className="mt-1 text-xs text-text-tertiary">
-                    What a casting director sees in two seconds.
-                  </p>
+                  <p className="mt-1 text-xs text-text-tertiary">What a CD sees in two seconds.</p>
                   <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-gold transition-colors group-hover:text-gold-soft">
-                    Open casting view
-                    <span aria-hidden="true">→</span>
+                    Open casting view →
                   </span>
                 </Link>
 
-                {/* Cinematic view card */}
                 <Link
                   href={`/${ASHISH.slug}`}
                   className="group relative overflow-hidden rounded-sm border border-gold/20 bg-slate-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
                 >
                   <div className="mb-3 flex items-center gap-2">
-                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gold/10 text-xs text-gold">
-                      🎬
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gold/10 text-[10px] text-gold">
+                      ▶
                     </span>
                     <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
                       Cinematic view
@@ -450,8 +535,7 @@ export default function HomePage() {
                     Photos, work, the whole profile.
                   </p>
                   <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-gold transition-colors group-hover:text-gold-soft">
-                    Open cinematic view
-                    <span aria-hidden="true">→</span>
+                    Open cinematic view →
                   </span>
                 </Link>
               </div>
@@ -575,65 +659,64 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * CLUB
+       * ATMOSPHERE (stage/cinema mood imagery)
        * ============================================================ */}
       <Section
         tone="dark"
-        id="club"
-        className="py-20 md:py-28"
+        className="py-16 md:py-24"
         style={{
           background: "linear-gradient(180deg, #0e0e0c 0%, #0a0a08 100%)",
         }}
       >
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-          <div className="grid grid-cols-1 gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left */}
-            <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-                The club
-              </p>
-              <h2 className="display-m mt-6 text-text-primary">
-                More than a profile. A way in.{" "}
-                <span className="font-devanagari text-[0.7em] text-gold" style={{ opacity: 0.8 }}>
-                  रास्ता यहीं से।
-                </span>
-              </h2>
-              <p className="mt-5 max-w-[440px] text-text-secondary">
-                The profile gets you noticed. The club gets you connected. A real community of
-                Mumbai actors helping each other break through.
-              </p>
-
-              <ul className="mt-8 flex flex-col gap-3">
-                {clubBullets.map((b) => (
-                  <li key={b} className="flex items-start gap-3 text-text-secondary">
-                    <span className="font-devanagari text-gold" style={{ opacity: 0.8 }}>
-                      ॥
-                    </span>
-                    {b}
-                  </li>
-                ))}
-              </ul>
-
-              <Link
-                href="/club"
-                className="mt-10 inline-flex h-12 items-center justify-center rounded-full bg-slate-cream px-7 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
-              >
-                Apply to join
-              </Link>
+          <div className="grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
+            {/* Source: Unsplash - theatre stage lights. TODO: swap for real Slate photos */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+              <Image
+                src="/atmosphere/theatre-lights.jpg"
+                alt=""
+                fill
+                className="object-cover"
+                style={{ filter: "brightness(0.5) sepia(0.3) saturate(0.8)" }}
+                sizes="(min-width: 768px) 25vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-bg/60 to-transparent" />
             </div>
-
-            {/* Right - abstract mood visuals */}
-            <div className="grid grid-cols-2 gap-3">
-              <MoodTile className="row-span-2 min-h-[280px]" />
-              <MoodTile
-                className="aspect-square"
-                gradient="radial-gradient(ellipse at 60% 40%, rgba(232,201,122,0.12) 0%, transparent 60%), linear-gradient(140deg, #161613, #0e0e0c)"
+            {/* Source: Unsplash - stage spotlight. TODO: swap for real Slate photos */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+              <Image
+                src="/atmosphere/stage-spotlight.jpg"
+                alt=""
+                fill
+                className="object-cover"
+                style={{ filter: "brightness(0.45) sepia(0.25) saturate(0.7)" }}
+                sizes="(min-width: 768px) 25vw, 50vw"
               />
-              <MoodTile
-                className="aspect-square"
-                glow={false}
-                gradient="linear-gradient(160deg, rgba(201,162,75,0.08), #0e0e0c)"
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-bg/60 to-transparent" />
+            </div>
+            {/* Source: Unsplash - dark cinema. TODO: swap for real Slate photos */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+              <Image
+                src="/atmosphere/dark-cinema.jpg"
+                alt=""
+                fill
+                className="object-cover"
+                style={{ filter: "brightness(0.5) sepia(0.35) saturate(0.6)" }}
+                sizes="(min-width: 768px) 25vw, 50vw"
               />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-bg/60 to-transparent" />
+            </div>
+            {/* Source: Unsplash - Mumbai night. TODO: swap for real Slate photos */}
+            <div className="relative aspect-[4/3] overflow-hidden rounded-sm">
+              <Image
+                src="/atmosphere/mumbai-night.jpg"
+                alt=""
+                fill
+                className="object-cover"
+                style={{ filter: "brightness(0.45) sepia(0.2) saturate(0.7)" }}
+                sizes="(min-width: 768px) 25vw, 50vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-slate-bg/60 to-transparent" />
             </div>
           </div>
         </div>
@@ -656,20 +739,20 @@ export default function HomePage() {
               lineHeight: 1,
             }}
           >
-            Come find your room.
+            Find your people.
           </h2>
           <p className="mx-auto mt-6 max-w-[42ch] text-text-secondary">
-            Mumbai is hard alone. It&apos;s different with a club behind you. Join the founding
-            batch. Your profile, your community, your first break.
+            Mumbai is hard alone. The club has your back. Join the founding batch. Your profile,
+            your community, your first break.
           </p>
           <Link
             href="/signup"
             className="mt-10 inline-flex h-14 items-center justify-center rounded-full bg-slate-cream px-10 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
           >
-            Join the Slate club, free
+            Join the club, free
           </Link>
           <p className="mt-6 font-devanagari text-[15px] text-gold" style={{ opacity: 0.8 }}>
-            मुंबई में नए हो? सही कमरे से शुरू करो।
+            मुंबई में नए हो? सही लोग यहीं मिलेंगे।
           </p>
         </div>
       </Section>

@@ -18,10 +18,10 @@ export function FloatingCards() {
             boxShadow: "0 16px 48px -16px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(245,239,227,0.08)",
           }}
         >
-          <span className="text-sm text-gold">✦</span>
+          <span className="text-sm text-gold">⚡</span>
           <div>
-            <p className="text-[12px] font-medium text-text-primary">Free profile, made for you</p>
-            <p className="text-[10px] text-text-tertiary">No design skills needed</p>
+            <p className="text-[12px] font-medium text-text-primary">Fast for casting directors</p>
+            <p className="text-[10px] text-text-tertiary">Everything they need in 2 seconds</p>
           </div>
         </div>
       </motion.div>
@@ -37,10 +37,10 @@ export function FloatingCards() {
             boxShadow: "0 16px 48px -16px rgba(0,0,0,0.7), inset 0 0 0 1px rgba(245,239,227,0.08)",
           }}
         >
-          <span className="text-sm text-gold">☀</span>
+          <span className="text-sm text-gold">✦</span>
           <div>
-            <p className="text-[12px] font-medium text-text-primary">First access</p>
-            <p className="text-[10px] text-text-tertiary">Meet working actors</p>
+            <p className="text-[12px] font-medium text-text-primary">One link, not ten</p>
+            <p className="text-[10px] text-text-tertiary">Looks professionally made</p>
           </div>
         </div>
       </motion.div>

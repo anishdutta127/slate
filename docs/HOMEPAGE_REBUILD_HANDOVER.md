@@ -23,23 +23,27 @@ Replace the current homepage. It is a long-scroll, community-first landing. Dark
 Build these sections in order. Each section is full-width background, content constrained to `max-w-[1200px]` centered with `px-6 md:px-12`.
 
 ### 1.1 — Sticky nav
+
 - Fixed top, `backdrop-blur`, transparent until scrolled 20px then a hairline bottom border appears.
 - Left: wordmark `Slate.` (Fraunces 600, gold dot) followed by small Devanagari `स्लेट` in gold at ~13px, 0.7 opacity.
 - Center (hidden below md): links — "How it works" (#how), "The Club" (#club), "Pricing" (#pricing), "A profile" (#ashish).
 - Right: primary pill button "Join the club" → links to `/signup` (or `/club` if signup isn't ready; your call, but make it consistent).
 
 ### 1.2 — Hero (the desktop fix)
+
 Two-column grid on `lg:` (1.1fr / 0.9fr), single column stacked on mobile. `min-h-[100svh]`, vertically centered, top padding to clear the nav (~120px).
 
 **Left column:**
+
 - Eyebrow (mono, gold, uppercase, 0.2em tracking, with a short gold rule before it): "Mumbai · The actors' club"
-- H1 (Fraunces 600, clamp(40px, 7vw, 76px), line-height 1.02, letter-spacing -0.025em): **"Your first profile should feel like your *first break.*"** — the words "first break" in italic + gold-soft color.
+- H1 (Fraunces 600, clamp(40px, 7vw, 76px), line-height 1.02, letter-spacing -0.025em): **"Your first profile should feel like your _first break._"** — the words "first break" in italic + gold-soft color.
 - Subhead (Inter Tight, ~18px, text-secondary, max-w-[480px]): "Join the Slate actors' club in Mumbai. Get a free, casting-ready profile, practise every week with other actors, and find your way into the right rooms."
-- Hinglish line (italic, text-tertiary, ~15px): Devanagari "सीन शुरू यहीं से।" in gold (not italic) + "  The scene starts here." in muted.
+- Hinglish line (italic, text-tertiary, ~15px): Devanagari "सीन शुरू यहीं से।" in gold (not italic) + " The scene starts here." in muted.
 - Two CTAs: primary "Join the club — it's free" (cream pill) → /signup; ghost "See a profile →" → #ashish.
 - Founding note (mono, 12px, text-tertiary): "**Founding batch open.** First 100 members get their profile made for free." — "Founding batch open." in gold.
 
 **Right column — the phone mockup (MUST be fully visible above the fold at 1440px, not cropped):**
+
 - A phone frame (~300px wide, aspect 9/19.5, surface bg, 40px radius, hairline border, cinematic shadow, 10px padding).
 - Inside: Ashish's hero photo (`02-headshot-blazer`, use the optimized version in `/public/talent/ashish/`) filling top 62%, gradient fade to bg at bottom, then overlaid: mono gold chip "MUMBAI · ACTOR", name "Ashish Rawat" (Fraunces 600, 26px), stats line (mono, 10px) "Plays 22-28 · 5'8" · Hindi & English".
 - Two floating cards (absolute positioned, surface-2 bg, hairline border, subtle shadow, gentle infinite float animation via Motion — respect prefers-reduced-motion):
@@ -48,7 +52,9 @@ Two-column grid on `lg:` (1.1fr / 0.9fr), single column stacked on mobile. `min-
 - On mobile the floating cards should pull in close to the phone edges so they don't cause horizontal scroll. Test: NO horizontal scroll at any width.
 
 ### 1.3 — Before/After (the showpiece — most important section)
+
 Background: subtle gradient dark → near-black.
+
 - Section label (mono gold): "The problem"
 - H2: "How you apply now." + small Devanagari "और कैसे होना चाहिए।" in gold
 - Intro: "Right now your work lives in a messy WhatsApp message. Drive links, YouTube dumps, a wall of text. Casting people scroll past it in two seconds. Slate fixes the thing they actually see."
@@ -59,6 +65,7 @@ Background: subtle gradient dark → near-black.
 This section sells the product. Make the contrast visceral — the left genuinely ugly, the right genuinely beautiful.
 
 ### 1.4 — How it works (`id="how"`)
+
 - Label "How it works", H2 "Three steps." + Devanagari "बस तीन कदम।"
 - Three cards (grid-cols-3 on md:, stacked mobile), each with a large faded gold serif number, a Fraunces title, a description, and a small Devanagari line:
   1. "Join the club" / "Apply to the Mumbai actors' club. We welcome freshers. No CV, no fees, no gatekeeping." / "क्लब से जुड़ो।"
@@ -67,6 +74,7 @@ This section sells the product. Make the contrast visceral — the left genuinel
 - Cards lift on hover (translateY -4px, border brightens).
 
 ### 1.5 — What you get
+
 - Label "What you get", H2 "More than a portfolio."
 - Three tiles (grid-cols-3 md:): each with a gold icon chip, Fraunces title, description:
   1. "A profile that opens doors" — "Photos, intro video, work links, and a clean casting view — all on one cinematic page that looks ready to forward."
@@ -74,13 +82,16 @@ This section sells the product. Make the contrast visceral — the left genuinel
   3. "Weekly practice" — "Slate Sundays in Aram Nagar. Scene work, cold reads, feedback from people who get it. Free, every week."
 
 ### 1.6 — Ashish showcase (`id="ashish"`)
+
 Background: near-black → bg gradient.
+
 - Two columns (lg:). Left: the framed-portrait treatment (the V3 design already chosen for the cinematic hero — gold 1px border, padding, surface bg, cinematic shadow) showing Ashish's photo, with a mono caption "Ashish Rawat · slate.club/ashish".
 - Right: label "One of the first", H2 "Meet Ashish.", a Fraunces italic pull-quote with a gold left border: "Six years on stage and screen. Built for ad films, ready for the long form.", then his credit pills (Honda, Cipla, Zepto, Nilkamal, Smotect) as mono outlined chips, then a line "This is what a Slate profile looks like. Yours will look just as good — whether you have six credits or none yet.", then a ghost button "See his full profile →" linking to `/ashish`.
 
 **IMPORTANT — make the credit pills real:** the founder specifically wants the demo to show that work links are accessible. So in this showcase, the credit pills should be actual links — tapping "Honda" opens his Honda credit URL in a new tab. Pull the URLs from `lib/talent/ashish.ts`. Add a subtle external-link indicator (small arrow on hover) so it's clear they're tappable. This previews the "your links are one tap away" value right on the homepage.
 
 ### 1.7 — Pricing (`id="pricing"`)
+
 - Label "Free to join", H2 "Start free. Grow when you're ready.", intro "The club and your first profile are free for the founding batch. When you want more reach, we have tools that do the work for you."
 - Two cards side by side (stack mobile):
   - **Free card ("The Club"):** "Free · founding batch". Desc "Everything you need to start showing up like a professional." List (gold checkmarks): casting-ready profile page / clean WhatsApp share with preview / the Mumbai actors' WhatsApp community / weekly Slate Sunday practice / ask seniors for contacts & advice. CTA primary full-width "Join the club" → /signup.
@@ -88,15 +99,20 @@ Background: near-black → bg gradient.
 - Below both cards, centered note (mono): "Outreach is **managed and respectful**. We never blast. We reach the right people, on your behalf, with messages worth reading."
 
 ### 1.8 — Club (`id="club"`)
+
 Background: bg → near-black gradient.
+
 - Two columns. Left: label "Slate Sundays", H2 "The club meets every week." + Devanagari "हर संडे।", intro about Aram Nagar weekly meetups, a list with Devanagari "॥" bullets (weekly scene practice & cold reads / vetted WhatsApp community / monthly Slate Nights with working actors & CDs / no fees, no gatekeeping), primary CTA "Apply to join" → /club.
 - Right: a small photo grid (placeholder — use Ashish's other 3 photos for now, real meetup photos later). One tall + two square, rounded, hairline borders.
 
 ### 1.9 — Final CTA (`id="join"`)
+
 Centered, generous padding.
+
 - Label "Are you an actor?", H2 (large) "Come find your room.", intro "Mumbai is hard alone. It's different with a club behind you. Join the founding batch — your profile, your community, your first break.", big primary CTA "Join the Slate club — free →" → /signup, and below it a Devanagari line in gold "मुंबई में नए हो? सही कमरे से शुरू करो।"
 
 ### 1.10 — Footer
+
 - Wordmark (Slate. + स्लेट), links (How it works, The Club, Pricing, Manifesto, Instagram), and "Made in Mumbai · स्लेट" in mono with the Devanagari in gold.
 
 ---
@@ -104,6 +120,7 @@ Centered, generous padding.
 ## PART 2 — DESKTOP LAYOUT CORRECTNESS (the bug we're fixing)
 
 The current homepage fails on desktop. Acceptance criteria for the rebuild:
+
 - At 1440px width: hero is a balanced two-column layout, phone mockup fully visible above the fold, no empty dead space, headline sized for its column not the full viewport.
 - At 375px width: everything stacks cleanly, no horizontal scroll anywhere on the page, phone mockup and floating cards fit.
 - At 768px and 1024px: graceful intermediate layouts, no broken grids.

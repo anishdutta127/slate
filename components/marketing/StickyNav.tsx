@@ -9,7 +9,7 @@ export function StickyNav() {
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 20);
+    const onScroll = () => setScrolled(window.scrollY > 80);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
@@ -18,13 +18,13 @@ export function StickyNav() {
   return (
     <header
       className={cn(
-        "fixed inset-x-0 top-0 z-50 backdrop-blur-md transition-[border-color,background-color] duration-300",
+        "fixed inset-x-0 top-0 z-50 transition-all duration-300",
         scrolled
-          ? "border-b border-border-dark bg-slate-bg/80"
+          ? "border-b border-border-dark bg-slate-bg/80 backdrop-blur-md"
           : "border-b border-transparent bg-transparent",
       )}
     >
-      <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-3 md:px-12">
+      <nav className="mx-auto flex max-w-[1200px] items-center justify-between px-6 py-2.5 md:px-12">
         <Link href="/" className="flex items-baseline gap-2">
           <Wordmark size="sm" />
           <span className="font-devanagari text-[13px] text-gold" style={{ opacity: 0.7 }}>

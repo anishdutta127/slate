@@ -4,6 +4,8 @@ import Link from "next/link";
 import ReactDOM from "react-dom";
 import { Section } from "@/components/visual/Section";
 import { Divider } from "@/components/visual/Divider";
+import { StageGlow } from "@/components/visual/StageGlow";
+import { GrainField } from "@/components/visual/GrainField";
 import { CinematicHero } from "@/components/profile/CinematicHero";
 import { CinematicSlideshow } from "@/components/profile/CinematicSlideshow";
 import { CreditCard } from "@/components/profile/CreditCard";
@@ -55,9 +57,14 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
 
   return (
     <>
-      <CinematicHero talent={t} />
+      {/* Enhanced CinematicHero with stage glow */}
+      <div className="relative">
+        <div aria-hidden="true" className="pointer-events-none absolute inset-0 z-0">
+          <StageGlow className="h-full w-full" />
+        </div>
+        <CinematicHero talent={t} />
+      </div>
 
-      {/* Sentinel: when this scrolls offscreen, the mobile sticky contact bar appears */}
       <div id="post-hero-sentinel" aria-hidden="true" className="h-px" />
 
       {/* ============ 01 - SHOWREEL ============ */}
@@ -100,9 +107,10 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
 
-      {/* ============ 02 - SELECTED WORK ============ */}
-      <Section tone="dark" className="px-6 py-24 md:px-12 md:py-32">
-        <div className="mx-auto max-w-[1120px]">
+      {/* ============ 02 - SELECTED WORK (improved credit cards) ============ */}
+      <Section tone="dark" className="relative px-6 py-24 md:px-12 md:py-32">
+        <GrainField gradient="radial-gradient(ellipse at 50% 20%, rgba(201,162,75,0.04) 0%, transparent 60%)" />
+        <div className="relative mx-auto max-w-[1120px]">
           <SectionLabel number="02" label="Selected work" />
           <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             Six brands. One year.
@@ -125,7 +133,7 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         <div className="mx-auto max-w-[800px]">
           <SectionLabel number="03" label="Portfolio" />
           <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
-            More of him.
+            The lookbook.
           </h2>
 
           <div className="mt-12">
@@ -134,14 +142,54 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
 
-      {/* ============ 04 - ABOUT ============ */}
+      {/* ============ 04 - IN THEIR WORDS (director quotes) ============ */}
+      <Section tone="dark" className="relative px-6 py-24 md:px-12 md:py-32">
+        <StageGlow className="pointer-events-none absolute inset-0" />
+        <div className="relative mx-auto max-w-[800px] text-center">
+          <SectionLabel number="04" label="In their words" devanagari="उनकी ज़ुबानी" />
+          <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
+            What they say.
+          </h2>
+
+          <div className="mt-16 space-y-12">
+            {/* TODO: real director quote - collect from Ashish */}
+            <blockquote className="border-l-2 border-gold/40 pl-6 text-left">
+              <p className="text-lg italic leading-relaxed text-text-secondary">
+                &ldquo;Ashish walks in and the room already trusts him. That face sells honesty. Put
+                him in front of a family and he belongs there. Put him in a confrontation scene and
+                he holds.&rdquo;
+              </p>
+              <cite className="mt-4 block font-mono text-xs uppercase tracking-[0.15em] text-text-tertiary not-italic">
+                {/* TODO: real director name */}
+                Director, Honda TVC
+              </cite>
+            </blockquote>
+
+            {/* TODO: real director quote */}
+            <blockquote className="border-l-2 border-gold/40 pl-6 text-left">
+              <p className="text-lg italic leading-relaxed text-text-secondary">
+                &ldquo;Very few actors this early in their career have this kind of range. He
+                switches from the everyday guy to something more intense and you believe
+                both.&rdquo;
+              </p>
+              <cite className="mt-4 block font-mono text-xs uppercase tracking-[0.15em] text-text-tertiary not-italic">
+                {/* TODO: real CD name */}
+                Casting Director, Cipla TVC
+              </cite>
+            </blockquote>
+          </div>
+        </div>
+      </Section>
+
+      {/* ============ 05 - BEYOND THE WORK ============ */}
       <Section tone="dark" className="px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[680px] text-center">
-          <SectionLabel number="04" label="About" devanagari="के बारे में" />
+          <SectionLabel number="05" label="Beyond the work" devanagari="काम से परे" />
           <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             The actor.
           </h2>
 
+          {/* TODO: replace with Ashish's own words */}
           <p
             className="mt-10 text-balance font-display italic text-text-secondary"
             style={{
@@ -175,13 +223,26 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
               <dd className="mt-1 text-base text-text-primary">{t.city}</dd>
             </div>
           </dl>
+
+          {/* TODO: fill in what Ashish wants to play next */}
+          <div className="mt-12 rounded-sm border border-gold/15 bg-slate-surface/30 p-6">
+            <p className="font-mono text-[10px] uppercase tracking-[0.18em] text-gold">
+              What he wants to play next
+            </p>
+            <p className="mt-3 text-sm leading-relaxed text-text-secondary">
+              {/* TODO: real answer from Ashish */}
+              Looking for his first long-format role. Open to OTT series, independent film, and
+              theatre. Comfortable with Hindi and English scripts. Drawn to layered characters,
+              human drama, and stories rooted in real India.
+            </p>
+          </div>
         </div>
       </Section>
 
-      {/* ============ 05 - GET IN TOUCH ============ */}
+      {/* ============ 06 - GET IN TOUCH ============ */}
       <Section tone="dark" as="section" className="px-6 py-24 md:px-12 md:py-32">
         <div id="contact" className="mx-auto max-w-[680px] text-center">
-          <SectionLabel number="05" label="Get in touch" devanagari="संपर्क करें" />
+          <SectionLabel number="06" label="Get in touch" devanagari="संपर्क करें" />
           <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             He&apos;s ready when you are.
           </h2>
