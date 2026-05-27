@@ -20,8 +20,8 @@ export function FloatingCards() {
         >
           <span className="text-sm text-gold">✦</span>
           <div>
-            <p className="text-[12px] font-medium text-text-primary">Free CD-ready profile</p>
-            <p className="text-[10px] text-text-tertiary">Made for you</p>
+            <p className="text-[12px] font-medium text-text-primary">Free profile, made for you</p>
+            <p className="text-[10px] text-text-tertiary">No design skills needed</p>
           </div>
         </div>
       </motion.div>
@@ -39,8 +39,8 @@ export function FloatingCards() {
         >
           <span className="text-sm text-gold">☀</span>
           <div>
-            <p className="text-[12px] font-medium text-text-primary">Slate Sundays</p>
-            <p className="text-[10px] text-text-tertiary">Aram Nagar · weekly</p>
+            <p className="text-[12px] font-medium text-text-primary">First access</p>
+            <p className="text-[10px] text-text-tertiary">Meet working actors</p>
           </div>
         </div>
       </motion.div>

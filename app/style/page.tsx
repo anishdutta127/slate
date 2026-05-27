@@ -48,14 +48,14 @@ export default function StylePage() {
             <p className="display-m text-text-primary">Display M</p>
             <p className="display-s text-text-primary">Display S</p>
             <p className="body-l text-text-primary">
-              Body L — Mumbai-based actor with six years on stage and screen.
+              Body L - Mumbai-based actor with six years on stage and screen.
             </p>
             <p className="body-m text-text-secondary">
-              Body M — Faces you have seen in Honda, Cipla, Zepto, Nilkamal, and Smotect
+              Body M - Faces you have seen in Honda, Cipla, Zepto, Nilkamal, and Smotect
               commercials.
             </p>
             <p className="body-s text-text-tertiary">
-              Body S — North Indian, comfortable in Hindi and English.
+              Body S - North Indian, comfortable in Hindi and English.
             </p>
             <p className="chip-text text-text-secondary">
               CHIP TEXT · 5&apos;8&quot; · 22-28 · HINDI · ENGLISH
@@ -121,14 +121,14 @@ export default function StylePage() {
             <p className="display-m text-text-on-light">Display M</p>
             <p className="display-s text-text-on-light">Display S</p>
             <p className="body-l text-text-on-light">
-              Body L — Mumbai-based actor with six years on stage and screen.
+              Body L - Mumbai-based actor with six years on stage and screen.
             </p>
             <p className="body-m text-text-on-light/80">
-              Body M — Faces you have seen in Honda, Cipla, Zepto, Nilkamal, and Smotect
+              Body M - Faces you have seen in Honda, Cipla, Zepto, Nilkamal, and Smotect
               commercials.
             </p>
             <p className="body-s text-text-on-light/60">
-              Body S — North Indian, comfortable in Hindi and English.
+              Body S - North Indian, comfortable in Hindi and English.
             </p>
             <p className="chip-text text-text-on-light/70">
               CHIP TEXT · 5&apos;8&quot; · 22-28 · HINDI · ENGLISH

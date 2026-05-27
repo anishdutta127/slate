@@ -1,18 +1,19 @@
 import Link from "next/link";
-import Image from "next/image";
 import type { Metadata } from "next";
 import { Section } from "@/components/visual/Section";
 import { Wordmark } from "@/components/visual/Wordmark";
 import { BeforeAfterShowcase } from "@/components/marketing/BeforeAfterShowcase";
 import { StickyNav } from "@/components/marketing/StickyNav";
 import { FloatingCards } from "@/components/marketing/FloatingCards";
+import { PhoneProductDemo } from "@/components/marketing/PhoneProductDemo";
 import { TalentImage } from "@/components/profile/TalentImage";
+import { MoodTile } from "@/components/visual/MoodTile";
 import { ASHISH } from "@/lib/talent/ashish";
 
 export const metadata: Metadata = {
   title: "Slate, the actors' club of Mumbai",
   description:
-    "Join the Mumbai actors' club, get your casting profile made, send a beautiful link on WhatsApp, and practise with other freshers every week.",
+    "Join the Mumbai actors' club, get a casting-ready profile, and share one professional link on WhatsApp.",
 };
 
 /* ---------------------------------------------------------------------------
@@ -23,7 +24,7 @@ const howSteps = [
   {
     num: "1",
     title: "Join the club",
-    body: "Apply to the Mumbai actors' club. We welcome freshers. No CV, no fees, no gatekeeping.",
+    body: "Apply to the Mumbai actors' club. Freshers welcome. No CV, no fees.",
     hindi: "क्लब से जुड़ो।",
   },
   {
@@ -34,9 +35,9 @@ const howSteps = [
   },
   {
     num: "3",
-    title: "Grow together",
-    body: "Practise every Sunday, ask seniors for contacts and advice, send your link like a pro.",
-    hindi: "साथ में बढ़ो।",
+    title: "Get access",
+    body: "Book a practice slot with a working actor, get your first introductions, share your link like a pro.",
+    hindi: "आगे बढ़ो।",
   },
 ];
 
@@ -44,45 +45,53 @@ const whatYouGet = [
   {
     icon: "✦",
     title: "A profile that opens doors",
-    body: "Photos, intro video, work links, and a clean casting view — all on one cinematic page that looks ready to forward.",
+    body: "Photos, work links, casting view and cinematic view. One shareable link that looks professional.",
   },
   {
     icon: "◎",
-    title: "A real community",
-    body: "A vetted WhatsApp circle of Mumbai actors. Ask for contacts, audition leads, honest advice. You're not alone in this city anymore.",
+    title: "First access to working actors",
+    body: "A community where you can reach experienced actors, ask for contacts, and book practice slots.",
   },
   {
     icon: "☀",
-    title: "Weekly practice",
-    body: "Slate Sundays in Aram Nagar. Scene work, cold reads, feedback from people who get it. Free, every week.",
+    title: "Your first introductions",
+    body: "We help you get seen by the right people, the right way. No cold-messaging, no spam.",
   },
 ];
 
 const freeFeatures = [
   "Casting-ready profile page",
+  "Both casting + cinematic views",
   "Clean WhatsApp share with preview",
-  "The Mumbai actors' WhatsApp community",
-  "Weekly Slate Sunday practice",
-  "Ask seniors for contacts & advice",
+  "The Mumbai actors' community",
+  "Ask seniors for contacts and advice",
+  "Your first practice slot free",
 ];
 
-const proFeatures = [
-  "The full cinematic profile page",
-  "Custom link & no Slate watermark",
-  "See who opened your profile",
-];
-
-const proHighlight = "Managed outreach — verified casting contacts";
-
-const proExtras = [
-  "Personalised email + WhatsApp, reviewed by us",
-  "Reply tracking & follow-up help",
+const paidFeatures = [
+  {
+    name: "Practice slots",
+    price: "From ₹299",
+    description: "30 min with a working actor. First one free.",
+  },
+  {
+    name: "Cinematic Pro",
+    price: "₹99",
+    description: "Custom link, no watermark, see who opened your profile.",
+  },
+  {
+    name: "Reach recruiters directly",
+    price: "Coming soon",
+    badge: "Premium",
+    description:
+      "Personalised WhatsApp and email to verified casting contacts, sent on your behalf. Reviewed, never spam.",
+  },
 ];
 
 const clubBullets = [
-  "Weekly scene practice & cold reads",
-  "Vetted WhatsApp community",
-  "Monthly Slate Nights with working actors & CDs",
+  "A vetted WhatsApp community of Mumbai actors",
+  "Book practice slots with working actors",
+  "First introductions to the right people",
   "No fees, no gatekeeping",
 ];
 
@@ -91,17 +100,14 @@ const clubBullets = [
  * --------------------------------------------------------------------------- */
 
 export default function HomePage() {
-  // Non-null: these are static data entries we control (lib/talent/ashish.ts)
-  const blazerPhoto = ASHISH.gallery[0]!; // 02-headshot-blazer
-  const fullbodyPhoto = ASHISH.gallery[1]!; // 01-fullbody-white-shirt
-  const seatedPhoto = ASHISH.gallery[2]!; // 04-seated-mint-shirt
+  const allPhotos = [ASHISH.hero, ...ASHISH.gallery];
 
   return (
     <>
       <StickyNav />
 
       {/* ============================================================
-       * 1.2 — Hero
+       * HERO
        * ============================================================ */}
       <Section
         tone="dark"
@@ -131,32 +137,30 @@ export default function HomePage() {
             <h1
               className="mt-5 font-display text-text-primary"
               style={{
-                fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
-                fontWeight: 600,
-                fontSize: "clamp(40px, 7vw, 76px)",
+                fontWeight: 700,
+                fontSize: "clamp(40px, 7vw, 72px)",
                 lineHeight: 1.02,
                 letterSpacing: "-0.025em",
               }}
             >
-              Your first profile should feel like your{" "}
-              <em className="text-gold-soft" style={{ fontStyle: "italic" }}>
-                first break.
-              </em>
+              One link.
+              <br />
+              Everything a casting director needs.
             </h1>
 
             {/* Subhead */}
             <p className="mt-6 max-w-[480px] text-lg leading-relaxed text-text-secondary">
-              Join the Slate actors&apos; club in Mumbai. Get a free, casting-ready profile,
-              practise every week with other actors, and find your way into the right rooms.
+              Join the club and we build you a free profile that looks professional. Share one link
+              instead of a pile of Google Drive and YouTube links.
             </p>
 
             {/* Hinglish */}
             <p className="mt-4 text-[15px] text-text-tertiary">
               <span className="font-devanagari text-gold" style={{ fontStyle: "normal" }}>
-                सीन शुरू यहीं से।
+                एक लिंक, बस।
               </span>
               {"  "}
-              <span className="italic">The scene starts here.</span>
+              <span className="italic">One link, that&apos;s all.</span>
             </p>
 
             {/* CTAs */}
@@ -165,91 +169,37 @@ export default function HomePage() {
                 href="/signup"
                 className="inline-flex h-12 items-center justify-center rounded-full bg-slate-cream px-7 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
               >
-                Join the club — it&apos;s free
+                Join the club, free
               </Link>
               <a
-                href="#ashish"
+                href="#how"
                 className="inline-flex h-12 items-center justify-center rounded-full border border-gold/35 px-7 text-base font-medium text-text-primary transition-all duration-300 hover:-translate-y-0.5 hover:border-gold/60 hover:bg-slate-surface focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
               >
-                See a profile →
+                See how it works
               </a>
             </div>
 
             {/* Founding note */}
             <p className="mt-5 font-mono text-[12px] tracking-[0.04em] text-text-tertiary">
               <span className="font-semibold text-gold">Founding batch open.</span> First 100
-              members get their profile made for free.
+              members get their profile made free.
             </p>
           </div>
 
-          {/* Right column — phone mockup */}
+          {/* Right column - phone as product demo */}
           <div className="relative mx-auto w-full max-w-[400px] lg:max-w-none">
-            <div className="relative mx-auto w-[260px] sm:w-[280px] lg:w-[300px]">
-              {/* Phone frame */}
-              <div
-                className="relative overflow-hidden rounded-[2.5rem] bg-slate-surface p-2.5"
-                style={{
-                  boxShadow:
-                    "0 30px 80px -30px rgba(0,0,0,0.8), inset 0 0 0 1px rgba(245,239,227,0.08)",
-                }}
-              >
-                {/* Speaker pill */}
-                <div
-                  aria-hidden="true"
-                  className="absolute left-1/2 top-2 z-10 h-1 w-12 -translate-x-1/2 rounded-full bg-[#1a1916]"
-                />
-                {/* Screen */}
-                <div
-                  className="relative overflow-hidden rounded-[2rem]"
-                  style={{ aspectRatio: "9/19.5" }}
-                >
-                  {/* Photo */}
-                  <TalentImage
-                    photo={blazerPhoto}
-                    talentSlug={ASHISH.slug}
-                    priority
-                    fill
-                    sizes="300px"
-                    className="object-cover object-[center_15%]"
-                  />
-                  {/* Gradient fade */}
-                  <div
-                    aria-hidden="true"
-                    className="absolute inset-0"
-                    style={{
-                      background:
-                        "linear-gradient(to bottom, transparent 45%, rgba(22,22,19,0.6) 65%, #161613 88%)",
-                    }}
-                  />
-                  {/* Text overlay */}
-                  <div className="absolute inset-x-0 bottom-0 px-5 pb-6">
-                    <p className="font-mono text-[9px] uppercase tracking-[0.15em] text-gold">
-                      Mumbai · Actor
-                    </p>
-                    <p
-                      className="mt-1 font-display text-[26px] font-semibold leading-tight text-text-primary"
-                      style={{
-                        fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1',
-                      }}
-                    >
-                      Ashish Rawat
-                    </p>
-                    <p className="mt-1 font-mono text-[10px] tracking-wide text-text-secondary">
-                      Plays 22-28 · 5&apos;8&quot; · Hindi &amp; English
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              {/* Floating cards */}
-              <FloatingCards />
-            </div>
+            <PhoneProductDemo
+              talentSlug={ASHISH.slug}
+              photos={allPhotos}
+              credits={ASHISH.credits}
+            />
+            <FloatingCards />
           </div>
         </div>
       </Section>
 
       {/* ============================================================
-       * 1.3 — Before / After
+       * BEFORE / AFTER
        * ============================================================ */}
       <Section
         tone="dark"
@@ -279,7 +229,7 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * 1.4 — How it works
+       * HOW IT WORKS
        * ============================================================ */}
       <Section tone="dark" id="how" className="py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
@@ -312,7 +262,6 @@ export default function HomePage() {
                 <span
                   className="font-display text-gold/20"
                   style={{
-                    fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                     fontWeight: 700,
                     fontSize: "4.5rem",
                     lineHeight: 1,
@@ -330,7 +279,7 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * 1.5 — What you get
+       * WHAT YOU GET
        * ============================================================ */}
       <Section tone="dark" className="py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
@@ -367,7 +316,7 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * 1.6 — Ashish showcase
+       * MEET ASHISH - dual profile showcase
        * ============================================================ */}
       <Section
         tone="dark"
@@ -378,8 +327,14 @@ export default function HomePage() {
         }}
       >
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
-          <div className="grid grid-cols-1 items-center gap-12 lg:grid-cols-2 lg:gap-16">
-            {/* Left — framed portrait */}
+          <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
+            One of the first
+          </p>
+          <h2 className="display-m mt-6 text-text-primary">Meet Ashish. One of the first.</h2>
+
+          {/* Portrait + quote + credits */}
+          <div className="mt-12 grid grid-cols-1 items-start gap-12 lg:grid-cols-2 lg:gap-16">
+            {/* Left - framed portrait */}
             <div className="flex flex-col items-center">
               <div
                 className="relative overflow-hidden rounded-sm bg-slate-surface p-3"
@@ -391,7 +346,7 @@ export default function HomePage() {
               >
                 <div className="relative aspect-[3/4] w-full overflow-hidden rounded-[2px]">
                   <TalentImage
-                    photo={blazerPhoto}
+                    photo={ASHISH.gallery[0]!}
                     talentSlug={ASHISH.slug}
                     fill
                     sizes="(min-width: 1024px) 380px, 320px"
@@ -404,15 +359,9 @@ export default function HomePage() {
               </p>
             </div>
 
-            {/* Right — copy + credits */}
+            {/* Right - copy + credits */}
             <div>
-              <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-                One of the first
-              </p>
-              <h2 className="display-m mt-6 text-text-primary">Meet Ashish.</h2>
-
-              {/* Pull-quote */}
-              <blockquote className="mt-6 border-l-2 border-gold/60 pl-5">
+              <blockquote className="border-l-2 border-gold/60 pl-5">
                 <p
                   className="font-display italic text-text-primary"
                   style={{
@@ -425,7 +374,7 @@ export default function HomePage() {
                 </p>
               </blockquote>
 
-              {/* Credit pills — linked */}
+              {/* Credit pills */}
               <div className="mt-8 flex flex-wrap gap-2">
                 {ASHISH.credits.map((credit) => (
                   <a
@@ -454,23 +403,65 @@ export default function HomePage() {
               </div>
 
               <p className="mt-6 max-w-[440px] text-sm leading-relaxed text-text-secondary">
-                This is what a Slate profile looks like. Yours will look just as good — whether you
-                have six credits or none yet.
+                This is what a Slate profile looks like. Every member gets two views: a fast casting
+                view for CDs, and a cinematic view for the full story.
               </p>
 
-              <Link
-                href={`/${ASHISH.slug}`}
-                className="mt-8 inline-flex h-12 items-center justify-center rounded-full border border-gold/40 px-6 text-base font-medium text-text-primary transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream hover:text-text-on-light focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
-              >
-                See his full profile →
-              </Link>
+              {/* Two profile type preview cards */}
+              <div className="mt-8 grid grid-cols-1 gap-4 sm:grid-cols-2">
+                {/* Casting view card */}
+                <Link
+                  href={`/${ASHISH.slug}/c`}
+                  className="group relative overflow-hidden rounded-sm border border-gold/20 bg-slate-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
+                >
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gold/10 text-xs text-gold">
+                      ⚡
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
+                      Casting view
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-text-primary">Fast, scannable.</p>
+                  <p className="mt-1 text-xs text-text-tertiary">
+                    What a casting director sees in two seconds.
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-gold transition-colors group-hover:text-gold-soft">
+                    Open casting view
+                    <span aria-hidden="true">→</span>
+                  </span>
+                </Link>
+
+                {/* Cinematic view card */}
+                <Link
+                  href={`/${ASHISH.slug}`}
+                  className="group relative overflow-hidden rounded-sm border border-gold/20 bg-slate-surface p-5 transition-all duration-300 hover:-translate-y-1 hover:border-gold/40"
+                >
+                  <div className="mb-3 flex items-center gap-2">
+                    <span className="inline-flex h-6 w-6 items-center justify-center rounded-full bg-gold/10 text-xs text-gold">
+                      🎬
+                    </span>
+                    <span className="font-mono text-[10px] uppercase tracking-[0.15em] text-gold">
+                      Cinematic view
+                    </span>
+                  </div>
+                  <p className="text-sm font-medium text-text-primary">The full story.</p>
+                  <p className="mt-1 text-xs text-text-tertiary">
+                    Photos, work, the whole profile.
+                  </p>
+                  <span className="mt-4 inline-flex items-center gap-1 text-xs font-medium text-gold transition-colors group-hover:text-gold-soft">
+                    Open cinematic view
+                    <span aria-hidden="true">→</span>
+                  </span>
+                </Link>
+              </div>
             </div>
           </div>
         </div>
       </Section>
 
       {/* ============================================================
-       * 1.7 — Pricing
+       * PRICING
        * ============================================================ */}
       <Section tone="dark" id="pricing" className="py-20 md:py-28">
         <div className="mx-auto max-w-[1200px] px-6 md:px-12">
@@ -495,7 +486,6 @@ export default function HomePage() {
               <p
                 className="mt-4 font-display text-text-primary"
                 style={{
-                  fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                   fontWeight: 700,
                   fontSize: "clamp(2rem, 6vw, 3rem)",
                   lineHeight: 0.95,
@@ -525,7 +515,7 @@ export default function HomePage() {
               </Link>
             </article>
 
-            {/* Pro card */}
+            {/* Paid features card */}
             <article
               className="relative flex flex-col overflow-hidden rounded-sm p-6 md:p-8"
               style={{
@@ -537,49 +527,37 @@ export default function HomePage() {
                 aria-hidden="true"
                 className="pointer-events-none absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-gold/80 to-transparent"
               />
-              <div className="flex items-center gap-3">
-                <p className="chip-text text-gold">Slate Pro + Outreach</p>
-                <span className="rounded-full bg-gold/15 px-2.5 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-gold">
-                  For serious profiles
-                </span>
-              </div>
+              <p className="chip-text text-gold">Upgrades</p>
               <p
                 className="mt-4 font-display text-text-primary"
                 style={{
-                  fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                   fontWeight: 700,
-                  fontSize: "clamp(2rem, 6vw, 3rem)",
-                  lineHeight: 0.95,
+                  fontSize: "clamp(1.5rem, 4vw, 2rem)",
+                  lineHeight: 1.1,
                 }}
               >
-                ₹99{" "}
-                <span className="text-[0.4em] font-normal tracking-normal text-text-tertiary">
-                  /cinematic page
-                </span>
+                When you&apos;re ready for more
               </p>
               <p className="mt-4 text-sm text-text-secondary">
-                When you&apos;re ready to be seen by the right people, we help you reach them —
-                properly, never spam.
+                Pay only for what you need. No subscriptions, no bundles.
               </p>
 
-              <ul className="mt-6 flex flex-1 flex-col gap-3">
-                {proFeatures.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
-                    <span className="mt-0.5 text-gold">✓</span>
-                    {f}
-                  </li>
+              <div className="mt-6 flex flex-1 flex-col gap-4">
+                {paidFeatures.map((f) => (
+                  <div key={f.name} className="rounded-sm border border-gold/15 bg-slate-bg/50 p-4">
+                    <div className="flex items-center gap-2">
+                      <span className="text-sm font-medium text-text-primary">{f.name}</span>
+                      {f.badge && (
+                        <span className="rounded-full bg-gold/15 px-2 py-0.5 font-mono text-[9px] uppercase tracking-[0.12em] text-gold">
+                          {f.badge}
+                        </span>
+                      )}
+                    </div>
+                    <p className="mt-1 font-mono text-xs text-gold">{f.price}</p>
+                    <p className="mt-1 text-xs text-text-tertiary">{f.description}</p>
+                  </div>
                 ))}
-                <li className="flex items-start gap-2 text-sm font-medium text-gold">
-                  <span className="mt-0.5">✓</span>
-                  {proHighlight}
-                </li>
-                {proExtras.map((f) => (
-                  <li key={f} className="flex items-start gap-2 text-sm text-text-secondary">
-                    <span className="mt-0.5 text-gold">✓</span>
-                    {f}
-                  </li>
-                ))}
-              </ul>
+              </div>
 
               <Link
                 href="/signup?intent=pro"
@@ -591,15 +569,13 @@ export default function HomePage() {
           </div>
 
           <p className="mt-8 text-center font-mono text-[11px] tracking-[0.06em] text-text-tertiary">
-            Outreach is{" "}
-            <span className="font-semibold text-text-secondary">managed and respectful</span>. We
-            never blast. We reach the right people, on your behalf, with messages worth reading.
+            We reach the right people, personally. We never blast.
           </p>
         </div>
       </Section>
 
       {/* ============================================================
-       * 1.8 — Club
+       * CLUB
        * ============================================================ */}
       <Section
         tone="dark"
@@ -614,17 +590,17 @@ export default function HomePage() {
             {/* Left */}
             <div>
               <p className="font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-                Slate Sundays
+                The club
               </p>
               <h2 className="display-m mt-6 text-text-primary">
-                The club meets every week.{" "}
+                More than a profile. A way in.{" "}
                 <span className="font-devanagari text-[0.7em] text-gold" style={{ opacity: 0.8 }}>
-                  हर संडे।
+                  रास्ता यहीं से।
                 </span>
               </h2>
               <p className="mt-5 max-w-[440px] text-text-secondary">
-                Every Sunday in Aram Nagar, freshers come together for scene work, cold reads, and
-                honest feedback. The WhatsApp community carries the energy through the week.
+                The profile gets you noticed. The club gets you connected. A real community of
+                Mumbai actors helping each other break through.
               </p>
 
               <ul className="mt-8 flex flex-col gap-3">
@@ -646,59 +622,25 @@ export default function HomePage() {
               </Link>
             </div>
 
-            {/* Right — photo grid */}
+            {/* Right - abstract mood visuals */}
             <div className="grid grid-cols-2 gap-3">
-              {/* Tall photo */}
-              <div
-                className="relative row-span-2 overflow-hidden rounded-sm"
-                style={{
-                  boxShadow: "inset 0 0 0 1px rgba(245,239,227,0.08)",
-                }}
-              >
-                <Image
-                  src={`/talent/${ASHISH.slug}/${fullbodyPhoto.slug}-828.webp`}
-                  alt={fullbodyPhoto.alt}
-                  fill
-                  sizes="(min-width: 1024px) 280px, 180px"
-                  className="object-cover"
-                />
-              </div>
-              {/* Square photos */}
-              <div
-                className="relative aspect-square overflow-hidden rounded-sm"
-                style={{
-                  boxShadow: "inset 0 0 0 1px rgba(245,239,227,0.08)",
-                }}
-              >
-                <Image
-                  src={`/talent/${ASHISH.slug}/${ASHISH.hero.slug}-828.webp`}
-                  alt={ASHISH.hero.alt}
-                  fill
-                  sizes="(min-width: 1024px) 280px, 180px"
-                  className="object-cover"
-                />
-              </div>
-              <div
-                className="relative aspect-square overflow-hidden rounded-sm"
-                style={{
-                  boxShadow: "inset 0 0 0 1px rgba(245,239,227,0.08)",
-                }}
-              >
-                <Image
-                  src={`/talent/${ASHISH.slug}/${seatedPhoto.slug}-828.webp`}
-                  alt={seatedPhoto.alt}
-                  fill
-                  sizes="(min-width: 1024px) 280px, 180px"
-                  className="object-cover"
-                />
-              </div>
+              <MoodTile className="row-span-2 min-h-[280px]" />
+              <MoodTile
+                className="aspect-square"
+                gradient="radial-gradient(ellipse at 60% 40%, rgba(232,201,122,0.12) 0%, transparent 60%), linear-gradient(140deg, #161613, #0e0e0c)"
+              />
+              <MoodTile
+                className="aspect-square"
+                glow={false}
+                gradient="linear-gradient(160deg, rgba(201,162,75,0.08), #0e0e0c)"
+              />
             </div>
           </div>
         </div>
       </Section>
 
       {/* ============================================================
-       * 1.9 — Final CTA
+       * FINAL CTA
        * ============================================================ */}
       <Section tone="dark" id="join" className="py-24 md:py-36">
         <div className="mx-auto max-w-[660px] px-6 text-center md:px-12">
@@ -708,7 +650,6 @@ export default function HomePage() {
           <h2
             className="mt-6 font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
               fontWeight: 700,
               fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
               letterSpacing: "-0.025em",
@@ -719,13 +660,13 @@ export default function HomePage() {
           </h2>
           <p className="mx-auto mt-6 max-w-[42ch] text-text-secondary">
             Mumbai is hard alone. It&apos;s different with a club behind you. Join the founding
-            batch — your profile, your community, your first break.
+            batch. Your profile, your community, your first break.
           </p>
           <Link
             href="/signup"
             className="mt-10 inline-flex h-14 items-center justify-center rounded-full bg-slate-cream px-10 text-base font-medium text-text-on-light transition-all duration-300 hover:-translate-y-0.5 hover:bg-slate-cream-2 hover:shadow-cinematic focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg"
           >
-            Join the Slate club — free →
+            Join the Slate club, free
           </Link>
           <p className="mt-6 font-devanagari text-[15px] text-gold" style={{ opacity: 0.8 }}>
             मुंबई में नए हो? सही कमरे से शुरू करो।
@@ -734,7 +675,7 @@ export default function HomePage() {
       </Section>
 
       {/* ============================================================
-       * 1.10 — Footer
+       * FOOTER
        * ============================================================ */}
       <Section tone="dark" as="footer" className="border-t border-border-dark px-6 py-16 md:px-12">
         <div className="mx-auto flex max-w-[1200px] flex-col items-center gap-8 text-center md:flex-row md:justify-between md:text-left">

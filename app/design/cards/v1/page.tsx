@@ -40,7 +40,6 @@ export default function CardV1() {
             <span
               className="px-6 text-center font-display text-text-primary"
               style={{
-                fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                 fontWeight: 700,
                 fontSize: "clamp(2rem, 9vw, 3.5rem)",
                 letterSpacing: "-0.02em",

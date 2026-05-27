@@ -21,7 +21,6 @@ export function CardBoard({ credits, title, renderCard }: CardBoardProps) {
         <h2
           className="mt-3 font-display"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "clamp(1.75rem, 7vw, 2.5rem)",
             letterSpacing: "-0.02em",

@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export const dynamic = "force-dynamic";
 export const metadata = {
-  title: "Photo exploration — Slate",
+  title: "Photo exploration - Slate",
   robots: { index: false, follow: false },
 };
 
@@ -32,14 +32,11 @@ export default function PhotoBoard() {
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">
           D1 · Photo exploration · V3 Framed Portrait
         </p>
-        <h1
-          className="mt-2 font-display text-3xl font-semibold md:text-5xl"
-          style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-        >
+        <h1 className="mt-2 font-display text-3xl font-semibold md:text-5xl">
           Which photo composes best in the frame?
         </h1>
         <p className="mt-3 max-w-[60ch] text-text-secondary">
-          Same V3 layout (chosen hero direction), four photos. Each iframe is 375 × 812 — phone
+          Same V3 layout (chosen hero direction), four photos. Each iframe is 375 × 812, phone
           width. The frame shape and matting are identical; only the photo inside changes.
         </p>
       </header>

@@ -35,11 +35,11 @@
   --shadow-cinematic: 0 24px 64px -20px rgba(0, 0, 0, 0.6), 0 8px 24px -12px rgba(0, 0, 0, 0.4);
 
   /* ---- typography: families (wired to next/font/local CSS vars in layout.tsx) ---- */
-  --font-display: var(--font-fraunces), ui-serif, Georgia, serif;
+  --font-display: var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-body: var(--font-geist), system-ui, -apple-system, sans-serif;
   --font-mono: var(--font-jetbrains-mono), ui-monospace, monospace;
   /* Devanagari accent face — only used inside .devanagari spans, always with English siblings */
-  --font-devanagari: var(--font-noto-serif-devanagari), "Noto Serif Devanagari", "Mangal", serif;
+  --font-devanagari: var(--font-noto-sans-devanagari), "Noto Sans Devanagari", "Mangal", sans-serif;
 }
 
 /* Helper for the few Devanagari accents we render across the app.
@@ -90,7 +90,6 @@ body {
 
 .font-display {
   font-family: var(--font-display);
-  font-feature-settings: "ss01", "ss02";
 }
 
 .display-l {
@@ -99,10 +98,6 @@ body {
   font-size: clamp(2.75rem, 7vw, 6rem);
   line-height: 1;
   letter-spacing: -0.02em;
-  font-variation-settings:
-    "opsz" 144,
-    "SOFT" 50,
-    "WONK" 1;
 }
 
 .display-m {
@@ -111,10 +106,6 @@ body {
   font-size: clamp(2.5rem, 5vw, 3.5rem);
   line-height: 1.05;
   letter-spacing: -0.015em;
-  font-variation-settings:
-    "opsz" 72,
-    "SOFT" 50,
-    "WONK" 1;
 }
 
 .display-s {
@@ -123,10 +114,6 @@ body {
   font-size: clamp(1.5rem, 2.5vw, 1.75rem);
   line-height: 1.1;
   letter-spacing: -0.01em;
-  font-variation-settings:
-    "opsz" 36,
-    "SOFT" 50,
-    "WONK" 1;
 }
 
 .body-l {

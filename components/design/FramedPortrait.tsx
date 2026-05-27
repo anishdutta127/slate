@@ -25,10 +25,7 @@ export function FramedPortrait({
     <main className="relative h-svh min-h-[600px] w-full overflow-hidden bg-slate-bg">
       {/* Wordmark top-left */}
       <div className="absolute left-6 top-6 z-20 flex items-baseline gap-1.5">
-        <span
-          className="font-display text-sm font-semibold tracking-tight text-text-primary opacity-70"
-          style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-        >
+        <span className="font-display text-sm font-semibold tracking-tight text-text-primary opacity-70">
           Slate.
         </span>
         <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -71,7 +68,6 @@ export function FramedPortrait({
           <h1
             className="font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
               fontWeight: 600,
               fontSize: "clamp(1.75rem, 7vw, 2.5rem)",
               letterSpacing: "-0.01em",

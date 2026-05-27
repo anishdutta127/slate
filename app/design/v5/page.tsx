@@ -21,10 +21,7 @@ export default function DesignV5() {
         {/* Mast head — top thin gold rail */}
         <div className="flex items-baseline justify-between border-b border-gold/30 pb-2">
           <div className="flex items-baseline gap-1.5">
-            <span
-              className="font-display text-sm font-semibold tracking-tight text-text-primary"
-              style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-            >
+            <span className="font-display text-sm font-semibold tracking-tight text-text-primary">
               Slate.
             </span>
             <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -62,7 +59,6 @@ export default function DesignV5() {
           <h1
             className="font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
               fontWeight: 700,
               fontSize: "clamp(3rem, 13vw, 5rem)",
               letterSpacing: "-0.03em",

@@ -69,7 +69,7 @@ export function BeforeAfterShowcase() {
     <div className="grid grid-cols-1 gap-10 md:grid-cols-2 md:gap-12">
       {/* BEFORE — the Drive dump */}
       <figure className="flex flex-col items-center gap-4">
-        <span className="chip-text text-text-tertiary">Today — the Drive dump</span>
+        <span className="chip-text text-text-tertiary">Today - the Drive dump</span>
         <PhoneFrame tilt="left" className="opacity-95">
           <WhatsAppChrome>
             <Bubble side="right" time={FAKE_TIME}>
@@ -95,13 +95,13 @@ export function BeforeAfterShowcase() {
 
       {/* AFTER — one Slate link */}
       <figure className="flex flex-col items-center gap-4">
-        <span className="chip-text text-gold">With Slate — one link</span>
+        <span className="chip-text text-gold">With Slate - one link</span>
         <PhoneFrame tilt="right">
           <WhatsAppChrome>
             <Bubble side="right" time={FAKE_TIME}>
               Send your profile na
             </Bubble>
-            <Bubble side="left">Hi, here&apos;s my profile —</Bubble>
+            <Bubble side="left">Hi, here&apos;s my profile.</Bubble>
 
             {/* Slate unfurl card */}
             <div className="mr-auto mb-1.5 max-w-[90%] overflow-hidden rounded-md bg-[#1f2c33]">
@@ -118,11 +118,8 @@ export function BeforeAfterShowcase() {
                 <div className="font-mono text-[7px] uppercase tracking-[0.15em] text-[#C9A24B]">
                   SLATE.CLUB
                 </div>
-                <div
-                  className="mt-0.5 font-display text-[12px] font-semibold leading-tight"
-                  style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-                >
-                  Ashish Rawat — Mumbai actor
+                <div className="mt-0.5 font-display text-[12px] font-semibold leading-tight">
+                  Ashish Rawat - Mumbai actor
                 </div>
                 <div className="mt-0.5 text-[8px] leading-snug text-[#5C564E]">
                   Plays 22-28 · Hindi & English. Honda, Cipla, Zepto.

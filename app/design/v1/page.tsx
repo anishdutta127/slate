@@ -36,10 +36,7 @@ export default function DesignV1() {
         <div className="relative flex flex-col justify-between bg-slate-bg px-5 py-6">
           {/* Wordmark top-right */}
           <div className="flex items-baseline justify-end gap-1.5">
-            <span
-              className="font-display text-sm font-semibold tracking-tight text-text-primary"
-              style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-            >
+            <span className="font-display text-sm font-semibold tracking-tight text-text-primary">
               Slate.
             </span>
             <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -53,7 +50,6 @@ export default function DesignV1() {
             <h1
               className="font-display text-text-primary"
               style={{
-                fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                 fontWeight: 700,
                 fontSize: "clamp(2.5rem, 14vw, 4.5rem)",
                 letterSpacing: "-0.025em",

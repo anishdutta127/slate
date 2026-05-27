@@ -6,7 +6,7 @@ import { Divider } from "@/components/visual/Divider";
 import { LoginForm } from "@/app/login/LoginForm";
 
 export const metadata: Metadata = {
-  title: "Join Slate — the actors' club of Mumbai",
+  title: "Join Slate - the actors' club of Mumbai",
   description:
     "Sign up for Slate. Get a free casting-ready profile and join the Mumbai actors' club.",
 };
@@ -26,7 +26,6 @@ export default function SignupPage() {
       <h1
         className="mt-6 max-w-[20ch] font-display text-text-primary"
         style={{
-          fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
           fontWeight: 700,
           fontSize: "clamp(2.5rem, 8vw, 4rem)",
           letterSpacing: "-0.025em",
@@ -36,7 +35,7 @@ export default function SignupPage() {
         Start with your phone number.
       </h1>
       <p className="mt-6 max-w-[36ch] text-balance text-base leading-relaxed text-text-secondary md:text-lg">
-        Enter your number to create your Slate account. Free for the founding batch — no card, no
+        Enter your number to create your Slate account. Free for the founding batch - no card, no
         catch.
       </p>
 

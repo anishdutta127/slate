@@ -50,19 +50,19 @@ What to avoid: gradients-on-white, purple/blue tech vibes, every-startup-Inter, 
 ## Typography
 
 ```css
---font-display: "Fraunces", ui-serif, Georgia, serif;
---font-body: "Geist", "Inter Tight", system-ui, sans-serif;
+--font-display: "Geist", system-ui, -apple-system, sans-serif;
+--font-body: "Geist", system-ui, -apple-system, sans-serif;
 --font-mono: "JetBrains Mono", ui-monospace, monospace;
---font-devanagari: "Noto Serif Devanagari", "Mangal", serif;
+--font-devanagari: "Noto Sans Devanagari", "Mangal", sans-serif;
 ```
 
-**Fraunces** is loaded as a subset variable woff2: Latin only, weight axis 400–700, `opsz` axis live (used at three sizes), with `SOFT` and `WONK` pinned as CSS constants at `SOFT 50` and `WONK 1` via `font-variation-settings`. Total file weight ~50–65KB — this fits the CD view performance budget on India 3G/patchy 4G. Self-hosted from `public/fonts/`, loaded via `next/font/local` with `font-display: swap`.
+**Geist** is loaded as a variable woff2 (weight axis 100-900). Impact comes from size and weight, not ornament. This is immediately readable for our Hindi-first, English-as-second-language audience. Self-hosted from `public/fonts/`, loaded via `next/font/local` with `font-display: swap`.
 
-Variants (all use the same single woff2 file, axes set per element via CSS):
+Variants:
 
-- Display L (actor names on profile hero): `Fraunces` 700 weight, `opsz` 144, `SOFT` 50, `WONK` 1. Size ~64–96px on desktop, 44px on mobile. Letter spacing -0.02em.
-- Display M (section headers, marketing H1): Fraunces 600, `opsz` 72, same SOFT/WONK. Size 40–56px.
-- Display S (card titles): Fraunces 600, `opsz` 36, same SOFT/WONK. Size 24–28px.
+- Display L (actor names on profile hero): Geist 700, size ~64-96px on desktop, 44px on mobile. Letter spacing -0.02em.
+- Display M (section headers, marketing H1): Geist 600, size 40-56px.
+- Display S (card titles): Geist 600, size 24-28px.
 
 **Body** sizes:
 
@@ -73,7 +73,7 @@ Variants (all use the same single woff2 file, axes set per element via CSS):
 
 **Numbers** for ages, heights, years — always in `--font-mono`. It's the one place we lean into the analog feel.
 
-**Devanagari accents** — Noto Serif Devanagari, custom-subset to only the glyphs we use (~10 KB woff2). Render via the `.devanagari` helper class, which sets the family, opacity 0.7, and font-size 0.85em relative to the parent. Always paired with English siblings, always smaller and quieter. Used in exactly these placements: cinematic hero wordmark (`Slate. · स्लेट`), cinematic about section header (`About · के बारे में`), cinematic contact section header (`Get in touch · संपर्क करें`), cinematic footer (`Made on Slate · स्लेट`), and one touch on the CD view footer (`Made on Slate · स्लेट`). The CD page is otherwise pure English — the accent is reserved for the closing wordmark only so it signals belonging without compromising the page's information density. To add a new Devanagari phrase, edit `PHRASES` in `scripts/subset-devanagari.ts` and re-run.
+**Devanagari accents** - Noto Sans Devanagari (cleaner match to the sans display system, more readable for Hindi-first readers). Render via the `.devanagari` helper class, which sets the family, opacity 0.7, and font-size 0.85em relative to the parent. Always paired with English siblings, always smaller and quieter.
 
 ---
 

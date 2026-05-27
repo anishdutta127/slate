@@ -6,7 +6,7 @@ import { SectionLabel } from "@/components/profile/SectionLabel";
 import { ClubApplyForm } from "./ClubApplyForm";
 
 export const metadata: Metadata = {
-  title: "The club — Slate",
+  title: "The club - Slate",
   description:
     "The Slate club helps fresher actors in Mumbai join a vetted WhatsApp community, practise weekly, and get a CD-ready profile made for free during the founding batch.",
 };
@@ -32,7 +32,6 @@ export default function ClubPage() {
               <h1
                 className="mt-6 font-display text-text-primary"
                 style={{
-                  fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                   fontWeight: 700,
                   fontSize: "clamp(2.5rem, 8vw, 4.5rem)",
                   letterSpacing: "-0.025em",
@@ -100,7 +99,6 @@ export default function ClubPage() {
           <h2
             className="mt-6 max-w-[20ch] font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
               fontWeight: 600,
               fontSize: "clamp(2rem, 6vw, 3.5rem)",
               letterSpacing: "-0.02em",

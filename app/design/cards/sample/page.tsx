@@ -29,7 +29,6 @@ function V1Card({ credit, index }: { credit: TalentCredit; index: number }) {
       <span
         className="px-6 text-center font-display text-text-primary"
         style={{
-          fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
           fontWeight: 700,
           fontSize: "2.4rem",
           letterSpacing: "-0.02em",
@@ -72,7 +71,6 @@ function V2Card({ credit, index }: { credit: TalentCredit; index: number }) {
         <span
           className="font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "2.2rem",
             letterSpacing: "-0.02em",
@@ -120,7 +118,6 @@ function V3Card({ credit, index }: { credit: TalentCredit; index: number }) {
         <p
           className="font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "2rem",
             letterSpacing: "-0.02em",
@@ -146,10 +143,7 @@ function V4Card({ credit, index }: { credit: TalentCredit; index: number }) {
     >
       <div className="flex items-baseline justify-between border-b border-gold/30 pb-2">
         <div className="flex items-baseline gap-1">
-          <span
-            className="font-display text-xs font-semibold tracking-tight text-text-primary"
-            style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-          >
+          <span className="font-display text-xs font-semibold tracking-tight text-text-primary">
             Slate.
           </span>
           <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -163,7 +157,6 @@ function V4Card({ credit, index }: { credit: TalentCredit; index: number }) {
         <p
           className="font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
             fontWeight: 700,
             fontSize: "2.6rem",
             letterSpacing: "-0.03em",
@@ -189,7 +182,6 @@ function V5Card({ credit, index }: { credit: TalentCredit; index: number }) {
         <span
           className="font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "1.85rem",
             letterSpacing: "-0.015em",
@@ -235,7 +227,6 @@ function V6Card({ credit, index }: { credit: TalentCredit; index: number }) {
           <span
             className="font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
               fontWeight: 700,
               fontSize: "1.2rem",
               lineHeight: 1.05,
@@ -274,7 +265,6 @@ export default function CardSampleGrid() {
         <h1
           className="mt-2 font-display"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "2rem",
           }}

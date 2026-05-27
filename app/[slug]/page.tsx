@@ -5,7 +5,7 @@ import ReactDOM from "react-dom";
 import { Section } from "@/components/visual/Section";
 import { Divider } from "@/components/visual/Divider";
 import { CinematicHero } from "@/components/profile/CinematicHero";
-import { ParallaxImage } from "@/components/profile/ParallaxImage";
+import { CinematicSlideshow } from "@/components/profile/CinematicSlideshow";
 import { CreditCard } from "@/components/profile/CreditCard";
 import { BrandedFallbackCard } from "@/components/profile/BrandedFallbackCard";
 import { SectionLabel } from "@/components/profile/SectionLabel";
@@ -29,12 +29,12 @@ export async function generateMetadata({
   const t = getTalentBySlug(slug);
   if (!t) return { title: "Not found" };
   return {
-    title: `${t.name} — ${t.city} actor`,
+    title: `${t.name} - ${t.city} actor`,
     description: t.bio,
     openGraph: {
       type: "profile",
       url: `${getBaseUrl()}/${t.slug}`,
-      title: `${t.name} — ${t.city} actor`,
+      title: `${t.name} - ${t.city} actor`,
       description: t.bio,
     },
     twitter: { card: "summary_large_image" },
@@ -46,16 +46,11 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
   const t = getTalentBySlug(slug);
   if (!t) notFound();
 
-  // Preload the hero photo at the size the hero will request so the LCP
-  // image starts downloading at HTML-parse time, not after layout. React 19
-  // hoists the call to a <link rel="preload"> tag in <head>.
   const heroSrc = `/talent/${t.slug}/${t.hero.slug}-828.webp`;
   ReactDOM.preload(heroSrc, { as: "image", fetchPriority: "high" });
 
   const honda = t.credits.find((c) => c.brand === "Honda")!;
   const otherCredits = t.credits.filter((c) => c.brand !== "Honda");
-  // Trailing space is intentional — leaves the cursor primed right after our
-  // line in WhatsApp's compose. Mirrors the CD view.
   const whatsappMessage = `Hi ${t.name.split(" ")[0]}, saw your profile on Slate `;
 
   return (
@@ -65,14 +60,11 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
       {/* Sentinel: when this scrolls offscreen, the mobile sticky contact bar appears */}
       <div id="post-hero-sentinel" aria-hidden="true" className="h-px" />
 
-      {/* ============ 01 · SHOWREEL ============ */}
+      {/* ============ 01 - SHOWREEL ============ */}
       <Section tone="dark" className="px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[1120px]">
           <SectionLabel number="01" label="Showreel" />
-          <h2
-            className="mt-6 max-w-[20ch] font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl"
-            style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-          >
+          <h2 className="mt-6 max-w-[20ch] font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             Honda. The headline.
           </h2>
 
@@ -83,9 +75,6 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
             aria-label={`Watch ${honda.brand} ${honda.medium} on Instagram (opens in new tab)`}
             className="group relative mt-10 block aspect-video w-full overflow-hidden rounded-md transition-all duration-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-4 focus-visible:ring-offset-slate-bg hover:ring-1 hover:ring-gold/40"
           >
-            {/* Showreel card uses the branded fallback at 16:9 since Honda is on
-                Instagram (no scrapable thumbnail). Branded card design carries the
-                same visual identity as the credits grid below. */}
             <div className="absolute inset-0">
               <BrandedFallbackCard
                 brand={honda.brand}
@@ -96,7 +85,6 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
               />
             </div>
 
-            {/* Centered play icon overlay */}
             <span aria-hidden="true" className="absolute inset-0 flex items-center justify-center">
               <span className="flex h-20 w-20 items-center justify-center rounded-full border border-gold/40 bg-slate-bg/60 backdrop-blur-sm transition-transform duration-300 group-hover:scale-110">
                 <svg className="ml-1 h-8 w-8 fill-gold" viewBox="0 0 24 24" aria-hidden="true">
@@ -112,14 +100,11 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
 
-      {/* ============ 02 · SELECTED WORK ============ */}
+      {/* ============ 02 - SELECTED WORK ============ */}
       <Section tone="dark" className="px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[1120px]">
           <SectionLabel number="02" label="Selected work" />
-          <h2
-            className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl"
-            style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-          >
+          <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             Six brands. One year.
           </h2>
 
@@ -135,38 +120,25 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
 
-      {/* ============ 03 · PORTFOLIO ============ */}
+      {/* ============ 03 - PORTFOLIO (cinematic slideshow) ============ */}
       <Section tone="dark" className="px-6 py-24 md:px-12 md:py-32">
-        <div className="mx-auto max-w-[1120px]">
+        <div className="mx-auto max-w-[800px]">
           <SectionLabel number="03" label="Portfolio" />
-          <h2
-            className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl"
-            style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-          >
+          <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             More of him.
           </h2>
 
-          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
-            {t.gallery.map((photo) => (
-              <ParallaxImage
-                key={photo.slug}
-                photo={photo}
-                talentSlug={t.slug}
-                sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
-              />
-            ))}
+          <div className="mt-12">
+            <CinematicSlideshow photos={t.gallery} talentSlug={t.slug} />
           </div>
         </div>
       </Section>
 
-      {/* ============ 04 · ABOUT ============ */}
+      {/* ============ 04 - ABOUT ============ */}
       <Section tone="dark" className="px-6 py-24 md:px-12 md:py-32">
         <div className="mx-auto max-w-[680px] text-center">
           <SectionLabel number="04" label="About" devanagari="के बारे में" />
-          <h2
-            className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl"
-            style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-          >
+          <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             The actor.
           </h2>
 
@@ -206,14 +178,11 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
 
-      {/* ============ 05 · GET IN TOUCH ============ */}
+      {/* ============ 05 - GET IN TOUCH ============ */}
       <Section tone="dark" as="section" className="px-6 py-24 md:px-12 md:py-32">
         <div id="contact" className="mx-auto max-w-[680px] text-center">
           <SectionLabel number="05" label="Get in touch" devanagari="संपर्क करें" />
-          <h2
-            className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl"
-            style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-          >
+          <h2 className="mt-6 font-display text-4xl font-semibold tracking-tight text-text-primary md:text-6xl">
             He&apos;s ready when you are.
           </h2>
 
@@ -268,14 +237,11 @@ export default async function ProfilePage({ params }: { params: Promise<{ slug: 
         </div>
       </Section>
 
-      {/* Mobile-only floating contact pill, appears after the hero */}
       <StickyContactBar sentinelId="post-hero-sentinel" contactSectionId="contact" />
     </>
   );
 }
 
-// Big tappable contact row. Hairline gold border, dark surface, 24px vertical
-// padding. Brief cream flash on tap signals the action triggered before nav.
 function ContactRow({
   href,
   target,

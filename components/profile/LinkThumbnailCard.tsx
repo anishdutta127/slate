@@ -69,7 +69,6 @@ export function LinkThumbnailCard({
           <p
             className="mt-3 font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
               fontWeight: 700,
               fontSize: "clamp(2rem, 8vw, 3.25rem)",
               letterSpacing: "-0.03em",

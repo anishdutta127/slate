@@ -5,7 +5,7 @@ import { Wordmark } from "@/components/visual/Wordmark";
 import { Divider } from "@/components/visual/Divider";
 
 export const metadata: Metadata = {
-  title: "Manifesto — Slate",
+  title: "Manifesto - Slate",
   description: "Why Slate exists. The story behind the actors' club of Mumbai.",
 };
 
@@ -30,7 +30,6 @@ export default function ManifestoPage() {
           <h1
             className="mt-6 font-display text-text-primary"
             style={{
-              fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
               fontWeight: 700,
               fontSize: "clamp(3rem, 9vw, 5.5rem)",
               letterSpacing: "-0.03em",
@@ -68,7 +67,6 @@ export default function ManifestoPage() {
             <span
               className="float-left mr-2 mt-1 font-display text-text-primary"
               style={{
-                fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                 fontWeight: 700,
                 fontSize: "4.5rem",
                 lineHeight: 0.85,
@@ -89,27 +87,27 @@ export default function ManifestoPage() {
           </p>
 
           <BlockQuote>
-            Slate is not a casting marketplace. It&apos;s the layer the actor controls — their
+            Slate is not a casting marketplace. It&apos;s the layer the actor controls: their
             presence, their pitch, their people.
           </BlockQuote>
 
           <p className="mt-8">
-            [PLACEHOLDER — paragraph on what we&apos;re NOT. We&apos;re not Talentrack. We&apos;re
+            [PLACEHOLDER - paragraph on what we&apos;re NOT. We&apos;re not Talentrack. We&apos;re
             not MCCC. We&apos;re not another &quot;AI will get you cast&quot; gimmick. We don&apos;t
             take a cut of jobs. Replace with your real framing of the &quot;not&quot; the user needs
             to hear.]
           </p>
 
           <p className="mt-8">
-            [PLACEHOLDER — paragraph on what we ARE. A free, mobile-first profile builder + WhatsApp
+            [PLACEHOLDER - paragraph on what we ARE. A free, mobile-first profile builder + WhatsApp
             send kit + a real-world club. Open with the moment a fresher first sees their own
-            film-poster profile — that&apos;s the emotional truth this paragraph should land.]
+            film-poster profile. That&apos;s the emotional truth this paragraph should land.]
           </p>
 
           <SectionHeading>The club</SectionHeading>
 
           <p>
-            [PLACEHOLDER — paragraph on the Sunday meetup in Aram Nagar. Why in-person matters. The
+            [PLACEHOLDER - paragraph on the Sunday meetup in Aram Nagar. Why in-person matters. The
             vetting story. Who&apos;s welcome and who isn&apos;t. Founder voice; first person
             plural.]
           </p>
@@ -117,7 +115,7 @@ export default function ManifestoPage() {
           <SectionHeading>What we won&apos;t do</SectionHeading>
 
           <p>
-            [PLACEHOLDER — paragraph on the lines we won&apos;t cross. No paid tiers at launch. No
+            [PLACEHOLDER - paragraph on the lines we won&apos;t cross. No paid tiers at launch. No
             pay-to-apply. No data sold to anyone, ever. No spammy casting-director-number
             directories. List the boundaries.]
           </p>
@@ -125,7 +123,7 @@ export default function ManifestoPage() {
           <SectionHeading>What you can do</SectionHeading>
 
           <p>
-            [PLACEHOLDER — closing call to action. Make a profile in 15 minutes. Send your link to
+            [PLACEHOLDER - closing call to action. Make a profile in 15 minutes. Send your link to
             the next casting director. Come to Sunday in Aram Nagar. Don&apos;t wait for permission.
             Land on a specific, do-this-today action.]
           </p>
@@ -135,7 +133,7 @@ export default function ManifestoPage() {
         <div className="mx-auto mt-24 max-w-[640px] text-center">
           <Divider className="mx-auto max-w-[10rem]" />
           <p className="mt-10 font-mono text-[11px] uppercase tracking-[0.18em] text-gold">
-            — [Founder name], Mumbai · 2026
+            - [Founder name], Mumbai · 2026
           </p>
           <div className="mt-12 flex flex-wrap items-center justify-center gap-3">
             <Link
@@ -183,7 +181,6 @@ function SectionHeading({ children }: { children: React.ReactNode }) {
     <h2
       className="mt-14 font-display text-text-primary"
       style={{
-        fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
         fontWeight: 600,
         fontSize: "clamp(1.5rem, 4vw, 2rem)",
         letterSpacing: "-0.015em",

@@ -3,15 +3,6 @@ import localFont from "next/font/local";
 import { getBaseUrl } from "@/lib/env";
 import "./globals.css";
 
-// Fraunces variable (Latin subset, opsz + wght axes — see public/fonts/README.md)
-const fraunces = localFont({
-  src: "../public/fonts/Fraunces-Variable.woff2",
-  variable: "--font-fraunces",
-  display: "swap",
-  weight: "400 700",
-  preload: true,
-});
-
 // Geist variable (Latin subset, wght axis)
 const geist = localFont({
   src: "../public/fonts/Geist-Variable.woff2",
@@ -30,11 +21,10 @@ const jetbrainsMono = localFont({
   preload: false,
 });
 
-// Noto Serif Devanagari (subset to ~13 glyphs used in the few Devanagari
-// accents we render — see scripts/subset-devanagari.ts and DESIGN.md).
+// Noto Sans Devanagari (Devanagari subset for accent phrases).
 const devanagari = localFont({
-  src: "../public/fonts/NotoSerifDevanagari-Subset.woff2",
-  variable: "--font-noto-serif-devanagari",
+  src: "../public/fonts/NotoSansDevanagari.woff2",
+  variable: "--font-noto-sans-devanagari",
   display: "swap",
   weight: "400 700",
   preload: false,
@@ -42,8 +32,8 @@ const devanagari = localFont({
 
 export const metadata: Metadata = {
   title: {
-    default: "Slate — the actors' club of Mumbai",
-    template: "%s — Slate",
+    default: "Slate - the actors' club of Mumbai",
+    template: "%s - Slate",
   },
   description:
     "Build a profile that looks like a film poster. Send it like a pro. Grow with others doing the same.",
@@ -54,7 +44,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${geist.variable} ${jetbrainsMono.variable} ${devanagari.variable}`}
+      className={`${geist.variable} ${jetbrainsMono.variable} ${devanagari.variable}`}
     >
       <body className="min-h-svh bg-slate-bg text-text-primary antialiased">{children}</body>
     </html>

@@ -47,12 +47,7 @@ export function CinematicHero({ talent, objectClass = "object-[center_25%]" }: C
         href="/"
         className="absolute left-6 top-6 z-30 flex items-baseline gap-1.5 text-text-primary opacity-70 transition-opacity hover:opacity-100 focus-visible:opacity-100 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-gold focus-visible:ring-offset-2 focus-visible:ring-offset-slate-bg md:left-12 md:top-10"
       >
-        <span
-          className="font-display text-sm font-semibold tracking-tight"
-          style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-        >
-          Slate.
-        </span>
+        <span className="font-display text-sm font-semibold tracking-tight">Slate.</span>
         <span className="inline-block h-1 w-1 rounded-full bg-gold" />
         <span className="ml-1 devanagari text-text-secondary">स्लेट</span>
       </Link>
@@ -106,7 +101,6 @@ export function CinematicHero({ talent, objectClass = "object-[center_25%]" }: C
           {...reveal(250)}
           className="font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "clamp(2rem, 7vw, 3rem)",
             letterSpacing: "-0.015em",

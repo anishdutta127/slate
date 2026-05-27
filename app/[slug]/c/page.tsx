@@ -29,7 +29,7 @@ export async function generateMetadata({
   const t = getTalentBySlug(slug);
   if (!t) return { title: "Not found" };
   return {
-    title: `${t.name} — ${t.city} actor (Plays ${t.plays.min}-${t.plays.max})`,
+    title: `${t.name} - ${t.city} actor (Plays ${t.plays.min}-${t.plays.max})`,
     description: `${t.name}, ${t.city}-based actor. Plays ${t.plays.min}-${t.plays.max}. ${t.height.display}. ${t.languages.join(", ")}.`,
     robots: { index: false, follow: false }, // CD view is meant to be shared, not indexed
   };
@@ -71,7 +71,6 @@ export default async function CdView({ params }: { params: Promise<{ slug: strin
             <h1
               id="cd-name"
               className="font-display text-[22px] font-semibold leading-tight tracking-tight text-text-primary"
-              style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
             >
               {t.name}
             </h1>

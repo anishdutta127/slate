@@ -4,18 +4,12 @@ import { getTalentBySlug } from "@/lib/talent";
 import { getBaseUrl } from "@/lib/env";
 
 // Per-profile OG image, regenerated on each ISR revalidation. Renders at the
-// edge via Satori (a subset of React + CSS). The hero photo loads as a fetch
-// against the same deploy's /talent/<slug>/...webp path. Fraunces ships as
-// woff2 alongside it.
+// edge via Satori. The hero photo loads as a fetch against the same deploy's
+// /talent/<slug>/...webp path. Geist ships as woff2 alongside it.
 //
 // Layout (1200x630):
-//   left half (600px) — hero photo, object-cover, slight darken on the right edge
-//   right half (600px) — cream background:
-//     top: SLATE · स्लेट wordmark in gold mono
-//     center: actor name in Fraunces 700 (~80px)
-//     below name: Plays X-Y · City · Height in mono
-//     thin gold divider
-//     bottom: slate.club/<slug> in muted mono
+//   left half (600px): hero photo, object-cover, slight darken on the right edge
+//   right half (600px): cream background with name, stats, URL
 
 export const runtime = "edge";
 export const alt = "Slate profile";
@@ -28,12 +22,12 @@ export default async function Image({ params }: { params: Promise<{ slug: string
   if (!talent) notFound();
 
   const baseUrl = getBaseUrl();
-  const fontUrl = `${baseUrl}/fonts/Fraunces-Variable.woff2`;
+  const fontUrl = `${baseUrl}/fonts/Geist-Variable.woff2`;
   const heroUrl = `${baseUrl}/talent/${talent.slug}/${talent.hero.slug}-828.webp`;
 
-  const [fraunces, heroBytes] = await Promise.all([
+  const [geistFont, heroBytes] = await Promise.all([
     fetch(fontUrl).then((r) => {
-      if (!r.ok) throw new Error(`Fraunces fetch ${r.status}`);
+      if (!r.ok) throw new Error(`Geist fetch ${r.status}`);
       return r.arrayBuffer();
     }),
     fetch(heroUrl).then((r) => {
@@ -42,9 +36,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
     }),
   ]);
 
-  // Satori needs a data URL for img elements when the asset isn't a public,
-  // absolute https URL. Same-deploy fetches are fine, but we encode anyway so
-  // the rendered PNG is fully self-contained.
   const heroDataUrl = `data:image/webp;base64,${Buffer.from(heroBytes).toString("base64")}`;
 
   const cream = "#F5EFE3";
@@ -60,10 +51,10 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         display: "flex",
         backgroundColor: cream,
         color: dark,
-        fontFamily: "Fraunces",
+        fontFamily: "Geist",
       }}
     >
-      {/* Left half — hero */}
+      {/* Left half: hero */}
       <div
         style={{
           width: 600,
@@ -79,7 +70,6 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           alt=""
           style={{ width: 600, height: 630, objectFit: "cover" }}
         />
-        {/* Right-edge fade into the cream so the boundary doesn't read as a hard split */}
         <div
           style={{
             position: "absolute",
@@ -92,7 +82,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
         />
       </div>
 
-      {/* Right half — type */}
+      {/* Right half: type */}
       <div
         style={{
           width: 600,
@@ -103,7 +93,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           padding: "60px 60px 50px 30px",
         }}
       >
-        {/* Wordmark, top */}
+        {/* Wordmark */}
         <div
           style={{
             display: "flex",
@@ -127,7 +117,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           />
         </div>
 
-        {/* Name + stats, center */}
+        {/* Name + stats */}
         <div style={{ display: "flex", flexDirection: "column", gap: 18 }}>
           <div
             style={{
@@ -159,7 +149,7 @@ export default async function Image({ params }: { params: Promise<{ slug: string
           />
         </div>
 
-        {/* URL, bottom */}
+        {/* URL */}
         <div
           style={{
             fontSize: 18,
@@ -176,8 +166,8 @@ export default async function Image({ params }: { params: Promise<{ slug: string
       ...size,
       fonts: [
         {
-          name: "Fraunces",
-          data: fraunces,
+          name: "Geist",
+          data: geistFont,
           style: "normal",
           weight: 700,
         },

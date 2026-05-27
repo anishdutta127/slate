@@ -28,7 +28,6 @@ export function Wordmark({ size = "md", tone = "cream", className }: WordmarkPro
         toneColor,
         className,
       )}
-      style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
     >
       Slate
       <span

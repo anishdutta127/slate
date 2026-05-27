@@ -60,7 +60,6 @@ export default function CardV3() {
               <p
                 className="font-display text-text-primary"
                 style={{
-                  fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
                   fontWeight: 600,
                   fontSize: "clamp(1.75rem, 7vw, 2.5rem)",
                   letterSpacing: "-0.02em",

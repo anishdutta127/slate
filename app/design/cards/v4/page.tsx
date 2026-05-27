@@ -27,10 +27,7 @@ export default function CardV4() {
             {/* Mast head */}
             <div className="flex items-baseline justify-between border-b border-gold/30 pb-2">
               <div className="flex items-baseline gap-1">
-                <span
-                  className="font-display text-xs font-semibold tracking-tight text-text-primary"
-                  style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-                >
+                <span className="font-display text-xs font-semibold tracking-tight text-text-primary">
                   Slate.
                 </span>
                 <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -46,7 +43,6 @@ export default function CardV4() {
               <p
                 className="font-display text-text-primary"
                 style={{
-                  fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
                   fontWeight: 700,
                   fontSize: "clamp(2.25rem, 11vw, 4rem)",
                   letterSpacing: "-0.03em",

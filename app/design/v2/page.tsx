@@ -45,10 +45,7 @@ export default function DesignV2() {
 
       {/* Wordmark top */}
       <div className="absolute left-1/2 top-6 z-20 flex -translate-x-1/2 items-baseline gap-2">
-        <span
-          className="font-display text-base font-semibold tracking-tight text-text-primary"
-          style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-        >
+        <span className="font-display text-base font-semibold tracking-tight text-text-primary">
           Slate.
         </span>
         <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -62,7 +59,6 @@ export default function DesignV2() {
         <h1
           className="font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
             fontWeight: 700,
             fontSize: "clamp(3rem, 12vw, 5rem)",
             letterSpacing: "-0.02em",

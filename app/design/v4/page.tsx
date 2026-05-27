@@ -62,10 +62,7 @@ export default function DesignV4() {
       {/* Wordmark + city·year top-right */}
       <div className="absolute right-6 top-6 z-20 flex flex-col items-end gap-1">
         <div className="flex items-baseline gap-1.5">
-          <span
-            className="font-display text-sm font-semibold tracking-tight text-text-primary opacity-70"
-            style={{ fontVariationSettings: '"opsz" 36, "SOFT" 50, "WONK" 1' }}
-          >
+          <span className="font-display text-sm font-semibold tracking-tight text-text-primary opacity-70">
             Slate.
           </span>
           <span className="inline-block h-1 w-1 rounded-full bg-gold" />
@@ -81,7 +78,6 @@ export default function DesignV4() {
         <h1
           className="-mt-1 font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 144, "SOFT" 50, "WONK" 1',
             fontWeight: 700,
             fontSize: "clamp(4rem, 22vw, 8rem)",
             letterSpacing: "-0.04em",

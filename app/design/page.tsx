@@ -46,12 +46,7 @@ export default function DesignBoard() {
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">
           Design exploration · /ashish hero
         </p>
-        <h1
-          className="mt-2 font-display text-3xl font-semibold md:text-5xl"
-          style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-        >
-          Six directions.
-        </h1>
+        <h1 className="mt-2 font-display text-3xl font-semibold md:text-5xl">Six directions.</h1>
         <p className="mt-3 max-w-[60ch] text-text-secondary">
           Each iframe below is a complete hero treatment at iPhone 12 mini width (375 × 812). Click
           any variant title to open it full-screen on its own route. The user picks; the others get

@@ -34,10 +34,7 @@ export default function CardsBoard() {
         <p className="font-mono text-[10px] uppercase tracking-[0.25em] text-gold">
           A2 · Credit card exploration · 02 Selected Work
         </p>
-        <h1
-          className="mt-2 font-display text-3xl font-semibold md:text-5xl"
-          style={{ fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1' }}
-        >
+        <h1 className="mt-2 font-display text-3xl font-semibold md:text-5xl">
           Six card directions.
         </h1>
         <p className="mt-3 max-w-[60ch] text-text-secondary">

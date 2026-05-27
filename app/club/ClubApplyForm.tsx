@@ -48,7 +48,6 @@ export function ClubApplyForm() {
         <h3
           className="mt-4 font-display text-text-primary"
           style={{
-            fontVariationSettings: '"opsz" 72, "SOFT" 50, "WONK" 1',
             fontWeight: 600,
             fontSize: "1.75rem",
             lineHeight: 1.1,
@@ -114,7 +113,7 @@ export function ClubApplyForm() {
         />
       </label>
       <label className="flex flex-col gap-2">
-        <span className="chip-text text-text-tertiary">One line — why are you acting?</span>
+        <span className="chip-text text-text-tertiary">One line - why are you acting?</span>
         <textarea
           name="why"
           required
