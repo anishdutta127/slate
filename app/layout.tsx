@@ -30,6 +30,16 @@ const jetbrainsMono = localFont({
   preload: false,
 });
 
+// Noto Serif Devanagari (subset to ~13 glyphs used in the few Devanagari
+// accents we render — see scripts/subset-devanagari.ts and DESIGN.md).
+const devanagari = localFont({
+  src: "../public/fonts/NotoSerifDevanagari-Subset.woff2",
+  variable: "--font-noto-serif-devanagari",
+  display: "swap",
+  weight: "400 700",
+  preload: false,
+});
+
 export const metadata: Metadata = {
   title: {
     default: "Slate — the actors' club of Mumbai",
@@ -44,7 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html
       lang="en"
-      className={`${fraunces.variable} ${geist.variable} ${jetbrainsMono.variable}`}
+      className={`${fraunces.variable} ${geist.variable} ${jetbrainsMono.variable} ${devanagari.variable}`}
     >
       <body className="min-h-svh bg-slate-bg text-text-primary antialiased">{children}</body>
     </html>

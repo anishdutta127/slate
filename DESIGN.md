@@ -50,9 +50,10 @@ What to avoid: gradients-on-white, purple/blue tech vibes, every-startup-Inter, 
 ## Typography
 
 ```css
---font-display: 'Fraunces', ui-serif, Georgia, serif;
---font-body:    'Geist', 'Inter Tight', system-ui, sans-serif;
---font-mono:    'JetBrains Mono', ui-monospace, monospace;
+--font-display:    'Fraunces', ui-serif, Georgia, serif;
+--font-body:       'Geist', 'Inter Tight', system-ui, sans-serif;
+--font-mono:       'JetBrains Mono', ui-monospace, monospace;
+--font-devanagari: 'Noto Serif Devanagari', 'Mangal', serif;
 ```
 
 **Fraunces** is loaded as a subset variable woff2: Latin only, weight axis 400–700, `opsz` axis live (used at three sizes), with `SOFT` and `WONK` pinned as CSS constants at `SOFT 50` and `WONK 1` via `font-variation-settings`. Total file weight ~50–65KB — this fits the CD view performance budget on India 3G/patchy 4G. Self-hosted from `public/fonts/`, loaded via `next/font/local` with `font-display: swap`.
@@ -69,6 +70,8 @@ Variants (all use the same single woff2 file, axes set per element via CSS):
 - Stats chip: 13px mono, uppercase, letter-spacing 0.08em — used for "5'9" · 22–26 · Hindi, English"
 
 **Numbers** for ages, heights, years — always in `--font-mono`. It's the one place we lean into the analog feel.
+
+**Devanagari accents** — Noto Serif Devanagari, custom-subset to only the glyphs we use (~10 KB woff2). Render via the `.devanagari` helper class, which sets the family, opacity 0.7, and font-size 0.85em relative to the parent. Always paired with English siblings, always smaller and quieter. Used in exactly these placements: cinematic hero wordmark (`Slate. · स्लेट`), cinematic about section header (`About · के बारे में`), cinematic contact section header (`Get in touch · संपर्क करें`), cinematic footer (`Made on Slate · स्लेट`), and one touch on the CD view footer (`Made on Slate · स्लेट`). The CD page is otherwise pure English — the accent is reserved for the closing wordmark only so it signals belonging without compromising the page's information density. To add a new Devanagari phrase, edit `PHRASES` in `scripts/subset-devanagari.ts` and re-run.
 
 ---
 
