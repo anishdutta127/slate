@@ -46,7 +46,10 @@ slate/
 │   ├── page.tsx                    # marketing landing
 │   ├── manifesto/page.tsx
 │   ├── club/page.tsx
-│   ├── login/page.tsx
+│   ├── login/
+│   │   ├── page.tsx                # M0.5 Phase 1 dev-login UI (Phase 2 swaps in Firebase OTP)
+│   │   ├── LoginForm.tsx           # client component, phone input + submit
+│   │   └── actions.ts              # server action calling auth.api.signInWithPhone
 │   ├── onboard/
 │   │   ├── layout.tsx              # progress dots, exit guard
 │   │   ├── basics/page.tsx
@@ -55,7 +58,8 @@ slate/
 │   │   ├── stats/page.tsx
 │   │   └── ready/page.tsx
 │   ├── me/
-│   │   ├── page.tsx                # dashboard: sends feed, edit profile, etc
+│   │   ├── page.tsx                # M0.5: signed-in stub. M4: full dashboard (sends feed, edit profile)
+│   │   ├── actions.ts              # M0.5: signOut. M4: additional actions
 │   │   ├── edit/page.tsx
 │   │   └── send/page.tsx           # the WhatsApp send flow
 │   │
@@ -112,20 +116,24 @@ slate/
 │
 ├── lib/
 │   ├── env.ts                      # zod-validated env vars
-│   ├── auth.ts                     # Better Auth config
-│   ├── db.ts                       # drizzle client
-│   ├── r2.ts                       # presign + upload helpers
-│   ├── firebase.ts                 # client-side Firebase init (browser SDK, used by OTP screen)
-│   ├── firebase-admin.ts           # server-side firebase-admin init + verifyIdToken helper
-│   ├── slugs.ts                    # reserved list + validators
-│   ├── og.ts                       # shared OG image helpers
-│   ├── embed.ts                    # detect YouTube/IG/FB/Drive and produce embed URL + thumbnail
-│   ├── send-templates.ts           # the 4 message presets
+│   ├── auth.ts                     # Better Auth config + plugin registration
+│   ├── dev-login-plugin.ts         # M0.5 Phase 1: custom Better Auth plugin exposing POST /sign-in-with-phone
+│   ├── db.ts                       # drizzle client (node-postgres, pooled)
+│   ├── dns-doh.ts                  # M0.5 workaround: DoH-based dns.lookup for ISPs that refuse Neon AWS hostnames (SLATE_USE_DOH=1)
+│   ├── cn.ts                       # clsx + tailwind-merge helper
+│   ├── r2.ts                       # presign + upload helpers (M3)
+│   ├── firebase.ts                 # client-side Firebase init (M3 Phase 2, OTP screen)
+│   ├── firebase-admin.ts           # server-side firebase-admin verifyIdToken helper (M3 Phase 2)
+│   ├── slugs.ts                    # reserved list + validators + generateSlugFromPhone
+│   ├── og.ts                       # shared OG image helpers (M1)
+│   ├── embed.ts                    # detect YouTube/IG/FB/Drive and produce embed URL + thumbnail (M1)
+│   ├── send-templates.ts           # the 4 message presets (M4)
 │   └── phone.ts                    # normalize, mask, format Indian numbers
 │
 ├── db/
-│   ├── schema.ts                   # drizzle tables
-│   ├── seed.ts                     # seeds Ashish's profile
+│   ├── schema.ts                   # drizzle tables (user, session, account, verification)
+│   ├── migrate.ts                  # tsx-runnable migration runner with DoH fallback
+│   ├── seed.ts                     # seeds Ashish's profile (M3)
 │   └── migrations/                 # generated, committed
 │
 ├── types/
@@ -161,6 +169,10 @@ R2_PUBLIC_URL=                  # e.g. https://media.slate.club
 BETTER_AUTH_SECRET=
 BETTER_AUTH_URL=                # https://slate.club in prod, http://localhost:3000 dev
 
+# Phase 1 dev-login flag (M0.5+). Set on preview, never in prod.
+SLATE_ALLOW_DEV_LOGIN=          # "1" to enable POST /api/auth/sign-in-with-phone
+
+# Phase 2 Firebase Phone Auth (M3, pre-launch). Not used in Phase 1.
 FIREBASE_PROJECT_ID=            # server-side (firebase-admin)
 FIREBASE_CLIENT_EMAIL=          # service account email
 FIREBASE_PRIVATE_KEY=           # service account private key, with \n escaped
@@ -169,6 +181,10 @@ NEXT_PUBLIC_FIREBASE_API_KEY=
 NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN=
 NEXT_PUBLIC_FIREBASE_PROJECT_ID=
 NEXT_PUBLIC_FIREBASE_APP_ID=
+
+# Local-dev DoH fallback (M0.5). Set to "1" only on networks where the ISP
+# refuses DNS for Neon AWS subdomains. No-op on Vercel where DNS is healthy.
+SLATE_USE_DOH=
 
 NEXT_PUBLIC_APP_URL=            # https://slate.club
 ```

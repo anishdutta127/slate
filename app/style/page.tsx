@@ -31,7 +31,7 @@ export default function StylePage() {
   if (!isVisible()) notFound();
 
   return (
-    <>
+    <main>
       {/* =============== Header (dark) =============== */}
       <Section tone="dark" as="header" className="border-b border-border-dark px-6 py-8 md:px-12">
         <Wordmark size="md" />
@@ -201,7 +201,7 @@ export default function StylePage() {
           <code className="font-mono">app/globals.css</code> to match.
         </p>
       </Section>
-    </>
+    </main>
   );
 }
 
